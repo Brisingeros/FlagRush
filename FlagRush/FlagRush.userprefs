@@ -1,0 +1,18 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Agents\Scripts\Common\Agents\Player.cs">
+    <Files>
+      <File FileName="Assets\Agents\Scripts\Common\Aspect.cs" Line="5" Column="36" />
+      <File FileName="Assets\Agents\Scripts\Common\Senses\Sense.cs" Line="11" Column="55" />
+      <File FileName="Assets\Agents\Scripts\Common\Senses\SoundAlly.cs" Line="13" Column="46" />
+      <File FileName="Assets\Agents\Scripts\Common\Senses\SoundEnemy.cs" Line="13" Column="46" />
+      <File FileName="Assets\Agents\Scripts\Common\Agents\Player.cs" Line="15" Column="16" />
+      <File FileName="Assets\Agents\Scripts\Common\Team.cs" Line="7" Column="1" />
+      <File FileName="Assets\Agents\Scripts\Common\Senses\PerspectiveEnemy.cs" Line="25" Column="37" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
