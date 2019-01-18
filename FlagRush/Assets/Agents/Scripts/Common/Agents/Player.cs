@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+
 
 public class Player : Aspect {
 
@@ -8,15 +10,21 @@ public class Player : Aspect {
 	//TODO: Los enfermeros cuando escuchan un sonido o ven a un enemigo, se dirigen al escondite más cercano a un nivel inferior. Tras esto, reinician rutina
 
 	public int defaultHealth;
+    List<Player> enemies;
+    List<Aspect> enemiesSound;
+    public Player focus;
 
-	private int health;
+    private int health;
 
 	// Use this for initialization
 	void Start () {
-		aspectAct = Aspect.aspect.NPC;
+		aspectAct = aspect.NPC;
 		health = defaultHealth;
 		alive = true;
-	}
+        enemies = new List<Player>();
+        enemiesSound = new List<Aspect>();
+        focus = null;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -41,4 +49,56 @@ public class Player : Aspect {
 		alive = true;
 	}
 
+    public void addEnemy(Player e)
+    {
+
+        enemies.Add(e);
+
+    }
+
+    public virtual void addSound(Aspect a)
+    {
+        enemiesSound.Add(a);
+    }
+
+    public Player getEnemy(int pos)
+    {
+        return enemies[pos];
+    }
+
+
+    public bool removeEnemy(Player e)
+    {
+        return enemies.Remove(e);
+    }
+
+    public virtual bool removeSound(Aspect a)
+    {
+        return enemiesSound.Remove(a);
+    }
+
+    public void OrderByDistance(string type)
+    {
+
+        if(type.Equals("vision"))
+            enemies = enemies.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).ToList();
+        else if(type.Equals("sound"))
+            enemiesSound = enemiesSound.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).ToList();
+
+    }
+
+    public int sizeEnemies()
+    {
+        return enemies.Count;
+    }
+
+    public int sizeEnemiesSound()
+    {
+        return enemiesSound.Count;
+    }
+
+    public float GetDistanceToEnemy(Player e)
+    {
+        return Vector3.Distance(e.transform.position, transform.position);
+    }
 }

@@ -2,19 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundAlly : Sense {
+public class SoundAlly : Sense
+{
+    Nurse nurse;
 
-	void OnTriggerEnter(Collider other){
+    private void Start()
+    {
+        nurse = GetComponentInParent<Nurse>();
+    }
 
-		Aspect aspect = other.GetComponent<Aspect> ();
+    void OnTriggerEnter(Collider other)
+    {
 
-		if (aspect != null) {
+        Aspect aspect = other.GetComponent<Aspect>();
 
-			if (aspect.alive && aspect.teamAct == pla.teamAct)
-				Debug.Log ("Aliado escuchado");
+        if (aspect != null)
+        {
 
-		}
+            if (!aspect.alive && aspect.aspectAct == Aspect.aspect.Sound && aspect.teamAct == nurse.teamAct)
+            {
+                nurse.addSound(aspect);
+                Debug.Log("Aliado herido escuchado");
 
-	}
+            }
+
+        }
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+
+        Aspect aspect = other.GetComponent<Aspect>();
+
+        if (aspect != null)
+        {
+
+            if (!aspect.alive && aspect.aspectAct == Aspect.aspect.Sound && aspect.teamAct == nurse.teamAct)
+            {
+                nurse.removeSound(other.GetComponent<Aspect>());
+            }
+
+        }
+
+    }
+
+    void Update()
+    {
+        nurse.OrderAlliesByDistance("sound");
+    }
 
 }

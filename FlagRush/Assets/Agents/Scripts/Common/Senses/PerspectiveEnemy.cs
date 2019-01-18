@@ -5,46 +5,81 @@ using UnityEngine;
 public class PerspectiveEnemy : Sense {
 
 	public GameObject shootPos;
+    private Player parent;
+    private float distanceMelee = 0; //CAMBIAR
 
-	void OnTriggerEnter(Collider other){
+    private void Awake()
+    {
+        parent = transform.GetComponentInParent<Player>();
 
+    }
+
+    void OnTriggerEnter(Collider other){
+
+        Player p = other.GetComponent<Player>();
+        if (p && p.aspectAct == Aspect.aspect.NPC && p.teamAct != pla.teamAct)
+            parent.addEnemy(other.GetComponent<Player>());
 		//TODO: insert to enemies list
 		//OnTriggerStay (other);
 
 	}
 
-	void OnTriggerStay(Collider other){
+    private void Update()
+    {
+        //TODO: El array de enemigos estará ordenado por distancia (recta)
+        parent.focus = null;
+        parent.OrderByDistance("vision");
+        int numEnemies = parent.sizeEnemies();
+        //Probar raycast en orden, y quedarse como focus con el primero que puedas golpear
+        //TODO: si la distancia en líne recta es menor a *insert number* es un golpe a melee, no hace falta raycast
+        if ( numEnemies > 0)
+        {
+            int i = 0;
+            while(i < numEnemies && parent.focus == null)
+            {
+                Player player = parent.getEnemy(i);
 
-		//TODO: El array de enemigos estará ordenado por distancia (recta)
-		//Probar raycast en orden, y quedarse como focus con el primero que puedas golpear
+                if (player && player.alive)
+                {
 
-		//TODO: si la distancia en líne recta es menor a *insert number* es un golpe a melee, no hace falta raycast
-	
-		Aspect aspect = other.GetComponent<Aspect> ();
+                    if(parent.GetDistanceToEnemy(player) < distanceMelee)
+                    {
+                        Debug.Log("Enemigo a la vista. Golpe melee");
+                        parent.focus = player;
 
-		if (aspect != null) {
+                    }
+                    else
+                    {
+                        RaycastHit hit;
+                        Vector3 rayDirection = player.transform.position - shootPos.transform.position;
 
-			if (aspect.aspectAct == Aspect.aspect.NPC && aspect.alive && aspect.teamAct != pla.teamAct) {
-				Player enemy = (Player)aspect;
+                        if (Physics.Raycast(shootPos.transform.position, rayDirection, out hit))
+                        { //Mirar si es necesario maxdistance
+                            Player plaHit = hit.collider.GetComponent<Player>();
 
-				RaycastHit hit;
-				Vector3 rayDirection = enemy.transform.position - shootPos.transform.position;
+                            if (plaHit != null && plaHit == player)
+                            {
+                                Debug.Log("Enemigo a la vista");
+                                parent.focus = player;
+                            }
+                        }
+                    }
+                        
+                }
 
-				if (Physics.Raycast(shootPos.transform.position, rayDirection, out hit)){ //Mirar si es necesario maxdistance
-					Player plaHit = hit.collider.GetComponent<Player>();
+                i++;
 
-					if (plaHit != null && plaHit == enemy) {
-						Debug.Log ("Enemigo a la vista");
-					}
-				}
-			}
+            }
 
-		}
+        }
 
-	}
+    }
 
 	void OnTriggerExit(Collider other){
-		//TODO: Remove from enemies list
+        //TODO: Remove from enemies list
+        Player p = other.GetComponent<Player>();
+        if (p && p.aspectAct == Aspect.aspect.NPC && p.teamAct != pla.teamAct)
+            parent.removeEnemy(other.GetComponent<Player>());
 	}
 
 }

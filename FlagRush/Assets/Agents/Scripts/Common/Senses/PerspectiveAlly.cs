@@ -4,13 +4,47 @@ using UnityEngine;
 
 public class PerspectiveAlly : Sense {
 
-	public GameObject shootPos;
+    Nurse nurse;
 
-	void OnTriggerEnter(Collider other){
+    private void Start()
+    {
+        nurse = GetComponentInParent<Nurse>();
+    }
 
-		//TODO: insert to allies list
-		//OnTriggerStay (other);
+    void OnTriggerEnter(Collider other){
+
+        Player al = other.GetComponent<Player>();
+
+        if(al && al.aspectAct == Aspect.aspect.NPC && !al.alive)
+        {
+            nurse.addAlly(al);
+            Debug.Log("Aliado avistado");
+        }
 
 	}
 
+    private void OnTriggerExit(Collider other)
+    {
+        Player al = other.GetComponent<Player>();
+
+        if (al && al.aspectAct == Aspect.aspect.NPC && !al.alive)
+        {
+            nurse.removeAlly(al);
+        }
+    }
+
+    private void Update()
+    {
+        for(int i = 0; i < nurse.getAllySize(); i++)
+        {
+            Player p = nurse.getAlly(i);
+            if (p.alive)
+            {
+                nurse.removeAlly(p);
+                i--;
+
+            }
+        }
+
+    }
 }

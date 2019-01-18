@@ -8,12 +8,11 @@ public class Sense : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		pla = this.transform.parent.GetComponent<Player> ();
+		pla = transform.parent.GetComponent<Player> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
 	}
 
 }
