@@ -55,6 +55,7 @@
   <ItemGroup>
      <Compile Include="Assets\Agents\Scripts\Common\Agents\Player.cs" />
      <Compile Include="Assets\Agents\Scripts\Common\Aspect.cs" />
+     <Compile Include="Assets\Agents\Scripts\Common\Senses\PerspectiveAlly.cs" />
      <Compile Include="Assets\Agents\Scripts\Common\Senses\PerspectiveEnemy.cs" />
      <Compile Include="Assets\Agents\Scripts\Common\Senses\Sense.cs" />
      <Compile Include="Assets\Agents\Scripts\Common\Senses\SoundAlly.cs" />

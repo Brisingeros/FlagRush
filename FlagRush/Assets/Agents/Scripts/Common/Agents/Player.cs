@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : Aspect {
 
+	//TODO: Cuando pase X tiempo muerto, hacer despawn y spawnear una tumba en su lugar (Jeje solución de mierda a revivir sin querer)
+	//TODO: Los enfermeros cuando escuchan un sonido o ven a un enemigo, se dirigen al escondite más cercano a un nivel inferior. Tras esto, reinician rutina
+
 	public int defaultHealth;
 
 	private int health;

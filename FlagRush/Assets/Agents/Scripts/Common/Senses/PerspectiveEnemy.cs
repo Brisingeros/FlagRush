@@ -8,6 +8,18 @@ public class PerspectiveEnemy : Sense {
 
 	void OnTriggerEnter(Collider other){
 
+		//TODO: insert to enemies list
+		//OnTriggerStay (other);
+
+	}
+
+	void OnTriggerStay(Collider other){
+
+		//TODO: El array de enemigos estará ordenado por distancia (recta)
+		//Probar raycast en orden, y quedarse como focus con el primero que puedas golpear
+
+		//TODO: si la distancia en líne recta es menor a *insert number* es un golpe a melee, no hace falta raycast
+	
 		Aspect aspect = other.GetComponent<Aspect> ();
 
 		if (aspect != null) {
@@ -29,6 +41,10 @@ public class PerspectiveEnemy : Sense {
 
 		}
 
+	}
+
+	void OnTriggerExit(Collider other){
+		//TODO: Remove from enemies list
 	}
 
 }
