@@ -76,6 +76,8 @@
      <Compile Include="Assets\StateMachines\Soldier\AtaqueSoldier.cs" />
      <Compile Include="Assets\StateMachines\Soldier\AvanzarSoldier.cs" />
      <Compile Include="Assets\StateMachines\Soldier\MuertoSoldier.cs" />
+     <Compile Include="Assets\World\Flag\FlagManager.cs" />
+     <Compile Include="Assets\World\Manager\WorldManager.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>D:/Git/FlagRush/FlagRush/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
