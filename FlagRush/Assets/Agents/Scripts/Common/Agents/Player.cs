@@ -16,6 +16,8 @@ public class Player : Aspect {
 
     private int health;
 
+	private WorldManager mG;
+
 	// Use this for initialization
 	void Start () {
 		aspectAct = aspect.NPC;
@@ -24,6 +26,8 @@ public class Player : Aspect {
         enemies = new List<Player>();
         enemiesSound = new List<Aspect>();
         focus = null;
+
+		mG = FindObjectOfType<WorldManager> ();
     }
 	
 	// Update is called once per frame
