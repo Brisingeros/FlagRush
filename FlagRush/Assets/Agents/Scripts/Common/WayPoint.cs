@@ -26,7 +26,24 @@ public class WayPoint : MonoBehaviour {
 		return aux;
 	}
 
-	public WayPoint getNext(){
+    private void OnTriggerEnter(Collider other)
+    {
+        Player player = other.GetComponent<Player>();
+        if (player)
+        {
+            Animator anim = player.GetComponent<Animator>();
+            int layerActual = player.getActualLayerAnimator();
+
+            if (anim.GetCurrentAnimatorStateInfo(layerActual).IsName(""))
+            {
+                
+                player.getAgent().SetDestination(getNext().transform.position);
+
+            }
+
+        }
+    }
+    public WayPoint getNext(){
 		WayPoint aux = this;
 
 		if (next != null)
