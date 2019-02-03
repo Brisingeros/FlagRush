@@ -34,7 +34,7 @@ public class WayPoint : MonoBehaviour {
             Animator anim = player.GetComponent<Animator>();
             int layerActual = player.getActualLayerAnimator();
 
-            if (anim.GetCurrentAnimatorStateInfo(layerActual).IsName(""))
+            if (anim.GetCurrentAnimatorStateInfo(layerActual).IsName("Avanzar"))
             {
                 
                 player.getAgent().SetDestination(getNext().transform.position);

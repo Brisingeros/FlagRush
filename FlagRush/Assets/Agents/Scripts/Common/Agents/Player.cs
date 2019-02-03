@@ -40,7 +40,7 @@ public class Player : Aspect {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		Debug.Log (wP.Count);
 	}
 
     public void setLayerAnimator(int a)

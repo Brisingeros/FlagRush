@@ -14,14 +14,14 @@ public class AvanzarSoldier : StateMachineBehaviour {
         player.setLayerAnimator(layerIndex);
         pAI = player.getAgent();
         WayPoint destination = player.getObjective();
+		Debug.Log (destination.transform.position);
         pAI.SetDestination(destination.transform.position);
-        
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		//TODO: Navmesh elegir siguiente objetivo y caminar hacia él
-        
+
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
