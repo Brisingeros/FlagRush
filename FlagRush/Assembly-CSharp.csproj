@@ -62,6 +62,7 @@
      <Compile Include="Assets\Agents\Scripts\Common\Senses\SoundAlly.cs" />
      <Compile Include="Assets\Agents\Scripts\Common\Senses\SoundEnemy.cs" />
      <Compile Include="Assets\Agents\Scripts\Common\Team.cs" />
+     <Compile Include="Assets\Agents\Scripts\Common\WayPoint.cs" />
      <Compile Include="Assets\StateMachines\Nurse\AlertaNurse.cs" />
      <Compile Include="Assets\StateMachines\Nurse\AvanzarNurse.cs" />
      <Compile Include="Assets\StateMachines\Nurse\HuirNurse.cs" />
@@ -78,6 +79,7 @@
      <Compile Include="Assets\StateMachines\Soldier\MuertoSoldier.cs" />
      <Compile Include="Assets\World\Flag\FlagManager.cs" />
      <Compile Include="Assets\World\Manager\WorldManager.cs" />
+     <None Include="Assets\NavMeshComponents-2018.2\ProjectSettings\ProjectVersion.txt" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>D:/Git/FlagRush/FlagRush/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
@@ -327,6 +329,16 @@
  <Reference Include="Boo.Lang">
  <HintPath>C:/Program Files/Unity18/Editor/Data/MonoBleedingEdge/lib/mono/unity/Boo.Lang.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="NavMeshComponentsExamplesEditor.csproj">
+      <Project>{D453602D-D418-05CE-122D-263AF492C880}</Project>      <Name>NavMeshComponentsExamplesEditor</Name>    </ProjectReference>
+    <ProjectReference Include="NavMeshComponentsEditor.csproj">
+      <Project>{EF52DAE3-381F-8CAF-14F5-2A855FCD6824}</Project>      <Name>NavMeshComponentsEditor</Name>    </ProjectReference>
+    <ProjectReference Include="NavMeshComponents.csproj">
+      <Project>{2E5E6165-5144-DBB1-6557-B0773C7491DD}</Project>      <Name>NavMeshComponents</Name>    </ProjectReference>
+    <ProjectReference Include="NavMeshComponentsExamples.csproj">
+      <Project>{FB127D49-E3C9-9D5C-6732-A55B4FF978D3}</Project>      <Name>NavMeshComponentsExamples</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
