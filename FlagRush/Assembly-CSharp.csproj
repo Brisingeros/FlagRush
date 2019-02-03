@@ -62,6 +62,7 @@
      <Compile Include="Assets\Agents\Scripts\Common\Senses\SoundAlly.cs" />
      <Compile Include="Assets\Agents\Scripts\Common\Senses\SoundEnemy.cs" />
      <Compile Include="Assets\Agents\Scripts\Common\Team.cs" />
+     <Compile Include="Assets\Agents\Scripts\Common\WayPoint.cs" />
      <Compile Include="Assets\StateMachines\Nurse\AlertaNurse.cs" />
      <Compile Include="Assets\StateMachines\Nurse\AvanzarNurse.cs" />
      <Compile Include="Assets\StateMachines\Nurse\HuirNurse.cs" />

@@ -10,13 +10,15 @@ public class Player : Aspect {
 	//TODO: Los enfermeros cuando escuchan un sonido o ven a un enemigo, se dirigen al escondite más cercano a un nivel inferior. Tras esto, reinician rutina
 
 	public int defaultHealth;
-    List<Player> enemies;
+	private int health;
+
+	private WorldManager mG;
+
+	List<Player> enemies;
     List<Aspect> enemiesSound;
     public Player focus;
 
-    private int health;
-
-	private WorldManager mG;
+	List<WayPoint> wP;
 
 	// Use this for initialization
 	void Start () {
@@ -26,6 +28,7 @@ public class Player : Aspect {
         enemies = new List<Player>();
         enemiesSound = new List<Aspect>();
         focus = null;
+		wP = new List<WayPoint> ();
 
 		mG = FindObjectOfType<WorldManager> ();
     }
@@ -105,4 +108,18 @@ public class Player : Aspect {
     {
         return Vector3.Distance(e.transform.position, transform.position);
     }
+
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.tag.Equals ("WayPoint")) {
+			wP.Add (other.GetComponent<WayPoint> ());
+		}
+	}
+
+	public WayPoint getObjective(){
+	
+		wP = wP.OrderBy (x => x.getValue (this.gameObject)).ToList();
+		return wP [0];
+	
+	}
 }
