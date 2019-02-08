@@ -9,26 +9,28 @@ public class Player : Aspect {
     //TODO: Cuando pase X tiempo muerto, hacer despawn y spawnear una tumba en su lugar (Jeje solución de mierda a revivir sin querer)
     //TODO: Los enfermeros cuando escuchan un sonido o ven a un enemigo, se dirigen al escondite más cercano a un nivel inferior. Tras esto, reinician rutina
 
-    private NavMeshAgent playerAI;
+    protected NavMeshAgent playerAI;
+	protected Animator anim;
+
 	public int defaultHealth;
-	private int health;
 
-	private WorldManager mG;
+	protected WorldManager mG;
 
-	List<Player> enemies;
-    List<Aspect> enemiesSound;
+	protected List<Player> enemies;
+    protected List<Aspect> enemiesSound;
     public Player focus;
 
-	List<WayPoint> wP;
+	protected List<WayPoint> wP;
 
-    private int actualLayerAnimator;
+    protected int actualLayerAnimator;
 
 	// Use this for initialization
 	void Start () {
 
         playerAI = GetComponent<NavMeshAgent>();
+		anim = GetComponent<Animator> ();
 		aspectAct = aspect.NPC;
-		health = defaultHealth;
+		anim.SetInteger("Lives", defaultHealth);
 		alive = true;
         enemies = new List<Player>();
         enemiesSound = new List<Aspect>();
@@ -40,7 +42,7 @@ public class Player : Aspect {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (wP.Count);
+		//Debug.Log (wP.Count);
 	}
 
     public void setLayerAnimator(int a)
@@ -66,12 +68,14 @@ public class Player : Aspect {
 	}
 
 	public void getShot(){
-		health--;
-		alive = health > 0;
+		int lives = anim.GetInteger ("Lives");
+		lives--;
+		alive = lives > 0;
+		anim.SetInteger("Lives", lives);
 	}
 
 	public void revive(){
-		health = defaultHealth;
+		anim.SetInteger("Lives", defaultHealth);
 		alive = true;
 	}
 
