@@ -6,7 +6,7 @@ public class PerspectiveEnemy : Sense {
 
 	public GameObject shootPos;
     private Player parent;
-    private float distanceMelee = 0; //CAMBIAR
+    private float distanceMelee = 3; //CAMBIAR
 
     private void Awake()
     {
@@ -19,8 +19,7 @@ public class PerspectiveEnemy : Sense {
         Player p = other.GetComponent<Player>();
         if (p && p.aspectAct == Aspect.aspect.NPC && p.teamAct != pla.teamAct)
             parent.addEnemy(p);
-		//TODO: insert to enemies list
-		//OnTriggerStay (other);
+		//insert to enemies list
 
 	}
 
@@ -31,7 +30,7 @@ public class PerspectiveEnemy : Sense {
         parent.OrderByDistance("vision");
         int numEnemies = parent.sizeEnemies();
         //Probar raycast en orden, y quedarse como focus con el primero que puedas golpear
-        //TODO: si la distancia en líne recta es menor a *insert number* es un golpe a melee, no hace falta raycast
+        //si la distancia en líne recta es menor a *insert number* es un golpe a melee, no hace falta raycast
         if ( numEnemies > 0)
         {
             int i = 0;
@@ -76,7 +75,7 @@ public class PerspectiveEnemy : Sense {
     }
 
 	void OnTriggerExit(Collider other){
-        //TODO: Remove from enemies list
+        //Remove from enemies list
         Player p = other.GetComponent<Player>();
         if (p && p.aspectAct == Aspect.aspect.NPC && p.teamAct != pla.teamAct)
             parent.removeEnemy(other.GetComponent<Player>());

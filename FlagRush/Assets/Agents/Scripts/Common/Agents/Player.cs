@@ -12,7 +12,7 @@ public class Player : Aspect {
     protected NavMeshAgent playerAI;
 	protected Animator anim;
 
-	public int defaultHealth;
+	protected int defaultHealth;
 
 	protected WorldManager mG;
 
@@ -24,13 +24,11 @@ public class Player : Aspect {
 
     protected int actualLayerAnimator;
 
-	// Use this for initialization
 	void Start () {
 
         playerAI = GetComponent<NavMeshAgent>();
 		anim = GetComponent<Animator> ();
 		aspectAct = aspect.NPC;
-		anim.SetInteger("Lives", defaultHealth);
 		alive = true;
         enemies = new List<Player>();
         enemiesSound = new List<Aspect>();
@@ -38,11 +36,16 @@ public class Player : Aspect {
 		wP = new List<WayPoint> ();
 
 		mG = FindObjectOfType<WorldManager> ();
+
+		initPlayer ();
     }
-	
-	// Update is called once per frame
+
+	protected virtual void initPlayer (){
+		
+	}
+
 	void Update () {
-		//Debug.Log (wP.Count);
+		
 	}
 
     public void setLayerAnimator(int a)
