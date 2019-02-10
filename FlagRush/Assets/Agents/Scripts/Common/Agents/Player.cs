@@ -2,39 +2,63 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
+using UnityEngine.AI;
 
 public class Player : Aspect {
 
-	//TODO: Cuando pase X tiempo muerto, hacer despawn y spawnear una tumba en su lugar (Jeje solución de mierda a revivir sin querer)
-	//TODO: Los enfermeros cuando escuchan un sonido o ven a un enemigo, se dirigen al escondite más cercano a un nivel inferior. Tras esto, reinician rutina
+    //TODO: Cuando pase X tiempo muerto, hacer despawn y spawnear una tumba en su lugar (Jeje solución de mierda a revivir sin querer)
+    //TODO: Los enfermeros cuando escuchan un sonido o ven a un enemigo, se dirigen al escondite más cercano a un nivel inferior. Tras esto, reinician rutina
+
+    protected NavMeshAgent playerAI;
+	protected Animator anim;
 
 	public int defaultHealth;
-    List<Player> enemies;
-    List<Aspect> enemiesSound;
+
+	protected WorldManager mG;
+
+	protected List<Player> enemies;
+    protected List<Aspect> enemiesSound;
     public Player focus;
 
-    private int health;
+	protected List<WayPoint> wP;
 
-	private WorldManager mG;
+    protected int actualLayerAnimator;
 
 	// Use this for initialization
 	void Start () {
+
+        playerAI = GetComponent<NavMeshAgent>();
+		anim = GetComponent<Animator> ();
 		aspectAct = aspect.NPC;
-		health = defaultHealth;
+		anim.SetInteger("Lives", defaultHealth);
 		alive = true;
         enemies = new List<Player>();
         enemiesSound = new List<Aspect>();
         focus = null;
+		wP = new List<WayPoint> ();
 
 		mG = FindObjectOfType<WorldManager> ();
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+		//Debug.Log (wP.Count);
 	}
 
+    public void setLayerAnimator(int a)
+    {
+        actualLayerAnimator = a;
+    }
+
+    public int getActualLayerAnimator()
+    {
+        return actualLayerAnimator;
+    }
+    public NavMeshAgent getAgent()
+    {
+        return playerAI;
+
+    }
 	public Team.team getTeam(){
 		return teamAct;
 	}
@@ -44,12 +68,14 @@ public class Player : Aspect {
 	}
 
 	public void getShot(){
-		health--;
-		alive = health > 0;
+		int lives = anim.GetInteger ("Lives");
+		lives--;
+		alive = lives > 0;
+		anim.SetInteger("Lives", lives);
 	}
 
 	public void revive(){
-		health = defaultHealth;
+		anim.SetInteger("Lives", defaultHealth);
 		alive = true;
 	}
 
@@ -105,4 +131,18 @@ public class Player : Aspect {
     {
         return Vector3.Distance(e.transform.position, transform.position);
     }
+
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.tag.Equals ("WayPoint")) {
+			wP.Add (other.GetComponent<WayPoint> ());
+		}
+	}
+
+	public WayPoint getObjective(){
+	
+		wP = wP.OrderBy (x => x.getValue (gameObject)).ToList();
+		return wP [0];
+	
+	}
 }

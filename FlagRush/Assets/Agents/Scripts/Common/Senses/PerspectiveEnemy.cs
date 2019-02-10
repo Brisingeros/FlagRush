@@ -18,7 +18,7 @@ public class PerspectiveEnemy : Sense {
 
         Player p = other.GetComponent<Player>();
         if (p && p.aspectAct == Aspect.aspect.NPC && p.teamAct != pla.teamAct)
-            parent.addEnemy(other.GetComponent<Player>());
+            parent.addEnemy(p);
 		//TODO: insert to enemies list
 		//OnTriggerStay (other);
 
