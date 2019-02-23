@@ -14,7 +14,6 @@ public class AvanzarSoldier : StateMachineBehaviour {
         player.setLayerAnimator(layerIndex);
         pAI = player.getAgent();
         WayPoint destination = player.getObjective();
-		Debug.Log (destination.transform.position);
         pAI.SetDestination(destination.transform.position);
 	}
 

@@ -148,4 +148,8 @@ public class Player : Aspect {
 		return wP [0];
 	
 	}
+
+	public Aspect getEnemySound() {
+		return enemiesSound [0];
+	}
 }

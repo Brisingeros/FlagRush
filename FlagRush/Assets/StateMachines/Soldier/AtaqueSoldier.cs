@@ -13,8 +13,12 @@ public class AtaqueSoldier : StateMachineBehaviour {
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		//TODO: Si está cerca --> Melee
+		//TODO:
+		//Hacer un elapsedTime que vaya restando desde 3 hasta 0
+		//Si es menor o igual a 0 y no está girando, disparar y poner a 3 otra vez
+		//Si está cerca --> Melee
 		//Si no --> distancia
+		//TODO: Mirar lo del giro
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state

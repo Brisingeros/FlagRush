@@ -17,6 +17,13 @@ public class MuertoSoldier : StateMachineBehaviour {
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		//TODO: Medir con timeDeltaTime hasta que pasen X segundos, donde el soldado muere definitivamente, dejando su tumba
 		elapsedTime += Time.deltaTime;
+
+		if (elapsedTime >= 30.0f){
+			Vector3 posPlayer = player.transform.position;
+			//Instantiate(); tumba
+			//Pos tumba = posPlayer;
+			Destroy(player);
+		}
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
