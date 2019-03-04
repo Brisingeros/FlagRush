@@ -14,13 +14,17 @@ public class AvanzarSoldier : StateMachineBehaviour {
         player.setLayerAnimator(layerIndex);
         pAI = player.getAgent();
         WayPoint destination = player.getObjective();
-		Debug.Log (destination.transform.position);
-        pAI.SetDestination(destination.transform.position);
+
+		if (pAI.remainingDistance <= destination.GetComponent<CapsuleCollider> ().radius) {
+			destination = destination.getNext ();
+		}
+        
+		pAI.SetDestination(destination.transform.position);
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		//TODO: Navmesh elegir siguiente objetivo y caminar hacia él
+		//Navmesh elegir siguiente objetivo y caminar hacia él
 
 	}
 

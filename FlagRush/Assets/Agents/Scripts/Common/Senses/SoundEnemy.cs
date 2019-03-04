@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class SoundEnemy : Sense {
 
-    public Player pla;
-
     private void Start()
     {
         pla = transform.parent.GetComponent<Player>();

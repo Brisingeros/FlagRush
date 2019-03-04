@@ -15,7 +15,7 @@ public class MuertoNurse : StateMachineBehaviour {
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		//TODO: Medir con timeDeltaTime hasta que pasen X segundos, donde el soldado muere definitivamente, dejando su tumba
+		//Medir con timeDeltaTime hasta que pasen X segundos, donde el soldado muere definitivamente, dejando su tumba
 		elapsedTime += Time.deltaTime;
 	}
 
