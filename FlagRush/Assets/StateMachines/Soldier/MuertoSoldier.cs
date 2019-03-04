@@ -15,11 +15,11 @@ public class MuertoSoldier : StateMachineBehaviour {
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		//TODO: Medir con timeDeltaTime hasta que pasen X segundos, donde el soldado muere definitivamente, dejando su tumba
 		elapsedTime += Time.deltaTime;
 
-		if (elapsedTime >= 30.0f){
+		if (elapsedTime >= 10.0f){
 			Vector3 posPlayer = player.transform.position;
+			//TODO:
 			//Instantiate(); tumba
 			//Pos tumba = posPlayer;
 			Destroy(player);

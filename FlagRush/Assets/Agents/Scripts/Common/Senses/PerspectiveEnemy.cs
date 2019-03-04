@@ -25,7 +25,7 @@ public class PerspectiveEnemy : Sense {
 
     private void Update()
     {
-        //TODO: El array de enemigos estará ordenado por distancia (recta)
+        //El array de enemigos estará ordenado por distancia (recta)
         parent.focus = null;
         parent.OrderByDistance("vision");
         int numEnemies = parent.sizeEnemies();
@@ -52,9 +52,10 @@ public class PerspectiveEnemy : Sense {
                         RaycastHit hit;
                         Vector3 rayDirection = player.transform.position - shootPos.transform.position;
 
-                        if (Physics.Raycast(shootPos.transform.position, rayDirection, out hit))
+						if (Physics.Raycast(shootPos.transform.position, rayDirection, out hit, 300.0f, -5, QueryTriggerInteraction.Ignore))
                         { //Mirar si es necesario maxdistance
-                            Player plaHit = hit.collider.GetComponent<Player>();
+							Player plaHit = hit.collider.GetComponentInParent<Player> ();
+							Debug.Log (hit.collider);
 
                             if (plaHit != null && plaHit == player)
                             {

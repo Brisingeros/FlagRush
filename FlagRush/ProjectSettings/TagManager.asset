@@ -36,7 +36,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Raycast
   - Navigable
   m_SortingLayers:
   - name: Default

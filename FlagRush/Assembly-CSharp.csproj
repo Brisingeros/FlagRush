@@ -53,16 +53,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Agents\Scripts\Common\Agents\nurse.cs" />
+     <Compile Include="Assets\Agents\Scripts\Common\Agents\Nurse.cs" />
      <Compile Include="Assets\Agents\Scripts\Common\Agents\Player.cs" />
-     <Compile Include="Assets\Agents\Scripts\Common\Agents\sniper.cs" />
-     <Compile Include="Assets\Agents\Scripts\Common\Agents\soldier.cs" />
+     <Compile Include="Assets\Agents\Scripts\Common\Agents\Sniper.cs" />
+     <Compile Include="Assets\Agents\Scripts\Common\Agents\Soldier.cs" />
      <Compile Include="Assets\Agents\Scripts\Common\Aspect.cs" />
      <Compile Include="Assets\Agents\Scripts\Common\Senses\PerspectiveAlly.cs" />
      <Compile Include="Assets\Agents\Scripts\Common\Senses\PerspectiveEnemy.cs" />
      <Compile Include="Assets\Agents\Scripts\Common\Senses\Sense.cs" />
      <Compile Include="Assets\Agents\Scripts\Common\Senses\SoundAlly.cs" />
      <Compile Include="Assets\Agents\Scripts\Common\Senses\SoundEnemy.cs" />
+     <Compile Include="Assets\Agents\Scripts\Common\Sound.cs" />
      <Compile Include="Assets\Agents\Scripts\Common\Team.cs" />
      <Compile Include="Assets\Agents\Scripts\Common\WayPoint.cs" />
      <Compile Include="Assets\StateMachines\Nurse\AlertaNurse.cs" />

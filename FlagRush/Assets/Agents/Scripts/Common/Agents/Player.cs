@@ -24,6 +24,8 @@ public class Player : Aspect {
 
     protected int actualLayerAnimator;
 
+	public GameObject basicSound;
+
 	void Start () {
 
         playerAI = GetComponent<NavMeshAgent>();
@@ -44,9 +46,9 @@ public class Player : Aspect {
 		
 	}
 
-	void Update () {
+	/*void Update () {
 		
-	}
+	}*/
 
     public void setLayerAnimator(int a)
     {
@@ -73,6 +75,7 @@ public class Player : Aspect {
 	public void getShot(){
 		int lives = anim.GetInteger ("Lives");
 		lives--;
+		Debug.Log (lives);
 		alive = lives > 0;
 		anim.SetInteger("Lives", lives);
 	}
@@ -151,5 +154,14 @@ public class Player : Aspect {
 
 	public Aspect getEnemySound() {
 		return enemiesSound [0];
+	}
+
+	public void generateSound(){
+		GameObject snd = Instantiate (basicSound);
+		snd.transform.position = this.transform.position;
+
+		Sound sndComp = snd.GetComponent<Sound> ();
+		sndComp.teamAct = this.teamAct;
+		sndComp.alive = this.alive;
 	}
 }
