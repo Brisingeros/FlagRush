@@ -9,7 +9,7 @@ public class WayPoint : MonoBehaviour {
 	public WayPoint previous;
 	public WayPoint next;
     public Type type;
-    public Team team;
+    public Team.team team;
 
     public enum Type {
 
@@ -18,13 +18,6 @@ public class WayPoint : MonoBehaviour {
         sniper
 
     };
-
-    public enum Team
-    {
-        red,
-        blue
-
-    }
 
 	public int lvl;
 
@@ -49,16 +42,22 @@ public class WayPoint : MonoBehaviour {
         Player player = other.GetComponent<Player>();
         if (player)
         {
-            Animator anim = player.GetComponent<Animator>();
-            int layerActual = player.getActualLayerAnimator();
-
-            if (anim.GetCurrentAnimatorStateInfo(layerActual).IsName("Avanzar"))
+            if (type == Type.soldier)
             {
-                
-                player.getAgent().SetDestination(getNext().transform.position);
+                Animator anim = player.GetComponent<Animator>();
+                int layerActual = player.getActualLayerAnimator();
 
+                if (anim.GetCurrentAnimatorStateInfo(layerActual).IsName("Avanzar"))
+                {
+
+                    player.getAgent().SetDestination(getNext().transform.position);
+
+                }
+            }else if(type == Type.nurse)
+            {
+                player.setHidden(true);
             }
-
+            
         }
     }
     public WayPoint getNext(){

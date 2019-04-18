@@ -151,7 +151,9 @@ public class Player : Aspect {
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.tag.Equals ("WayPoint")) {
-			wP.Add (other.GetComponent<WayPoint> ());
+            WayPoint w = other.GetComponent<WayPoint>();
+            if (w.type == WayPoint.Type.soldier && w.team == teamAct)
+			    wP.Add (other.GetComponent<WayPoint> ());
 		}
 	}
 
