@@ -32,33 +32,24 @@ public class WayPoint : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         Player player = other.GetComponent<Player>();
-        if (player)
+		if (player && (team == player.getTeam() && type == player.getTypeNpc()))
         {
-			if (type == TypeNPC.type.Soldier)
+            Animator anim = player.GetComponent<Animator>();
+            int layerActual = player.getActualLayerAnimator();
+
+            if (anim.GetCurrentAnimatorStateInfo(layerActual).IsName("Avanzar"))
             {
-                Animator anim = player.GetComponent<Animator>();
-                int layerActual = player.getActualLayerAnimator();
-
-                if (anim.GetCurrentAnimatorStateInfo(layerActual).IsName("Avanzar"))
-                {
-
-                    player.getAgent().SetDestination(getNext().transform.position);
-
-                }
-			}else if(type == TypeNPC.type.Nurse)
-            {
-                player.setHidden(true);
+				if (getNext () != null)
+				{
+					//player.transform.LookAt(getNext().transform);
+					player.getAgent().SetDestination(getNext().transform.position);
+				}
             }
-            
         }
     }
+
     public WayPoint getNext(){
-		WayPoint aux = this;
-
-		if (next != null)
-			aux = next;
-
-		return aux;
+		return next;
 	}
 
 }

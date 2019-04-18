@@ -9,6 +9,12 @@ public class MuertoSniper : StateMachineBehaviour {
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		player = animator.gameObject.GetComponent<Player>();
+		Debug.Log (player);
+		Vector3 posPlayer = player.transform.position;
+		//TODO:
+		//Instantiate(); tumba
+		//Pos tumba = posPlayer;
+		Destroy(player.gameObject);
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
