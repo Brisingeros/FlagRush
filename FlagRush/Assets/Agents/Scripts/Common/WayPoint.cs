@@ -8,16 +8,8 @@ public class WayPoint : MonoBehaviour {
 
 	public WayPoint previous;
 	public WayPoint next;
-    public Type type;
+	public TypeNPC.type type;
     public Team.team team;
-
-    public enum Type {
-
-        nurse,
-        soldier,
-        sniper
-
-    };
 
 	public int lvl;
 
@@ -42,7 +34,7 @@ public class WayPoint : MonoBehaviour {
         Player player = other.GetComponent<Player>();
         if (player)
         {
-            if (type == Type.soldier)
+			if (type == TypeNPC.type.Soldier)
             {
                 Animator anim = player.GetComponent<Animator>();
                 int layerActual = player.getActualLayerAnimator();
@@ -53,7 +45,7 @@ public class WayPoint : MonoBehaviour {
                     player.getAgent().SetDestination(getNext().transform.position);
 
                 }
-            }else if(type == Type.nurse)
+			}else if(type == TypeNPC.type.Nurse)
             {
                 player.setHidden(true);
             }

@@ -12,6 +12,7 @@ public class Nurse : Player {
     {
         defaultHealth = 1;
         anim.SetInteger("Lives", defaultHealth);
+		typeNpc = TypeNPC.type.Nurse;
 
         allySounds = new List<Aspect>();
         allies = new List<Player>();

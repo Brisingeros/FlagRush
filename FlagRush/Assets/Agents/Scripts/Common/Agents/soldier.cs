@@ -8,6 +8,7 @@ public class Soldier : Player {
 
 		defaultHealth = 3;
 		anim.SetInteger ("Lives", defaultHealth);
+		typeNpc = TypeNPC.type.Soldier;
 
 	}
 	

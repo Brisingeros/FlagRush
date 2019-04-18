@@ -14,6 +14,8 @@ public abstract class Player : Aspect {
 
 	protected int defaultHealth;
 
+	protected TypeNPC.type typeNpc;
+
 	protected WorldManager mG;
 
 	protected List<Player> enemies;
@@ -57,6 +59,10 @@ public abstract class Player : Aspect {
     {
         return hidden;
     }
+
+	public TypeNPC.type getTypeNpc(){
+		return typeNpc;
+	}
 
     public void setLayerAnimator(int a)
     {
@@ -150,7 +156,7 @@ public abstract class Player : Aspect {
 	{
 		if (other.tag.Equals ("WayPoint")) {
             WayPoint w = other.GetComponent<WayPoint>();
-            if (w.team == teamAct)
+			if (w.team == teamAct && w.type == typeNpc)
 			    wP.Add (other.GetComponent<WayPoint> ());
 		}
 	}
