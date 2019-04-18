@@ -9,7 +9,7 @@ public class MuertoSniper : StateMachineBehaviour {
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		player = animator.gameObject.GetComponent<Player>();
-		Debug.Log (player);
+		animator.SetInteger("Lives", -1);
 		Vector3 posPlayer = player.transform.position;
 		//TODO:
 		//Instantiate(); tumba
