@@ -27,7 +27,7 @@ public class PerspectiveAlly : Sense {
     {
         Player al = other.GetComponent<Player>();
 
-        if (al && al.aspectAct == Aspect.aspect.NPC && !al.alive)
+        if ((al && al.aspectAct == Aspect.aspect.NPC && !al.alive)) // || other.CompareTag("tomb")
         {
             nurse.removeAlly(al);
         }

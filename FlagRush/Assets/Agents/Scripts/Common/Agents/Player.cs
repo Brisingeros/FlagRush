@@ -92,9 +92,9 @@ public abstract class Player : Aspect {
 		Debug.Log (lives);
 		alive = lives > 0;
 		anim.SetInteger("Lives", lives);
-	}
+    }
 
-	public void revive(){
+    public void revive(){
 		anim.SetInteger("Lives", defaultHealth);
 		alive = true;
 	}
@@ -173,11 +173,15 @@ public abstract class Player : Aspect {
 	}
 
 	public void generateSound(){
-		GameObject snd = Instantiate (basicSound);
-		snd.transform.position = this.transform.position;
+		GameObject snd = Instantiate(basicSound);
+		snd.transform.position = transform.position;
 
 		Sound sndComp = snd.GetComponent<Sound> ();
-		sndComp.teamAct = this.teamAct;
-		sndComp.alive = this.alive;
-	}
+		sndComp.teamAct = teamAct;
+		sndComp.alive = alive;
+
+        //if(!alive)
+            //snd.transform.SetParent(transform);
+
+    }
 }

@@ -49,7 +49,6 @@ public class SoundAlly : Sense
 
     void Update()
     {
-        nurse.OrderAlliesByDistance("sound");
     }
 
 }
