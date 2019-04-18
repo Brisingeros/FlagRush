@@ -8,13 +8,31 @@ public class WayPoint : MonoBehaviour {
 
 	public WayPoint previous;
 	public WayPoint next;
+    public Type type;
+    public Team team;
+
+    public enum Type {
+
+        nurse,
+        soldier,
+        sniper
+
+    };
+
+    public enum Team
+    {
+        red,
+        blue
+
+    }
 
 	public int lvl;
 
 	public float getValue(GameObject g){
-		float dis =  Vector3.Distance(g.transform.position, this.transform.position);
+		float dis =  Vector3.Distance(g.transform.position, transform.position);
 
-		return Mathf.Abs(dis) - (lvl * weight);
+		return Mathf.Abs(dis) - (lvl * weight); //cuanto mas nivel, mas cerca de la bandera
+
 	}
 
 	public WayPoint getPrevious(){

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HuirNurse : StateMachineBehaviour {
+    //enemigo cerca. Se esconde en el matojo mas cercano
 
 	private Player player;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AlertaNurse : StateMachineBehaviour {
-
+    //Alerta de sonido aliado herido
 	private Player player;
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state

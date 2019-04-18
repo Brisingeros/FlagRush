@@ -31,7 +31,7 @@ public class Nurse : Player {
 			if (!huir && enemiesSound.Count > 0)
 				huir = Vector3.Distance(enemiesSound[0].transform.position, transform.position) < 40;
 
-			anim.SetBool ("Peligro", huir);
+			anim.SetBool ("Peligro", huir); //en el statemachine de huir hay que ponerlo a false cuando llegue al waypoint
 		}
 
 		//fijar peligro según la distancia a sonidos enemigos o si hay un enemigo visible

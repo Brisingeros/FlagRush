@@ -38,7 +38,7 @@ public class PerspectiveEnemy : Sense {
             {
                 Player player = parent.getEnemy(i);
 
-                if (player && player.alive)
+                if (player && !player.getHidden() && player.alive)
                 {
 
                     if(parent.GetDistanceToEnemy(player) < distanceMelee)

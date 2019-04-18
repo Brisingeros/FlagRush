@@ -6,24 +6,35 @@ public class MuertoSoldier : StateMachineBehaviour {
 
 	private Player player;
 	private float elapsedTime;
+    private float elapsedSound;
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		player = animator.gameObject.GetComponent<Player>();
-		elapsedTime = 0.0f;
+		elapsedTime = elapsedSound = 0.0f;
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		elapsedTime += Time.deltaTime;
+        elapsedSound += Time.deltaTime;
 
-		if (elapsedTime >= 10.0f){
+		if (elapsedTime >= 60.0f){
 			Vector3 posPlayer = player.transform.position;
 			//TODO:
 			//Instantiate(); tumba
 			//Pos tumba = posPlayer;
 			Destroy(player);
-		}
+        }
+        else
+        {
+            if(elapsedSound >= 15.0f)
+            {
+                player.generateSound();
+                elapsedSound = 0.0f;
+            }
+        }
+        
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state

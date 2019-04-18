@@ -23,7 +23,7 @@ public class Player : Aspect {
 	protected List<WayPoint> wP;
 
     protected int actualLayerAnimator;
-
+    protected bool hidden = false;
 	public GameObject basicSound;
 
 	void Start () {
@@ -49,6 +49,16 @@ public class Player : Aspect {
 	/*void Update () {
 		
 	}*/
+
+    public void setHidden(bool state)
+    {
+        hidden = state;
+    }
+
+    public bool getHidden()
+    {
+        return hidden;
+    }
 
     public void setLayerAnimator(int a)
     {
