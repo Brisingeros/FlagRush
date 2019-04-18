@@ -17,6 +17,6 @@ public class Sound : Aspect {
 		elapsedTime -= Time.deltaTime;
 
 		if (elapsedTime <= 0.0f)
-			Destroy (this.gameObject);
+			Destroy (gameObject);
 	}
 }
