@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Sniper : Player {
 
-	protected void initPlayer(){
+    protected override void initPlayer(){
 
 		defaultHealth = 2;
 		anim.SetInteger ("Lives", defaultHealth);

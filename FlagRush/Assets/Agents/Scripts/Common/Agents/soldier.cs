@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Soldier : Player {
 
-	protected void initPlayer(){
+    protected override void initPlayer(){
 
 		defaultHealth = 3;
 		anim.SetInteger ("Lives", defaultHealth);

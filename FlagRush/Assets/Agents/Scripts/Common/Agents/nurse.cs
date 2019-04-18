@@ -8,29 +8,31 @@ public class Nurse : Player {
     List<Aspect> allySounds;
     List<Player> allies;
 
-	protected void initPlayer(){
-	
-		defaultHealth = 1;
-		anim.SetInteger ("Lives", defaultHealth);
+    protected override void initPlayer()
+    {
+        defaultHealth = 1;
+        anim.SetInteger("Lives", defaultHealth);
 
-		allySounds = new List<Aspect>();
-		allies = new List<Player>();
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        allySounds = new List<Aspect>();
+        allies = new List<Player>();
+
+    }
+
+    // Update is called once per frame
+    void Update () {
+
 		anim.SetBool("Alerta", allySounds.Count > 0);
 		anim.SetBool("Aliado", allies.Count > 0);
 
-		bool huir = anim.GetBool ("Peligro");
+		bool huir = anim.GetBool("Peligro");
 
 		if (!huir) {
 			huir = focus != null;
 
-			if (!huir && enemiesSound.Count > 0)
-				huir = Vector3.Distance(enemiesSound[0].transform.position, transform.position) < 40;
-
+            if (!huir && enemiesSound.Count > 0)
+            {
+                huir = Vector3.Distance(enemiesSound[0].transform.position, transform.position) < 40;
+            }
 			anim.SetBool ("Peligro", huir); //en el statemachine de huir hay que ponerlo a false cuando llegue al waypoint
 		}
 
@@ -75,4 +77,6 @@ public class Nurse : Player {
     {
         return allies.Count;
     }
+
+
 }
