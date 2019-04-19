@@ -7,10 +7,11 @@ public class Nurse : Player {
 
     List<Aspect> allySounds;
     List<Player> allies;
+    public Player focusAlly;
 
     protected override void initPlayer()
     {
-        defaultHealth = 1;
+        defaultHealth = 50;
         anim.SetInteger("Lives", defaultHealth);
 		typeNpc = TypeNPC.type.Nurse;
 
@@ -22,20 +23,20 @@ public class Nurse : Player {
     // Update is called once per frame
     void Update () {
 
+		bool huir = anim.GetBool("Peligro");
+        Debug.Log("sonidos aliados: " + allySounds.Count);
         anim.SetBool("Alerta", allySounds.Count > 0);
         anim.SetBool("Aliado", allies.Count > 0);
 
-		bool huir = anim.GetBool("Peligro");
+        if (!huir) {
 
-		if (!huir) {
-
-			huir = focus != null;
+            huir = focus != null;
 
             if (!huir && enemiesSound.Count > 0)
             {
                 huir = Vector3.Distance(enemiesSound[0].transform.position, transform.position) < 40;
             }
-			anim.SetBool ("Peligro", huir); //en el statemachine de huir hay que ponerlo a false cuando llegue al waypoint
+            anim.SetBool ("Peligro", huir); //en el statemachine de huir hay que ponerlo a false cuando llegue al waypoint
 		}
 
 		//fijar peligro según la distancia a sonidos enemigos o si hay un enemigo visible
@@ -43,15 +44,51 @@ public class Nurse : Player {
 		//dado que lo que queremos es que el enfermero huya hasta el waypoint anterior, y ahí realizar de nuevo comprobación
 	}
 
+    public void findHidingPlace()
+    {
+
+        List<GameObject> bushes = GameObject.FindGameObjectsWithTag("Bush").ToList();
+        bushes = bushes.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).ToList(); //ordenamos por distancia a enfermera
+        getAgent().SetDestination(bushes[0].transform.position);
+
+    }
+
     public void SetFocus()
     {
-        focus = allies.Count > 0?allies[0]: null;
+        focusAlly = allies.Count > 0?allies[0]: null;
     }
 
     public void addAlly(Player a)
     {
         allies.Add(a);
         OrderAlliesByDistance("vision");
+
+    }
+
+    protected override void removeSoldiers(Team.team type)
+    {
+        if (type != teamAct)
+        {
+            enemies = enemies.FindAll(x => x != null);
+
+        }
+        else
+        {
+            allies = allies.FindAll(x => x != null);
+        }
+    }
+
+    public void removeDestroyedSounds(Team.team type)
+    {
+
+        if (type != teamAct)
+        {
+            enemiesSound = enemiesSound.FindAll(x => x != null);
+
+        }else
+        {
+            allySounds = allySounds.FindAll(x => x != null);
+        }
 
     }
 

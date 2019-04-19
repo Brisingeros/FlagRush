@@ -44,10 +44,25 @@ public class WayPoint : MonoBehaviour {
 					//player.transform.LookAt(getNext().transform);
 					player.getAgent().SetDestination(getNext().transform.position);
 				}
+            }else if (CompareTag("Bush")) //es un escondite, ha llegado
+            {
+                player.setHidden(true);
             }
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        Player player = other.GetComponent<Player>();
+        if (player && (team == player.getTeam() && type == player.getTypeNpc()))
+        {
+            if (CompareTag("Bush")) //es un escondite, ha llegado
+            {
+                player.setHidden(false);
+            }
+
+        }
+    }
     public WayPoint getNext(){
 		return next;
 	}

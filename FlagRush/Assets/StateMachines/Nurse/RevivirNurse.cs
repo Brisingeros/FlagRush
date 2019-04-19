@@ -1,17 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RevivirNurse : StateMachineBehaviour {
 
 	private Player player;
+    private NavMeshAgent pAI;
 
-	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		player = animator.gameObject.GetComponent<Player>();
+    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+
+        player = animator.gameObject.GetComponent<Player>();
+        pAI = player.getAgent();
+        pAI.velocity = pAI.velocity * 0.7f;
+        pAI.ResetPath();
+
         Nurse n = player.gameObject.GetComponent<Nurse>();
-        n.focus.revive();
-	}
+        Debug.Log("revive a: " + n.focusAlly.name);
+        n.focusAlly.revive();
+        n.removeAlly(n.focusAlly);
+
+    }
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	//override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {

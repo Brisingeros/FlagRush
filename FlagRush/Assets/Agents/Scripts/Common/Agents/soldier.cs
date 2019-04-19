@@ -11,9 +11,18 @@ public class Soldier : Player {
 		typeNpc = TypeNPC.type.Soldier;
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    protected override void removeSoldiers(Team.team type)
+    {
+        if (type != teamAct)
+        {
+            enemies = enemies.FindAll(x => x != null);
+
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
 		anim.SetBool("Alerta", enemiesSound.Count > 0);
 		anim.SetBool("Enemigo", focus != null);
 	}

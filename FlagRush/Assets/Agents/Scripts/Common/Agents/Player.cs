@@ -20,6 +20,7 @@ public abstract class Player : Aspect {
 
 	protected List<Player> enemies;
     protected List<Aspect> enemiesSound;
+
     public Player focus;
 
 	protected List<WayPoint> wP;
@@ -46,6 +47,7 @@ public abstract class Player : Aspect {
 
     protected abstract void initPlayer();
 
+    protected abstract void removeSoldiers(Team.team type);
 	/*void Update () {
 		
 	}*/
@@ -180,8 +182,8 @@ public abstract class Player : Aspect {
 		sndComp.teamAct = teamAct;
 		sndComp.alive = alive;
 
-        //if(!alive)
-            //snd.transform.SetParent(transform);
+        if(!alive)
+            snd.transform.SetParent(transform);
 
     }
 }

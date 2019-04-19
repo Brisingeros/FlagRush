@@ -18,6 +18,8 @@ public class SoundEnemy : Sense {
 			if (aspect.alive && aspect.aspectAct == Aspect.aspect.Sound && aspect.teamAct != pla.teamAct)
             {
                 pla.addSound(aspect);
+                pla.OrderByDistance("sound");
+
                 Debug.Log("Enemigo escuchado");
 
             }
@@ -37,6 +39,8 @@ public class SoundEnemy : Sense {
             if (aspect.alive && aspect.aspectAct == Aspect.aspect.Sound && aspect.teamAct != pla.teamAct)
             {
                 pla.removeSound(other.GetComponent<Aspect>());
+                pla.OrderByDistance("sound");
+
             }
 
         }
@@ -45,7 +49,6 @@ public class SoundEnemy : Sense {
 
     void Update()
     {
-        pla.OrderByDistance("sound");
     }
 
 }
