@@ -24,17 +24,22 @@ public class Nurse : Player {
     void Update () {
 
 		bool huir = anim.GetBool("Peligro");
-        Debug.Log("sonidos aliados: " + allySounds.Count);
-        anim.SetBool("Alerta", allySounds.Count > 0);
-        anim.SetBool("Aliado", allies.Count > 0);
 
         if (!huir) {
 
             huir = focus != null;
 
-            if (!huir && enemiesSound.Count > 0)
+            if (!huir)
             {
-                huir = Vector3.Distance(enemiesSound[0].transform.position, transform.position) < 40;
+                if (enemiesSound.Count > 0 || enemies.Count > 0)
+                {
+                    huir = Vector3.Distance(enemiesSound[0].transform.position, transform.position) < 100 || Vector3.Distance(enemies[0].transform.position, transform.position) < 100;
+                }
+                else
+                {
+                    anim.SetBool("Alerta", allySounds.Count > 0);
+                    anim.SetBool("Aliado", allies.Count > 0);
+                }
             }
             anim.SetBool ("Peligro", huir); //en el statemachine de huir hay que ponerlo a false cuando llegue al waypoint
 		}
@@ -43,15 +48,6 @@ public class Nurse : Player {
 		//El problema de este, es que aquí nunca debería ponerse a false si estaba a true,
 		//dado que lo que queremos es que el enfermero huya hasta el waypoint anterior, y ahí realizar de nuevo comprobación
 	}
-
-    public void findHidingPlace()
-    {
-
-        List<GameObject> bushes = GameObject.FindGameObjectsWithTag("Bush").ToList();
-        bushes = bushes.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).ToList(); //ordenamos por distancia a enfermera
-        getAgent().SetDestination(bushes[0].transform.position);
-
-    }
 
     public void SetFocus()
     {
@@ -65,27 +61,27 @@ public class Nurse : Player {
 
     }
 
-    protected override void removeSoldiers(Team.team type)
+    public override void removeSoldiers(string type)
     {
-        if (type != teamAct)
+        if (type.Equals("enemy"))
         {
             enemies = enemies.FindAll(x => x != null);
 
         }
-        else
+        else if (type.Equals("ally"))
         {
             allies = allies.FindAll(x => x != null);
         }
     }
 
-    public void removeDestroyedSounds(Team.team type)
+    public override void removeDestroyedSounds(string type)
     {
 
-        if (type != teamAct)
+        if (type.Equals("enemy"))
         {
             enemiesSound = enemiesSound.FindAll(x => x != null);
 
-        }else
+        }else if (type.Equals("ally"))
         {
             allySounds = allySounds.FindAll(x => x != null);
         }
@@ -95,6 +91,11 @@ public class Nurse : Player {
     public bool removeAlly(Player a)
     {
         bool success = allies.Remove(a);
+        if (a.gameObject.GetComponentInChildren<Aspect>())
+        {
+            Aspect sound = a.gameObject.GetComponentInChildren<Aspect>();
+            removeSound(sound);
+        }
         OrderAlliesByDistance("vision");
 
         return success;
@@ -106,7 +107,6 @@ public class Nurse : Player {
 
     public override bool removeSound(Aspect a)
     {
-        Debug.Log("elimina sonido");
         return allySounds.Remove(a);
     }
 

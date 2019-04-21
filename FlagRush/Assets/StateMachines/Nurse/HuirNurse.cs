@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class HuirNurse : StateMachineBehaviour {
     //enemigo cerca. Se esconde en el matojo mas cercano
 
 	private Player player;
     private float elapsedTime;
+    private NavMeshAgent pAI;
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+
 		player = animator.gameObject.GetComponent<Player>();
-        player.gameObject.GetComponent<Nurse>().findHidingPlace();
-        animator.SetBool("Alerta", false);
+        player.findHidingPlace();
+        pAI = player.getAgent();
 
     }
 
@@ -21,6 +24,8 @@ public class HuirNurse : StateMachineBehaviour {
 
         if (player.getHidden())
         {
+            pAI.velocity = pAI.velocity * 0.7f;
+            pAI.ResetPath();
             elapsedTime += Time.deltaTime;
 
             if(elapsedTime >= 10)

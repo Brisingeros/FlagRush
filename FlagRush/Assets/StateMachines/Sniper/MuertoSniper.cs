@@ -6,8 +6,10 @@ public class MuertoSniper : StateMachineBehaviour {
 
 	private Player player;
     private float elapsedTime = 0.0f;
-	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+    private float elapsedTimeSound = 0.0f;
+
+    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         animator.SetInteger("Lives", -1);
         player = animator.gameObject.GetComponent<Player>();
 		Vector3 posPlayer = player.transform.position;
@@ -19,6 +21,7 @@ public class MuertoSniper : StateMachineBehaviour {
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 
         elapsedTime += Time.deltaTime;
+        elapsedTimeSound += Time.deltaTime;
 
         if (elapsedTime >= 60)
         {
@@ -26,6 +29,11 @@ public class MuertoSniper : StateMachineBehaviour {
             //Instantiate(); tumba
             //Pos tumba = posPlayer;
             Destroy(player.gameObject);
+
+        }else if(elapsedTimeSound >= 20.0f)
+        {
+            player.generateSound();
+            elapsedTimeSound = 0.0f;
         }
     }
 

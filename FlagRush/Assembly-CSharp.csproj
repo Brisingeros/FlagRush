@@ -66,6 +66,7 @@
     <Compile Include="Assets\Agents\Scripts\Common\Agents\Sniper.cs" />
     <Compile Include="Assets\Agents\Scripts\Common\Agents\Soldier.cs" />
     <Compile Include="Assets\Agents\Scripts\Common\Aspect.cs" />
+    <Compile Include="Assets\Agents\Scripts\Common\Grass.cs" />
     <Compile Include="Assets\Agents\Scripts\Common\Senses\PerspectiveAlly.cs" />
     <Compile Include="Assets\Agents\Scripts\Common\Senses\PerspectiveEnemy.cs" />
     <Compile Include="Assets\Agents\Scripts\Common\Senses\Sense.cs" />

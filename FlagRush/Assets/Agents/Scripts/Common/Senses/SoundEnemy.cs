@@ -9,6 +9,7 @@ public class SoundEnemy : Sense {
         pla = transform.parent.GetComponent<Player>();
 
     }
+
     void OnTriggerEnter(Collider other){
 	
 		Aspect aspect = other.GetComponent<Aspect> ();
@@ -49,6 +50,7 @@ public class SoundEnemy : Sense {
 
     void Update()
     {
+        pla.removeDestroyedSounds("enemy");
     }
 
 }

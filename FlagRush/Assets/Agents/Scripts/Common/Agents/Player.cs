@@ -47,8 +47,9 @@ public abstract class Player : Aspect {
 
     protected abstract void initPlayer();
 
-    protected abstract void removeSoldiers(Team.team type);
-	/*void Update () {
+    public abstract void removeSoldiers(string type);
+    public abstract void removeDestroyedSounds(string type);
+    /*void Update () {
 		
 	}*/
 
@@ -65,6 +66,15 @@ public abstract class Player : Aspect {
 	public TypeNPC.type getTypeNpc(){
 		return typeNpc;
 	}
+
+    public void findHidingPlace()
+    {
+        getAgent().ResetPath();
+        List<GameObject> bushes = GameObject.FindGameObjectsWithTag("Bush").ToList();
+        bushes = bushes.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).ToList(); //ordenamos por distancia a enfermera
+        getAgent().SetDestination(bushes[0].transform.position);
+
+    }
 
     public void setLayerAnimator(int a)
     {
@@ -91,7 +101,6 @@ public abstract class Player : Aspect {
 	public void getShot(){
 		int lives = anim.GetInteger ("Lives");
 		lives--;
-		Debug.Log (lives);
 		alive = lives > 0;
 		anim.SetInteger("Lives", lives);
     }
@@ -99,6 +108,11 @@ public abstract class Player : Aspect {
     public void revive(){
 		anim.SetInteger("Lives", defaultHealth);
 		alive = true;
+        if (GetComponentInChildren<Aspect>())
+        {
+            GameObject sound = transform.GetChild(transform.childCount-1).gameObject;
+            Destroy(sound);
+        }
 	}
 
     public void addEnemy(Player e)
@@ -161,9 +175,9 @@ public abstract class Player : Aspect {
 			if (w.team == teamAct && w.type == typeNpc)
 			    wP.Add (other.GetComponent<WayPoint> ());
 		}
-	}
+    }
 
-	public WayPoint getObjective(){
+    public WayPoint getObjective(){
 	
 		wP = wP.OrderBy (x => x.getValue (gameObject)).ToList();
 		return wP [0];

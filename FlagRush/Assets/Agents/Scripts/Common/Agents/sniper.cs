@@ -12,15 +12,25 @@ public class Sniper : Player {
 
 	}
 
-    protected override void removeSoldiers(Team.team type)
+    public override void removeSoldiers(string type)
     {
-        if (type != teamAct)
+        if (type.Equals("enemy"))
         {
             enemies = enemies.FindAll(x => x != null);
 
         }
     }
 
+    public override void removeDestroyedSounds(string type)
+    {
+
+        if (type.Equals("enemy"))
+        {
+            enemiesSound = enemiesSound.FindAll(x => x != null);
+
+        }
+
+    }
     // Update is called once per frame
     void Update () {
 		anim.SetBool("Alerta", enemiesSound.Count > 0);
