@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Sniper : Player {
 
+	public int positionBarricade;
+	public Barricade barricade;
+
     protected override void initPlayer(){
 
 		defaultHealth = 2;
