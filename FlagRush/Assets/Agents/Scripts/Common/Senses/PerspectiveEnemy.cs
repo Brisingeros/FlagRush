@@ -25,6 +25,8 @@ public class PerspectiveEnemy : Sense {
 
     private void Update()
     {
+        parent.removeSoldiers("enemy");
+
         //El array de enemigos estará ordenado por distancia (recta)
         parent.focus = null;
         parent.OrderByDistance("vision");
@@ -38,12 +40,12 @@ public class PerspectiveEnemy : Sense {
             {
                 Player player = parent.getEnemy(i);
 
-                if (player && player.alive)
+                if (player && !player.getHidden() && player.alive)
                 {
 
                     if(parent.GetDistanceToEnemy(player) < distanceMelee)
                     {
-                        Debug.Log("Enemigo a la vista. Golpe melee");
+                        //Debug.Log("Enemigo a la vista. Golpe melee");
                         parent.focus = player;
 
                     }
@@ -55,11 +57,10 @@ public class PerspectiveEnemy : Sense {
 						if (Physics.Raycast(shootPos.transform.position, rayDirection, out hit, 300.0f, -5, QueryTriggerInteraction.Ignore))
                         { //Mirar si es necesario maxdistance
 							Player plaHit = hit.collider.GetComponentInParent<Player> ();
-							Debug.Log (hit.collider);
 
                             if (plaHit != null && plaHit == player)
                             {
-                                Debug.Log("Enemigo a la vista");
+                               // Debug.Log("Enemigo a la vista");
                                 parent.focus = player;
                             }
                         }
@@ -78,6 +79,7 @@ public class PerspectiveEnemy : Sense {
 	void OnTriggerExit(Collider other){
         //Remove from enemies list
         Player p = other.GetComponent<Player>();
+
         if (p && p.aspectAct == Aspect.aspect.NPC && p.teamAct != pla.teamAct)
             parent.removeEnemy(other.GetComponent<Player>());
 	}

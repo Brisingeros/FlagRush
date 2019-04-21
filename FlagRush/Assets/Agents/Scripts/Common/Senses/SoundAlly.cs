@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class SoundAlly : Sense
 {
-    Nurse nurse;
+    Player nurse;
 
     private void Start()
     {
-        nurse = GetComponentInParent<Nurse>();
+        nurse = GetComponentInParent<Player>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -49,7 +49,7 @@ public class SoundAlly : Sense
 
     void Update()
     {
-        nurse.OrderAlliesByDistance("sound");
+        nurse.removeDestroyedSounds("ally");
     }
 
 }

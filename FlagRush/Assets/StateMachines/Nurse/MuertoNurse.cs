@@ -10,6 +10,7 @@ public class MuertoNurse : StateMachineBehaviour {
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		player = animator.gameObject.GetComponent<Player>();
+		animator.SetInteger("Lives", -1);
 		elapsedTime = 0.0f;
 	}
 

@@ -55,7 +55,7 @@ public class AtaqueSoldier : StateMachineBehaviour {
 
 			} else if (elapsedTime >= 3.0f) {
 				elapsedTime = 0.0f;
-				shoot (player, player.focus);
+				shoot (player.focus);
 			}	
 		}
 	}
@@ -68,10 +68,10 @@ public class AtaqueSoldier : StateMachineBehaviour {
 		
 	}
 
-	private void shoot(Player soldier, Player enemy){
+	private void shoot(Player enemy){
 
 		Debug.Log ("Shoot");
-		float distance = Vector3.Distance (enemy.transform.position, soldier.transform.position);
+		float distance = Vector3.Distance (enemy.transform.position, player.transform.position);
 
 		//TODO: animación de disparo o animación de golpe
 		if (distance < 20.0f) {

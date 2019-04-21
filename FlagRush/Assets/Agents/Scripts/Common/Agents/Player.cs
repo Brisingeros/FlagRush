@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.AI;
 
-public class Player : Aspect {
+public abstract class Player : Aspect {
 
     //TODO: Cuando pase X tiempo muerto, hacer despawn y spawnear una tumba en su lugar (Jeje solución de mierda a revivir sin querer)
     //TODO: Los enfermeros cuando escuchan un sonido o ven a un enemigo, se dirigen al escondite más cercano a un nivel inferior. Tras esto, reinician rutina
@@ -14,16 +14,19 @@ public class Player : Aspect {
 
 	protected int defaultHealth;
 
+	protected TypeNPC.type typeNpc;
+
 	protected WorldManager mG;
 
 	protected List<Player> enemies;
     protected List<Aspect> enemiesSound;
+
     public Player focus;
 
 	protected List<WayPoint> wP;
 
     protected int actualLayerAnimator;
-
+    protected bool hidden = false;
 	public GameObject basicSound;
 
 	void Start () {
@@ -39,16 +42,39 @@ public class Player : Aspect {
 
 		mG = FindObjectOfType<WorldManager> ();
 
-		initPlayer ();
+		initPlayer();
     }
 
-	protected virtual void initPlayer (){
-		
-	}
+    protected abstract void initPlayer();
 
-	/*void Update () {
+    public abstract void removeSoldiers(string type);
+    public abstract void removeDestroyedSounds(string type);
+    /*void Update () {
 		
 	}*/
+
+    public void setHidden(bool state)
+    {
+        hidden = state;
+    }
+
+    public bool getHidden()
+    {
+        return hidden;
+    }
+
+	public TypeNPC.type getTypeNpc(){
+		return typeNpc;
+	}
+
+    public void findHidingPlace()
+    {
+        getAgent().ResetPath();
+        List<GameObject> bushes = GameObject.FindGameObjectsWithTag("Bush").ToList();
+        bushes = bushes.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).ToList(); //ordenamos por distancia a enfermera
+        getAgent().SetDestination(bushes[0].transform.position);
+
+    }
 
     public void setLayerAnimator(int a)
     {
@@ -75,14 +101,18 @@ public class Player : Aspect {
 	public void getShot(){
 		int lives = anim.GetInteger ("Lives");
 		lives--;
-		Debug.Log (lives);
 		alive = lives > 0;
 		anim.SetInteger("Lives", lives);
-	}
+    }
 
-	public void revive(){
+    public void revive(){
 		anim.SetInteger("Lives", defaultHealth);
 		alive = true;
+        if (GetComponentInChildren<Aspect>())
+        {
+            GameObject sound = transform.GetChild(transform.childCount-1).gameObject;
+            Destroy(sound);
+        }
 	}
 
     public void addEnemy(Player e)
@@ -141,11 +171,13 @@ public class Player : Aspect {
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.tag.Equals ("WayPoint")) {
-			wP.Add (other.GetComponent<WayPoint> ());
+            WayPoint w = other.GetComponent<WayPoint>();
+			if (w.team == teamAct && w.type == typeNpc)
+			    wP.Add (other.GetComponent<WayPoint> ());
 		}
-	}
+    }
 
-	public WayPoint getObjective(){
+    public WayPoint getObjective(){
 	
 		wP = wP.OrderBy (x => x.getValue (gameObject)).ToList();
 		return wP [0];
@@ -157,11 +189,15 @@ public class Player : Aspect {
 	}
 
 	public void generateSound(){
-		GameObject snd = Instantiate (basicSound);
-		snd.transform.position = this.transform.position;
+		GameObject snd = Instantiate(basicSound);
+		snd.transform.position = transform.position;
 
 		Sound sndComp = snd.GetComponent<Sound> ();
-		sndComp.teamAct = this.teamAct;
-		sndComp.alive = this.alive;
-	}
+		sndComp.teamAct = teamAct;
+		sndComp.alive = alive;
+
+        if(!alive)
+            snd.transform.SetParent(transform);
+
+    }
 }

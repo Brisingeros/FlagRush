@@ -8,13 +8,16 @@ public class WayPoint : MonoBehaviour {
 
 	public WayPoint previous;
 	public WayPoint next;
+	public TypeNPC.type type;
+    public Team.team team;
 
 	public int lvl;
 
 	public float getValue(GameObject g){
-		float dis =  Vector3.Distance(g.transform.position, this.transform.position);
+		float dis =  Vector3.Distance(g.transform.position, transform.position);
 
-		return Mathf.Abs(dis) - (lvl * weight);
+		return Mathf.Abs(dis) - (lvl * weight); //cuanto mas nivel, mas cerca de la bandera
+
 	}
 
 	public WayPoint getPrevious(){
@@ -28,28 +31,30 @@ public class WayPoint : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
+
         Player player = other.GetComponent<Player>();
-        if (player)
+		if (player && (team == player.getTeam() && type == player.getTypeNpc()))
         {
             Animator anim = player.GetComponent<Animator>();
             int layerActual = player.getActualLayerAnimator();
 
             if (anim.GetCurrentAnimatorStateInfo(layerActual).IsName("Avanzar"))
             {
-                
-                player.getAgent().SetDestination(getNext().transform.position);
-
+				if (getNext () != null)
+				{
+					//player.transform.LookAt(getNext().transform);
+					player.getAgent().SetDestination(getNext().transform.position);
+				}
             }
-
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+    }
+
     public WayPoint getNext(){
-		WayPoint aux = this;
-
-		if (next != null)
-			aux = next;
-
-		return aux;
+		return next;
 	}
 
 }

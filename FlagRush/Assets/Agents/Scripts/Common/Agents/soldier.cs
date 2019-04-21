@@ -4,12 +4,33 @@ using UnityEngine;
 
 public class Soldier : Player {
 
-	protected void initPlayer(){
+    protected override void initPlayer(){
 
 		defaultHealth = 3;
 		anim.SetInteger ("Lives", defaultHealth);
+		typeNpc = TypeNPC.type.Soldier;
 
 	}
+
+	public override void removeSoldiers(string type)
+    {
+        if (type.Equals("enemy"))
+        {
+            enemies = enemies.FindAll(x => x != null);
+
+        }
+    }
+
+    public override void removeDestroyedSounds(string type)
+    {
+
+        if (type.Equals("enemy"))
+        {
+            enemiesSound = enemiesSound.FindAll(x => x != null);
+
+        }
+
+    }
 	
 	// Update is called once per frame
 	void Update () {

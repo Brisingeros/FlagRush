@@ -13,7 +13,6 @@ public class AlertaSoldier : StateMachineBehaviour {
 		player = animator.gameObject.GetComponent<Player>();
 		player.setLayerAnimator(layerIndex);
 		pAI = player.getAgent();
-		player = animator.gameObject.GetComponent<Player>();
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

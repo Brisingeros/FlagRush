@@ -5,16 +5,29 @@ using UnityEngine;
 public class MuertoSniper : StateMachineBehaviour {
 
 	private Player player;
-
+    private float elapsedTime = 0.0f;
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		player = animator.gameObject.GetComponent<Player>();
-	}
+        animator.SetInteger("Lives", -1);
+        player = animator.gameObject.GetComponent<Player>();
+		Vector3 posPlayer = player.transform.position;
+        player.generateSound();
 
-	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-	//override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
+    }
+
+    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+
+        elapsedTime += Time.deltaTime;
+
+        if (elapsedTime >= 60)
+        {
+            //TODO:
+            //Instantiate(); tumba
+            //Pos tumba = posPlayer;
+            Destroy(player.gameObject);
+        }
+    }
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	//override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {

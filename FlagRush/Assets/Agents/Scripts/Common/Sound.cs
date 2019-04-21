@@ -8,7 +8,7 @@ public class Sound : Aspect {
 
 	// Use this for initialization
 	void Start () {
-		elapsedTime = 15.0f;
+		elapsedTime = 20.0f;
 		aspectAct = aspect.Sound;
 	}
 	
@@ -17,6 +17,6 @@ public class Sound : Aspect {
 		elapsedTime -= Time.deltaTime;
 
 		if (elapsedTime <= 0.0f)
-			Destroy (this.gameObject);
+			Destroy(gameObject);
 	}
 }
