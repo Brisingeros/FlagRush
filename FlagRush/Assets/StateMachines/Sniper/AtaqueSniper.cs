@@ -18,7 +18,8 @@ public class AtaqueSniper : StateMachineBehaviour {
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		if (player.focus == null)
 			return;
-
+		
+		elapsedTime += Time.deltaTime;
 		Vector3 focusLeveled = player.focus.transform.position;
 		focusLeveled.y = player.transform.position.y;
 
@@ -45,7 +46,7 @@ public class AtaqueSniper : StateMachineBehaviour {
 
 		Vector3 desiredDirection = targetPos - position;
 		float angle = Vector3.Angle( desiredDirection, direction );
-		return angle < 5.0f;
+		return angle < 30.0f;
 
 	}
 

@@ -1,20 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class HuirSniper : StateMachineBehaviour {
 
-	private Player player;
+	private Sniper player;
+	private NavMeshAgent pAI;
+
+	private PositionBarricade scaping;
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		player = animator.gameObject.GetComponent<Player>();
+		player = animator.gameObject.GetComponent<Sniper>();
+		pAI = player.getAgent();
+		scaping = null;
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-	//override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
+	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+		if (scaping == null) {
+			scaping = player.barricade.defend (player);
+
+			if (scaping != null) {
+				pAI.SetDestination (scaping.transform.position);
+			}
+		} else {
+			bool danger = pAI.remainingDistance > 3;
+			if (!danger){
+				animator.SetBool ("Peligro", false);
+			}
+		}
+	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	//override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {

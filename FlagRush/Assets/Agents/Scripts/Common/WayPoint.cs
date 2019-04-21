@@ -31,6 +31,7 @@ public class WayPoint : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
+
         Player player = other.GetComponent<Player>();
 		if (player && (team == player.getTeam() && type == player.getTypeNpc()))
         {
@@ -46,6 +47,10 @@ public class WayPoint : MonoBehaviour {
 				}
             }
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
     }
 
     public WayPoint getNext(){

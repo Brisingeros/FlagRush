@@ -1,22 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RevivirNurse : StateMachineBehaviour {
 
 	private Player player;
+    private NavMeshAgent pAI;
+    private float elapsedTime = 0.0f;
 
-	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		player = animator.gameObject.GetComponent<Player>();
-        Nurse n = player.gameObject.GetComponent<Nurse>();
-        n.focus.revive();
-	}
+    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+
+        player = animator.gameObject.GetComponent<Player>();
+        pAI = player.getAgent();
+        pAI.velocity = pAI.velocity * 0.7f;
+        pAI.ResetPath();
+
+    }
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-	//override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
+	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+
+        elapsedTime += Time.deltaTime;
+
+        if(elapsedTime >= 5.0f)
+        {
+            Nurse n = player.gameObject.GetComponent<Nurse>();
+            if (n.focusAlly)
+            {
+                n.focusAlly.revive();
+                n.removeAlly(n.focusAlly);
+            }
+            elapsedTime = 0.0f;
+        }
+	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	//override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {

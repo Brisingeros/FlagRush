@@ -27,14 +27,12 @@ public class MuertoSoldier : StateMachineBehaviour {
 			//Pos tumba = posPlayer;
 			Destroy(player);
         }
-        else
+        else if(elapsedSound >= 20.0f)
         {
-            if(elapsedSound >= 15.0f)
-            {
                 player.generateSound();
                 elapsedSound = 0.0f;
             }
-        }
+        
         
 	}
 

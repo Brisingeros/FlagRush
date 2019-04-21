@@ -6,7 +6,7 @@ public class Barricade : MonoBehaviour {
 
 	private readonly int[] indexDefend = {0,4,8,12};
 	private readonly int[] indexAttack = {1,2,3,5,6,7,9,10,11};
-	public PositionBarricade[] positions = new PositionBarricade[12];
+	public PositionBarricade[] positions = new PositionBarricade[13];
 	public bool[] occupied = {false,false,false,false,false,false,false,false,false,false,false,false};
 
 	// Use this for initialization
@@ -19,7 +19,12 @@ public class Barricade : MonoBehaviour {
 		
 	}
 
-	public PositionBarricade defend(int pos){
+	public Vector3 getPositionMarker(int pos){
+		return positions [pos].getMarker ();
+	}
+
+	public PositionBarricade defend(Sniper sniper){
+		int pos = sniper.positionBarricade;
 		int betweenBottom = pos / 4;
 		int auxStart;
 
@@ -35,6 +40,8 @@ public class Barricade : MonoBehaviour {
 
 		if (!occupied [auxStart * 4]) {
 			occupied [auxStart * 4] = true;
+			occupied [pos] = false;
+			sniper.positionBarricade = auxStart * 4;
 			return positions[auxStart * 4];
 		}
 
@@ -78,6 +85,8 @@ public class Barricade : MonoBehaviour {
 			if (!occupied [posLooking]) {
 				occupied [posLooking] = true;
 				occupied [pos] = false;
+				Debug.Log (posLooking);
+				sniper.positionBarricade = posLooking;
 				return positions [posLooking];
 			}
 		}
@@ -85,13 +94,15 @@ public class Barricade : MonoBehaviour {
 		return null;
 	}
 
-	public PositionBarricade attack(int pos){
+	public PositionBarricade attack(Sniper sniper){
+		int pos = sniper.positionBarricade;
 		int[] auxArr = SuffleArray (indexAttack);
 
 		for (int i = 0; i < auxArr.Length; i++) {
 			if (!occupied [auxArr [i]]) {
 				occupied [pos] = false;
 				occupied [auxArr [i]] = true;
+				sniper.positionBarricade = auxArr [i];
 				return positions [auxArr [i]];
 			}
 		}
@@ -107,7 +118,7 @@ public class Barricade : MonoBehaviour {
 		}
 
 		for (int j = auxArray.Length; j > 0; j--) {
-			int k = (int)Random.Range (0, j + 1);
+			int k = (int)Random.Range (0, j);
 			int l = auxArray [k];
 			auxArray [k] = array [j - 1];
 			auxArray [j - 1] = l;
