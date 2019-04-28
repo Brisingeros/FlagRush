@@ -34,7 +34,17 @@ public class Soldier : Player {
 	
 	// Update is called once per frame
 	void Update () {
-		anim.SetBool("Alerta", enemiesSound.Count > 0);
-		anim.SetBool("Enemigo", focus != null);
+
+        if (anim.GetInteger("Lives") > -1)
+        {
+            anim.SetBool("Alerta", enemiesSound.Count > 0);
+            anim.SetBool("Enemigo", focus != null);
+        }
+        else
+        {
+            anim.SetBool("Alerta", false);
+            anim.SetBool("Enemigo", false);
+        }
+		
 	}
 }

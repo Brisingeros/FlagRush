@@ -37,16 +37,27 @@ public class Sniper : Player {
 
 	// Update is called once per frame
 	void Update () {
-		anim.SetBool("Alerta", enemiesSound.Count > 0);
-		anim.SetBool("Enemigo", focus != null);
 
-		//fijar "Peligro" según la distancia al enemigo visible más cercano
-		bool peligro = anim.GetBool("Peligro");
-		if (!peligro && focus != null){
-			float dis = Vector3.Distance(focus.transform.position, transform.position);
-			peligro = dis < 20;
-			anim.SetBool ("Peligro", peligro);
-		}
-			
+        if (anim.GetInteger("Lives") > -1)
+        {
+            anim.SetBool("Alerta", enemiesSound.Count > 0);
+            anim.SetBool("Enemigo", focus != null);
+
+            //fijar "Peligro" según la distancia al enemigo visible más cercano
+            bool peligro = anim.GetBool("Peligro");
+            if (!peligro && focus != null)
+            {
+                float dis = Vector3.Distance(focus.transform.position, transform.position);
+                peligro = dis < 20;
+                anim.SetBool("Peligro", peligro);
+            }
+        }
+        else
+        {
+            anim.SetBool("Alerta", false);
+            anim.SetBool("Enemigo", false);
+            anim.SetBool("Peligro", false);
+        }
+	
 	}
 }

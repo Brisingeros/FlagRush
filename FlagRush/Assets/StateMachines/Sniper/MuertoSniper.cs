@@ -10,7 +10,6 @@ public class MuertoSniper : StateMachineBehaviour {
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         animator.SetInteger("Lives", -1);
         player = animator.gameObject.GetComponent<Player>();
-		Vector3 posPlayer = player.transform.position;
         player.generateSound();
 
     }
@@ -23,8 +22,11 @@ public class MuertoSniper : StateMachineBehaviour {
         if (elapsedTime >= 60)
         {
             //TODO:
-            //Instantiate(); tumba
-            //Pos tumba = posPlayer;
+            Vector3 posPlayer = player.transform.position;
+
+            GameObject tomb = Resources.Load<GameObject>("Prefabs/Tomb");
+            Instantiate(tomb);
+            tomb.transform.position = posPlayer;
             Destroy(player.gameObject);
         }
     }

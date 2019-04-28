@@ -53,6 +53,10 @@ public abstract class Player : Aspect {
 		
 	}*/
 
+    public Animator getAnimator()
+    {
+        return anim;
+    }
     public void setHidden(bool state)
     {
         hidden = state;

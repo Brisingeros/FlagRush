@@ -22,8 +22,6 @@ public class AvanzarNurse : StateMachineBehaviour {
             destination = destination.getNext();
         }
 
-        Debug.Log("Nurse avanzar: " + destination);
-
         pAI.SetDestination(destination.transform.position);
     }
 
@@ -31,7 +29,6 @@ public class AvanzarNurse : StateMachineBehaviour {
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //Navmesh elegir siguiente objetivo y caminar hacia él
-        Debug.Log(pAI.destination);
 
     }
 

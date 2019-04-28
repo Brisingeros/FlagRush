@@ -23,26 +23,36 @@ public class Nurse : Player {
     // Update is called once per frame
     void Update () {
 
-		bool huir = anim.GetBool("Peligro");
-
-        if (!huir) {
-
-            huir = focus != null;
+        if (anim.GetInteger("Lives") > -1)
+        {
+            bool huir = anim.GetBool("Peligro");
 
             if (!huir)
             {
-                if (enemiesSound.Count > 0 || enemies.Count > 0)
+
+                huir = focus != null;
+
+                if (!huir)
                 {
-                    huir = (enemiesSound.Count > 0) ? Vector3.Distance(enemiesSound[0].transform.position, transform.position) < 30 : (enemies.Count > 0) ? Vector3.Distance(enemies[0].transform.position, transform.position) < 30 : false;
+                    if (enemiesSound.Count > 0 || enemies.Count > 0)
+                    {
+                        huir = (enemiesSound.Count > 0) ? Vector3.Distance(enemiesSound[0].transform.position, transform.position) < 30 : (enemies.Count > 0) ? Vector3.Distance(enemies[0].transform.position, transform.position) < 30 : false;
+                    }
+                    else
+                    {
+                        anim.SetBool("Alerta", allySounds.Count > 0);
+                        anim.SetBool("Aliado", allies.Count > 0);
+                    }
                 }
-                else
-                {
-                    anim.SetBool("Alerta", allySounds.Count > 0);
-                    anim.SetBool("Aliado", allies.Count > 0);
-                }
+                anim.SetBool("Peligro", huir); //en el statemachine de huir hay que ponerlo a false cuando llegue al waypoint
             }
-            anim.SetBool ("Peligro", huir); //en el statemachine de huir hay que ponerlo a false cuando llegue al waypoint
-		}
+        }
+        else
+        {
+            anim.SetBool("Alerta", false);
+            anim.SetBool("Aliado", false);
+            anim.SetBool("Peligro", false);
+        }
 
 		//fijar peligro según la distancia a sonidos enemigos o si hay un enemigo visible
 		//El problema de este, es que aquí nunca debería ponerse a false si estaba a true,

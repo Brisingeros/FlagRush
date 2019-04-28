@@ -12,9 +12,14 @@ public class Grass : MonoBehaviour
         if (pl)
         {
             pl.setHidden(true);
-            NavMeshAgent pAI = pl.getAgent();
-            pAI.velocity = pAI.velocity * 0.7f;
-            pAI.ResetPath();
+
+            if (pl.getAnimator().GetBool("Peligro"))
+            {
+                NavMeshAgent pAI = pl.getAgent();
+                pAI.velocity = pAI.velocity * 0.7f;
+                pAI.ResetPath();
+            }
+           
         }
     }
 
