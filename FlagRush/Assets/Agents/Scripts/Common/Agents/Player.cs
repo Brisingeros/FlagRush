@@ -185,10 +185,11 @@ public abstract class Player : Aspect {
 	}
 
 	public Aspect getEnemySound() {
-		return enemiesSound [0];
+		return (enemiesSound.Count > 0) ? enemiesSound[0] : null;
 	}
 
 	public void generateSound(){
+        hidden = false;
 		GameObject snd = Instantiate(basicSound);
 		snd.transform.position = transform.position;
 

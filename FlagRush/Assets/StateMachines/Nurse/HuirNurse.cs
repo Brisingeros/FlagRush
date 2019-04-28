@@ -14,18 +14,19 @@ public class HuirNurse : StateMachineBehaviour {
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 
 		player = animator.gameObject.GetComponent<Player>();
-        player.findHidingPlace();
         pAI = player.getAgent();
 
+        //pAI.velocity = pAI.velocity * 0.7f;
+        pAI.ResetPath();
+
+        player.findHidingPlace();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 
-        if (player.getHidden())
-        {
-            pAI.velocity = pAI.velocity * 0.7f;
-            pAI.ResetPath();
+        if (player.getHidden()){
+        
             elapsedTime += Time.deltaTime;
 
             if(elapsedTime >= 10)

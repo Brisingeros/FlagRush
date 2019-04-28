@@ -33,7 +33,7 @@ public class Nurse : Player {
             {
                 if (enemiesSound.Count > 0 || enemies.Count > 0)
                 {
-                    huir = Vector3.Distance(enemiesSound[0].transform.position, transform.position) < 100 || Vector3.Distance(enemies[0].transform.position, transform.position) < 100;
+                    huir = (enemiesSound.Count > 0) ? Vector3.Distance(enemiesSound[0].transform.position, transform.position) < 30 : (enemies.Count > 0) ? Vector3.Distance(enemies[0].transform.position, transform.position) < 30 : false;
                 }
                 else
                 {

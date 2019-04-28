@@ -44,7 +44,7 @@ public class Sniper : Player {
 		bool peligro = anim.GetBool("Peligro");
 		if (!peligro && focus != null){
 			float dis = Vector3.Distance(focus.transform.position, transform.position);
-			peligro = dis < 10;
+			peligro = dis < 20;
 			anim.SetBool ("Peligro", peligro);
 		}
 			

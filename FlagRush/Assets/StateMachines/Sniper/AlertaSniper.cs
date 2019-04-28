@@ -22,6 +22,9 @@ public class AlertaSniper : StateMachineBehaviour {
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		Aspect destination = player.getEnemySound();
 
+        if (!destination)
+            return;
+
 		Vector3 focusLeveled = destination.transform.position;
 		focusLeveled.y = player.transform.position.y;
 
