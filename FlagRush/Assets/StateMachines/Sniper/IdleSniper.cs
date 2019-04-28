@@ -32,8 +32,11 @@ public class IdleSniper : StateMachineBehaviour {
 		if (lookAt > 3) {
 			lookAt = 0;
 
+			Vector3 focusLeveled = player.barricade.getPositionMarker(player.positionBarricade);
+			focusLeveled.y = player.transform.position.y;
+
 			if (pAI.velocity == Vector3.zero)
-				player.transform.LookAt (player.barricade.getPositionMarker(player.positionBarricade));
+				player.transform.LookAt (focusLeveled);
 		}
 
 		if (player.positionBarricade % 4 == 0) {

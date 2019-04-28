@@ -26,12 +26,7 @@ public class MuertoSoldier : StateMachineBehaviour {
         elapsedSound += Time.deltaTime;
 
 		if (elapsedTime >= 10.0f){
-			Vector3 posPlayer = player.transform.localPosition;
-            //TODO:
-            GameObject tomb = Resources.Load<GameObject>("Prefabs/Tomb");
-			Instantiate(tomb);
-            tomb.transform.localPosition = new Vector3(posPlayer.x, 0, posPlayer.z);
-            Destroy(player.gameObject);
+			player.die ();
         }
         else if(elapsedSound >= 20.0f)
         {

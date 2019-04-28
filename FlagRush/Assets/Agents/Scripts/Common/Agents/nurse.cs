@@ -53,10 +53,7 @@ public class Nurse : Player {
             anim.SetBool("Aliado", false);
             anim.SetBool("Peligro", false);
         }
-
-		//fijar peligro según la distancia a sonidos enemigos o si hay un enemigo visible
-		//El problema de este, es que aquí nunca debería ponerse a false si estaba a true,
-		//dado que lo que queremos es que el enfermero huya hasta el waypoint anterior, y ahí realizar de nuevo comprobación
+			
 	}
 
     public void SetFocus()
@@ -112,7 +109,6 @@ public class Nurse : Player {
     }
 
     public override void addSound(Aspect a){
-		Debug.Log ("Nurse");
         allySounds.Add(a);
     }
 

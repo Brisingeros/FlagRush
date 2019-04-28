@@ -6,9 +6,6 @@ using UnityEngine.AI;
 
 public abstract class Player : Aspect {
 
-    //TODO: Cuando pase X tiempo muerto, hacer despawn y spawnear una tumba en su lugar (Jeje solución de mierda a revivir sin querer)
-    //TODO: Los enfermeros cuando escuchan un sonido o ven a un enemigo, se dirigen al escondite más cercano a un nivel inferior. Tras esto, reinician rutina
-
     protected NavMeshAgent playerAI;
 	protected Animator anim;
 
@@ -29,7 +26,12 @@ public abstract class Player : Aspect {
     protected bool hidden = false;
 	public GameObject basicSound;
 
+	private WorldManager WM;
+	private GameObject tomb;
+
 	void Start () {
+		WM = GameObject.FindObjectOfType<WorldManager> ();
+		tomb = Resources.Load<GameObject>("Prefabs/Tomb");
 
         playerAI = GetComponent<NavMeshAgent>();
 		anim = GetComponent<Animator> ();
@@ -109,6 +111,16 @@ public abstract class Player : Aspect {
 		anim.SetInteger("Lives", lives);
     }
 
+	//TODO: ANAALVARO
+	public void die(){
+		Vector3 posPlayer = this.transform.position;
+
+		Instantiate(tomb);
+		tomb.transform.position = posPlayer;
+		Destroy(this.gameObject);
+	}
+
+	//TODO: ANAALVARO
     public void revive(){
 		anim.SetInteger("Lives", defaultHealth);
 		alive = true;
@@ -117,6 +129,8 @@ public abstract class Player : Aspect {
             GameObject sound = transform.GetChild(transform.childCount-1).gameObject;
             Destroy(sound);
         }
+
+		WM.onRevive (this);
 	}
 
     public void addEnemy(Player e)
@@ -192,7 +206,7 @@ public abstract class Player : Aspect {
 		return (enemiesSound.Count > 0) ? enemiesSound[0] : null;
 	}
 
-	public void generateSound(){
+	public virtual void generateSound(){
         hidden = false;
 		GameObject snd = Instantiate(basicSound);
 		snd.transform.position = transform.position;

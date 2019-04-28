@@ -60,4 +60,18 @@ public class Sniper : Player {
         }
 	
 	}
+
+	override public void generateSound(){
+		hidden = false;
+		GameObject snd = Instantiate(basicSound);
+		barricade.generateSound (snd, positionBarricade);
+
+		Sound sndComp = snd.GetComponent<Sound> ();
+		sndComp.teamAct = teamAct;
+		sndComp.alive = alive;
+
+		if(!alive)
+			snd.transform.SetParent(transform);
+
+	}
 }

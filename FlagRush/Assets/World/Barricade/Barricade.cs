@@ -127,4 +127,11 @@ public class Barricade : MonoBehaviour {
 		return auxArray;
 	}
 
+	public void generateSound(GameObject snd, int posBarricade){
+		Vector3 posSound = getPositionMarker (posBarricade);
+		posSound.y = 0;
+
+		snd.transform.position = posSound;
+	}
+
 }

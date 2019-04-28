@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class FlagManager : MonoBehaviour {
 
-	public string teamS;
-	private Team.team team;
+	public Team.team team;
 
 	void Start(){
-		if (teamS.Equals ("blue")) {
-			team = Team.team.Blue;
-		} else if (teamS.Equals ("red")) {
-			team = Team.team.Red;
-		}
 	}
 
 	void OnTriggerEnter(Collider other){
@@ -20,7 +14,18 @@ public class FlagManager : MonoBehaviour {
 		Aspect p = other.GetComponent<Aspect> ();
 
 		if (p != null && p.aspectAct == Aspect.aspect.NPC && p.teamAct != team){
-			//WIN
+			Debug.Log (team.ToString() + " VICTORY");
+
+
+			#if UNITY_EDITOR
+			{
+				UnityEditor.EditorApplication.isPlaying = false;
+			}
+			#else
+			{
+				Application.Quit ();
+			}
+			#endif
 		}
 
 	}

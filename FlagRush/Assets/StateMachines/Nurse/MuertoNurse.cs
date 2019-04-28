@@ -21,12 +21,7 @@ public class MuertoNurse : StateMachineBehaviour {
 
         if (elapsedTime >= 60.0f)
         {
-            Vector3 posPlayer = player.transform.position;
-            //TODO:
-            GameObject tomb = Resources.Load<GameObject>("Prefabs/Tomb");
-            Instantiate(tomb);
-            tomb.transform.position = posPlayer;
-            Destroy(player.gameObject);
+			player.die ();
         }
     }
 

@@ -29,7 +29,6 @@ public class AlertaSniper : StateMachineBehaviour {
 		focusLeveled.y = player.transform.position.y;
 
 		if (!lookingAt (player.transform.forward, player.transform.position, focusLeveled)) {
-			//TODO: Mirar lo del giro
 
 			Vector3 targetDir = focusLeveled - player.transform.position;
 

@@ -23,10 +23,7 @@ public class AtaqueSniper : StateMachineBehaviour {
 		Vector3 focusLeveled = player.focus.transform.position;
 		focusLeveled.y = player.transform.position.y;
 
-        
-
 		if (!lookingAt (player.transform.forward, player.transform.position, focusLeveled)) {
-			//TODO: Mirar lo del giro
 
 			Vector3 targetDir = focusLeveled - player.transform.position;
 
@@ -48,7 +45,7 @@ public class AtaqueSniper : StateMachineBehaviour {
 
 		Vector3 desiredDirection = targetPos - position;
 		float angle = Vector3.Angle( desiredDirection, direction );
-		return angle < 30.0f;
+		return angle < 15.0f;
 
 	}
 

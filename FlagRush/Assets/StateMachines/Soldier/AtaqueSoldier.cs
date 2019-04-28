@@ -73,6 +73,7 @@ public class AtaqueSoldier : StateMachineBehaviour {
 		Debug.Log ("Shoot");
 		float distance = Vector3.Distance (enemy.transform.position, player.transform.position);
 
+		//TODO: ANAALVARO
 		//TODO: animación de disparo o animación de golpe
 		if (distance < 20.0f) {
 		
