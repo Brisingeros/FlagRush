@@ -51,9 +51,6 @@ public abstract class Player : Aspect {
 
     public abstract void removeSoldiers(string type);
     public abstract void removeDestroyedSounds(string type);
-    /*void Update () {
-		
-	}*/
 
     public Animator getAnimator()
     {

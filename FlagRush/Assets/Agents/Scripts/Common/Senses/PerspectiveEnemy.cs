@@ -11,16 +11,12 @@ public class PerspectiveEnemy : Sense {
     private void Awake()
     {
         parent = transform.GetComponentInParent<Player>();
-
     }
 
     void OnTriggerEnter(Collider other){
-
         Player p = other.GetComponent<Player>();
         if (p && p.aspectAct == Aspect.aspect.NPC && p.teamAct != pla.teamAct)
             parent.addEnemy(p);
-		//insert to enemies list
-
 	}
 
     private void Update()
@@ -42,12 +38,9 @@ public class PerspectiveEnemy : Sense {
 
                 if (player && !player.getHidden() && player.alive)
                 {
-
                     if(parent.GetDistanceToEnemy(player) < distanceMelee)
                     {
-                        //Debug.Log("Enemigo a la vista. Golpe melee");
                         parent.focus = player;
-
                     }
                     else
                     {
@@ -55,29 +48,21 @@ public class PerspectiveEnemy : Sense {
                         Vector3 rayDirection = player.transform.position - shootPos.transform.position;
 
 						if (Physics.Raycast(shootPos.transform.position, rayDirection, out hit, 300.0f, -5, QueryTriggerInteraction.Ignore))
-                        { //Mirar si es necesario maxdistance
+                        {
 							Player plaHit = hit.collider.GetComponentInParent<Player> ();
 
                             if (plaHit != null && plaHit == player)
-                            {
-                               // Debug.Log("Enemigo a la vista");
                                 parent.focus = player;
-                            }
                         }
                     }
                         
                 }
-
                 i++;
-
             }
-
         }
-
     }
 
 	void OnTriggerExit(Collider other){
-        //Remove from enemies list
         Player p = other.GetComponent<Player>();
 
         if (p && p.aspectAct == Aspect.aspect.NPC && p.teamAct != pla.teamAct)

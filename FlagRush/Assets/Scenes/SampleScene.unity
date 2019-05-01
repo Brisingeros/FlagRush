@@ -5094,6 +5094,47 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fddd8874cdc4954ca4aaae3c913e864, type: 3}
   m_IsPrefabAsset: 0
+--- !u!1 &1005354953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1005354955}
+  - component: {fileID: 1005354954}
+  m_Layer: 0
+  m_Name: SpawnerRed
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1005354954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1005354953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 704fb2af36164c44aaddb43b92dc519b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: {x: 110, y: 4, z: 25}
+--- !u!4 &1005354955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1005354953}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 76.62}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1015457715
 GameObject:
   m_ObjectHideFlags: 0
@@ -7975,10 +8016,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44878d0f5fe6e9447903325a1402a898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redSoldiers: 0
+  redSoldiers: 1
   redSnipers: 0
   redNurses: 0
-  blueSoldiers: 0
+  blueSoldiers: 1
   blueSnipers: 0
   blueNurses: 0
 --- !u!4 &1854603818

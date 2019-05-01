@@ -134,4 +134,28 @@ public class Barricade : MonoBehaviour {
 		snd.transform.position = posSound;
 	}
 
+	/////////////////////////////////////////////////////////////
+	public void spawnSnipers(GameObject prefab, int numSnipers){
+		int[] orderSpawn = SuffleArray (indexAttack);
+		int index = 0;
+
+		while (index < numSnipers && index < orderSpawn.Length) {
+			int position = orderSpawn [index];
+			occupied [position] = true;
+
+			GameObject instanced = Instantiate (prefab);
+			instanced.transform.position = positions [position].transform.position;
+
+			Sniper instancedSnp = instanced.GetComponent<Sniper> ();
+			instancedSnp.positionBarricade = position;
+			instancedSnp.barricade = this;
+
+			Vector3 focusLeveled = getPositionMarker(position);
+			focusLeveled.y = instanced.transform.position.y;
+			instanced.transform.LookAt (focusLeveled);
+
+			index++;
+		}
+	}
+
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class WorldManager : MonoBehaviour {
@@ -7,6 +8,20 @@ public class WorldManager : MonoBehaviour {
 	public int redSoldiers;
 	public int redSnipers;
 	public int redNurses;
+
+	public Spawner redSpawner;
+	public Spawner blueSpawner;
+
+	public Barricade redBarricade;
+	public Barricade blueBarricade;
+
+	public GameObject redSoldierPrefab;
+	public GameObject blueSoldierPrefab;
+	public GameObject redSniperPrefab;
+	public GameObject blueSniperPrefab;
+	public GameObject redNursePrefab;
+	public GameObject blueNursePrefab;
+
 	private int redForces;
 
 	public int blueSoldiers;
@@ -27,6 +42,25 @@ public class WorldManager : MonoBehaviour {
 		redMoral = blueMoral = 100;
 		redKillMoral = redMoral / (redForces);
 		blueKillMoral = blueMoral / (blueForces);
+
+		Task[] promises = new Task[2];
+
+		promises[0] = Task.Run (() => { redBarricade.spawnSnipers(redSniperPrefab, redSnipers); });
+		promises[1] = Task.Run (() => { blueBarricade.spawnSnipers(blueSniperPrefab, blueSnipers); });
+		Task.WaitAll (promises);
+
+		promises = new Task[2];
+
+		promises[0] = Task.Run (() => { redSpawner.SpawnPrefab(redSoldierPrefab, redSoldiers); });
+		promises[1] = Task.Run (() => { blueSpawner.SpawnPrefab(blueSoldierPrefab, blueSoldiers); });
+		Task.WaitAll (promises);
+
+		promises = new Task[2];
+
+		promises[0] = Task.Run (() => { redSpawner.SpawnPrefab(redNursePrefab, redNurses); });
+		promises[1] = Task.Run (() => { blueSpawner.SpawnPrefab(blueNursePrefab, blueNurses); });
+		Task.WaitAll (promises);
+
 	}
 	
 	public void onKill(Player pl){

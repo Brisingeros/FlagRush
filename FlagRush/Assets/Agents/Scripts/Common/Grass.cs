@@ -27,8 +27,6 @@ public class Grass : MonoBehaviour
     {
         Player pl = other.GetComponent<Player>();
         if (pl)
-        {
             pl.setHidden(false);
-        }
     }
 }

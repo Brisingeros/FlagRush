@@ -12,7 +12,6 @@ public class PerspectiveAlly : Sense {
     }
 
     void OnTriggerEnter(Collider other){
-
         Player al = other.GetComponent<Player>();
 
         if(al && al.aspectAct == Aspect.aspect.NPC && !al.alive)
@@ -20,7 +19,6 @@ public class PerspectiveAlly : Sense {
             nurse.addAlly(al);
             Debug.Log("Aliado avistado");
         }
-
 	}
 
     private void OnTriggerExit(Collider other)
@@ -44,9 +42,7 @@ public class PerspectiveAlly : Sense {
             {
                 nurse.removeAlly(p);
                 i--;
-
             }
         }
-
     }
 }
