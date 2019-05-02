@@ -15,9 +15,10 @@ public class MuertoSoldier : StateMachineBehaviour {
 		player = animator.gameObject.GetComponent<Player>();
         pAI = player.getAgent();
 		animator.SetInteger("Lives", -1);
-        pAI.speed = 0;
+		pAI.speed = 0;
         pAI.ResetPath();
-        elapsedTime = elapsedSound = 0.0f;
+		elapsedTime = 0.0f;
+		elapsedSound = 10.0f;
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -25,10 +26,10 @@ public class MuertoSoldier : StateMachineBehaviour {
 		elapsedTime += Time.deltaTime;
         elapsedSound += Time.deltaTime;
 
-		if (elapsedTime >= 10.0f){
+		if (elapsedTime >= 25.0f){
 			player.die ();
         }
-        else if(elapsedSound >= 20.0f)
+        else if(elapsedSound >= 3.0f)
         {
                 player.generateSound();
                 elapsedSound = 0.0f;

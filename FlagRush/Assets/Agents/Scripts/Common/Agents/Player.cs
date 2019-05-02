@@ -26,26 +26,23 @@ public abstract class Player : Aspect {
     protected bool hidden = false;
 	public GameObject basicSound;
 
-	private WorldManager WM;
 	private GameObject tomb;
 
-	void Start () {
-		WM = GameObject.FindObjectOfType<WorldManager> ();
+	void Awake() {
+		mG = FindObjectOfType<WorldManager> ();
 		tomb = Resources.Load<GameObject>("Prefabs/Tomb");
 
-        playerAI = GetComponent<NavMeshAgent>();
+		playerAI = GetComponent<NavMeshAgent>();
 		anim = GetComponent<Animator> ();
 		aspectAct = aspect.NPC;
 		alive = true;
-        enemies = new List<Player>();
-        enemiesSound = new List<Aspect>();
-        focus = null;
+		enemies = new List<Player>();
+		enemiesSound = new List<Aspect>();
+		focus = null;
 		wP = new List<WayPoint> ();
 
-		mG = FindObjectOfType<WorldManager> ();
-
 		initPlayer();
-    }
+	}
 
     protected abstract void initPlayer();
 
@@ -111,9 +108,13 @@ public abstract class Player : Aspect {
 	//TODO: ANAALVARO
 	public void die(){
 		Vector3 posPlayer = this.transform.position;
+		posPlayer.y = 0;
 
 		Instantiate(tomb);
 		tomb.transform.position = posPlayer;
+
+		mG.onKill (this);
+
 		Destroy(this.gameObject);
 	}
 
@@ -127,14 +128,12 @@ public abstract class Player : Aspect {
             Destroy(sound);
         }
 
-		WM.onRevive (this);
+		mG.onRevive (this);
 	}
 
     public void addEnemy(Player e)
     {
-
         enemies.Add(e);
-
     }
 
     public virtual void addSound(Aspect a)
@@ -160,12 +159,10 @@ public abstract class Player : Aspect {
 
     public void OrderByDistance(string type)
     {
-
         if(type.Equals("vision"))
             enemies = enemies.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).ToList();
         else if(type.Equals("sound"))
             enemiesSound = enemiesSound.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).ToList();
-
     }
 
     public int sizeEnemies()
@@ -187,16 +184,17 @@ public abstract class Player : Aspect {
 	{
 		if (other.tag.Equals ("WayPoint")) {
             WayPoint w = other.GetComponent<WayPoint>();
-			if (w.team == teamAct && w.type == typeNpc)
-			    wP.Add (other.GetComponent<WayPoint> ());
+			if (w.team == teamAct && w.type == typeNpc) {
+				wP.Add (w);
+				if (!anim.enabled)
+					anim.enabled = true;
+			}
 		}
     }
 
     public WayPoint getObjective(){
-	
 		wP = wP.OrderBy (x => x.getValue (gameObject)).ToList();
 		return wP [0];
-	
 	}
 
 	public Aspect getEnemySound() {

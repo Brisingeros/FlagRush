@@ -13,7 +13,7 @@ public class Grass : MonoBehaviour
         {
             pl.setHidden(true);
 
-            if (pl.getAnimator().GetBool("Peligro"))
+			if (pl.GetComponent<Nurse>() != null && pl.getAnimator().GetBool("Peligro"))
             {
                 NavMeshAgent pAI = pl.getAgent();
                 pAI.velocity = pAI.velocity * 0.7f;

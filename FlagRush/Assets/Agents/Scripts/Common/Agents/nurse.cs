@@ -66,7 +66,7 @@ public class Nurse : Player {
     {
         if (type.Equals("enemy"))
         {
-            enemies = enemies.FindAll(x => x != null);
+			enemies = enemies.FindAll(x => x != null && x.GetComponent<Nurse>() == null);
         }
         else if (type.Equals("ally"))
         {

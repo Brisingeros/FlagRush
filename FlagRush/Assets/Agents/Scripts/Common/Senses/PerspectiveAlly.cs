@@ -31,7 +31,7 @@ public class PerspectiveAlly : Sense {
         }
     }
 
-    private void Update()
+	private void FixedUpdate()
     {
         nurse.removeSoldiers("ally");
 

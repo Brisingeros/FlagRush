@@ -13,11 +13,11 @@ public class AvanzarSoldier : StateMachineBehaviour {
 		player = animator.gameObject.GetComponent<Player>();
         player.setLayerAnimator(layerIndex);
         pAI = player.getAgent();
-        WayPoint destination = player.getObjective();
+		pAI.speed = 15;
 
-		if (pAI.remainingDistance <= destination.GetComponent<CapsuleCollider> ().radius) {
-			destination = destination.getNext ();
-		}
+		WayPoint destination = player.getObjective ();
+		if (pAI.remainingDistance <= destination.GetComponent<CapsuleCollider> ().radius)
+			destination = destination.getNext();
         
 		pAI.SetDestination(destination.transform.position);
 	}

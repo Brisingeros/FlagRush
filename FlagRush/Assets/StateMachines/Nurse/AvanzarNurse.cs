@@ -18,9 +18,7 @@ public class AvanzarNurse : StateMachineBehaviour {
         WayPoint destination = player.getObjective();
 
         if (pAI.remainingDistance <= destination.GetComponent<CapsuleCollider>().radius)
-        {
-            destination = destination.getNext();
-        }
+			destination = destination.getNext();
 
         pAI.SetDestination(destination.transform.position);
     }

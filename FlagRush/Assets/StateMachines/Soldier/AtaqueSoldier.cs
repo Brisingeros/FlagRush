@@ -70,7 +70,7 @@ public class AtaqueSoldier : StateMachineBehaviour {
 
 	private void shoot(Player enemy){
 
-		Debug.Log ("Shoot");
+		//Debug.Log ("Shoot");
 		float distance = Vector3.Distance (enemy.transform.position, player.transform.position);
 
 		//TODO: ANAALVARO

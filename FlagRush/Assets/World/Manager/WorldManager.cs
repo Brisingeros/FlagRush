@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class WorldManager : MonoBehaviour {
 
-	public int redSoldiers;
-	public int redSnipers;
-	public int redNurses;
-
 	public Spawner redSpawner;
 	public Spawner blueSpawner;
 
@@ -22,6 +18,9 @@ public class WorldManager : MonoBehaviour {
 	public GameObject redNursePrefab;
 	public GameObject blueNursePrefab;
 
+	public int redSoldiers;
+	public int redSnipers;
+	public int redNurses;
 	private int redForces;
 
 	public int blueSoldiers;
@@ -36,31 +35,27 @@ public class WorldManager : MonoBehaviour {
 	private int blueKillMoral;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		redForces = redSoldiers + redSnipers + redNurses;
 		blueForces = blueSoldiers + blueSnipers + blueNurses;
 		redMoral = blueMoral = 100;
 		redKillMoral = redMoral / (redForces);
 		blueKillMoral = blueMoral / (blueForces);
 
-		Task[] promises = new Task[2];
+		redBarricade.spawnSnipers(redSniperPrefab, redSnipers);
+		blueBarricade.spawnSnipers(blueSniperPrefab, blueSnipers);
 
-		promises[0] = Task.Run (() => { redBarricade.spawnSnipers(redSniperPrefab, redSnipers); });
-		promises[1] = Task.Run (() => { blueBarricade.spawnSnipers(blueSniperPrefab, blueSnipers); });
-		Task.WaitAll (promises);
+		StartCoroutine (soldiers(redSpawner, redSoldierPrefab, redSoldiers));
+		StartCoroutine (soldiers(blueSpawner, blueSoldierPrefab, blueSoldiers));
+		StartCoroutine (soldiers(redSpawner, redNursePrefab, redNurses));
+		StartCoroutine (soldiers(blueSpawner, blueNursePrefab, blueNurses));
+	}
 
-		promises = new Task[2];
-
-		promises[0] = Task.Run (() => { redSpawner.SpawnPrefab(redSoldierPrefab, redSoldiers); });
-		promises[1] = Task.Run (() => { blueSpawner.SpawnPrefab(blueSoldierPrefab, blueSoldiers); });
-		Task.WaitAll (promises);
-
-		promises = new Task[2];
-
-		promises[0] = Task.Run (() => { redSpawner.SpawnPrefab(redNursePrefab, redNurses); });
-		promises[1] = Task.Run (() => { blueSpawner.SpawnPrefab(blueNursePrefab, blueNurses); });
-		Task.WaitAll (promises);
-
+	IEnumerator soldiers(Spawner target, GameObject prefab, int num){
+		for (int i = 0; i < num; i++) {
+			target.SpawnPrefab (prefab, 1);
+			yield return null;
+		}
 	}
 	
 	public void onKill(Player pl){

@@ -21,7 +21,7 @@ public class SoundEnemy : Sense {
                 pla.addSound(aspect);
                 pla.OrderByDistance("sound");
 
-                Debug.Log("Enemigo escuchado");
+                //Debug.Log("Enemigo escuchado");
 
             }
 
@@ -48,7 +48,7 @@ public class SoundEnemy : Sense {
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
         pla.removeDestroyedSounds("enemy");
     }

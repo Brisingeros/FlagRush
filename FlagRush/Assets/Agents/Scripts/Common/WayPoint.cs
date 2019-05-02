@@ -26,13 +26,13 @@ public class WayPoint : MonoBehaviour {
             Animator anim = player.GetComponent<Animator>();
             int layerActual = player.getActualLayerAnimator();
 
-			if (anim.GetCurrentAnimatorStateInfo(layerActual).IsName("Avanzar") && getNext () != null)
+			if (anim.GetCurrentAnimatorStateInfo (layerActual).IsName ("Avanzar") && getNext () != null)
 				player.getAgent().SetDestination(getNext().transform.position);
         }
     }
 
 	public WayPoint getNext(){
-		return next;
+		return (next != null) ? next : this;
 	}
 
 }

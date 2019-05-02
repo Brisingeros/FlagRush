@@ -27,7 +27,7 @@ public class SoundAlly : Sense
             nurse.removeSound(other.GetComponent<Aspect>());
     }
 
-    void Update()
+	void FixedUpdate()
     {
         nurse.removeDestroyedSounds("ally");
     }

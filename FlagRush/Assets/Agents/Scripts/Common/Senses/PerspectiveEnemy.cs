@@ -19,7 +19,7 @@ public class PerspectiveEnemy : Sense {
             parent.addEnemy(p);
 	}
 
-    private void Update()
+	private void FixedUpdate()
     {
         parent.removeSoldiers("enemy");
 
@@ -36,7 +36,7 @@ public class PerspectiveEnemy : Sense {
             {
                 Player player = parent.getEnemy(i);
 
-                if (player && !player.getHidden() && player.alive)
+				if (player && (parent.getHidden() || !player.getHidden()) && player.alive)
                 {
                     if(parent.GetDistanceToEnemy(player) < distanceMelee)
                     {
