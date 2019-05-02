@@ -54,6 +54,7 @@ public class Barricade : MonoBehaviour {
 			auxStart2 = betweenBottom;
 
 			while (orderLook.Count < 4) {
+                Debug.Log("index: " + (auxStart + index) + ", maximo: " + indexDefend.Length);
 				if ((auxStart + index) < indexDefend.Length)
 					orderLook.Add (indexDefend[auxStart+index]);
 
@@ -71,7 +72,7 @@ public class Barricade : MonoBehaviour {
 					orderLook.Add (indexDefend[auxStart-index]);
 
 				if ((auxStart2 + index) < indexDefend.Length)
-					orderLook.Add (indexDefend[auxStart2+index]);
+					orderLook.Add(indexDefend[auxStart2+index]);
 
 				index++;
 			}
@@ -136,6 +137,7 @@ public class Barricade : MonoBehaviour {
 
 	/////////////////////////////////////////////////////////////
 	public void spawnSnipers(GameObject prefab, int numSnipers){
+
 		int[] orderSpawn = SuffleArray (indexAttack);
 		int index = 0;
 
@@ -144,9 +146,10 @@ public class Barricade : MonoBehaviour {
 			occupied [position] = true;
 
 			GameObject instanced = Instantiate (prefab);
-			instanced.transform.position = positions [position].transform.position;
+            instanced.transform.position = transform.TransformPoint(positions[position].transform.localPosition);
+            instanced.GetComponent<Player>().getAgent().Warp(instanced.transform.position);
 
-			Sniper instancedSnp = instanced.GetComponent<Sniper> ();
+            Sniper instancedSnp = instanced.GetComponent<Sniper> ();
 			instancedSnp.positionBarricade = position;
 			instancedSnp.barricade = this;
 

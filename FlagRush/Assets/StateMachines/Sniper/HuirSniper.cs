@@ -20,7 +20,7 @@ public class HuirSniper : StateMachineBehaviour {
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		if (scaping == null) {
-			scaping = player.barricade.defend (player);
+			scaping = player.barricade.defend(player);
 
 			if (scaping != null) {
 				pAI.SetDestination (scaping.transform.position);
