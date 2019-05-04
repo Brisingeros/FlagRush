@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Agents\Scripts\Camera\RotateMoveCamera.cs" />
     <Compile Include="Assets\Agents\Scripts\Common\Agents\Nurse.cs" />
     <Compile Include="Assets\Agents\Scripts\Common\Agents\Player.cs" />
     <Compile Include="Assets\Agents\Scripts\Common\Agents\Sniper.cs" />
@@ -92,6 +93,8 @@
     <Compile Include="Assets\World\Barricade\Barricade.cs" />
     <Compile Include="Assets\World\Barricade\PositionBarricade.cs" />
     <Compile Include="Assets\World\Flag\FlagManager.cs" />
+    <Compile Include="Assets\World\Manager\Controller.cs" />
+    <Compile Include="Assets\World\Manager\UIController.cs" />
     <Compile Include="Assets\World\Manager\WorldManager.cs" />
     <Compile Include="Assets\World\Spawner\Spawner.cs" />
     <None Include="Assets\NavMeshComponents-2018.2\ProjectSettings\ProjectVersion.txt" />

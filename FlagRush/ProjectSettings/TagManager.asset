@@ -6,6 +6,13 @@ TagManager:
   tags:
   - WayPoint
   - Bush
+  - red soldiers
+  - blue soldiers
+  - red snipers
+  - blue snipers
+  - red nurses
+  - blue nurses
+  - UIController
   layers:
   - Default
   - TransparentFX

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WorldManager : MonoBehaviour {
 
@@ -36,6 +37,18 @@ public class WorldManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+
+        //gets values from Controller
+
+        Controller c = FindObjectOfType<Controller>();
+        redSoldiers = c.getRedSoldiers();
+        blueSoldiers = c.getBlueSoldiers();
+        redSnipers = c.getRedSnipers();
+        blueSnipers = c.getBlueSnipers();
+        redNurses = c.getRedNurses();
+        blueNurses = c.getBlueNurses();
+
+        //set initial values
 		redForces = redSoldiers + redSnipers + redNurses;
 		blueForces = blueSoldiers + blueSnipers + blueNurses;
 		redMoral = blueMoral = 100;
@@ -100,17 +113,13 @@ public class WorldManager : MonoBehaviour {
 		}
 	}
 
+    public void changeScene()
+    {
+        SceneManager.LoadScene("menu");
+    }
+
 	private void GameOver(string team){
 		Debug.Log (team + " VICTORY");
-
-		#if UNITY_EDITOR
-		{
-			UnityEditor.EditorApplication.isPlaying = false;
-		}
-		#else
-		{
-		Application.Quit ();
-		}
-		#endif
+        Invoke("changeScene", 5.0f);
 	}
 }
