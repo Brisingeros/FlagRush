@@ -100,8 +100,8 @@ public abstract class Player : Aspect {
 
 	public void getShot(){
 		int lives = anim.GetInteger ("Lives");
-		lives--;
-		alive = lives > 0;
+		alive = lives-1 > 0;
+        lives = (alive) ? --lives : 0;
 		anim.SetInteger("Lives", lives);
     }
 

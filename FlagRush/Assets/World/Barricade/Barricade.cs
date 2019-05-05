@@ -7,7 +7,7 @@ public class Barricade : MonoBehaviour {
 	private readonly int[] indexDefend = {0,4,8,12};
 	private readonly int[] indexAttack = {1,2,3,5,6,7,9,10,11};
 	public PositionBarricade[] positions = new PositionBarricade[13];
-	public bool[] occupied = {false,false,false,false,false,false,false,false,false,false,false,false};
+	private bool[] occupied = {false,false,false,false,false,false,false,false,false,false,false,false,false};
 
 	// Use this for initialization
 	void Start () {
@@ -28,82 +28,117 @@ public class Barricade : MonoBehaviour {
 		int betweenBottom = pos / 4;
 		int auxStart;
 
-		if (pos % 2 == 0) { //Central
-			auxStart = betweenBottom + ((int) Random.Range(0,2));
-		} else {
-			if ((pos / 2) % 2 == 0) { //Izq
-				auxStart = betweenBottom;
-			} else { //Der
-				auxStart = betweenBottom+1;
-			}
-		}
+        if (assertPos(indexDefend, pos))
+        {
+            Debug.Log("ERROR DEFEND ON DEFENSE");
+            return null;
+        }
 
-		if (!occupied [auxStart * 4]) {
-			occupied [auxStart * 4] = true;
-			occupied [pos] = false;
-			sniper.positionBarricade = auxStart * 4;
-			return positions[auxStart * 4];
-		}
+        if (pos % 2 == 0)
+        { //Central
+            auxStart = betweenBottom + ((int)Random.Range(0, 2));
+        }
+        else
+        {
+            if ((pos / 2) % 2 == 0)
+            { //Izq
+                auxStart = betweenBottom;
+            }
+            else
+            { //Der
+                auxStart = betweenBottom + 1;
+            }
+        }
 
-		////////////////////////
-		List<int> orderLook = new List<int>();
-		int index = 0;
-		int auxStart2;
+        Debug.Log("sobresale: " + (auxStart * 4 > occupied.Length));
+        if(auxStart * 4 > occupied.Length)
+        {
+            Debug.Log("longitud: " + occupied.Length);
+            Debug.Log("mierda pos:" + pos);
+            Debug.Log("mierda aux: " + auxStart);
+            Debug.Log("resultado: " + (auxStart*4));
+        }
+        if ((auxStart * 4 < occupied.Length) && !occupied[auxStart * 4])
+        {////////////////////////////
+            occupied[auxStart * 4] = true;
+            occupied[pos] = false;
+            sniper.positionBarricade = auxStart * 4;
+            return positions[auxStart * 4];
+        }
 
-		if (auxStart > betweenBottom) { //Empezar por la derecha
-			auxStart2 = betweenBottom;
+        ////////////////////////
+        List<int> orderLook = new List<int>();
+        int index = 0;
+        int auxStart2;
 
-			while (orderLook.Count < 4) {
-                Debug.Log("index: " + (auxStart + index) + ", maximo: " + indexDefend.Length);
-				if ((auxStart + index) < indexDefend.Length)
-					orderLook.Add (indexDefend[auxStart+index]);
+        if (auxStart > betweenBottom)
+        { //Empezar por la derecha
+            auxStart2 = betweenBottom;
 
-				if ((auxStart2 - index) > 0)
-					orderLook.Add (indexDefend[auxStart2-index]);
+            while (orderLook.Count < indexDefend.Length)
+            {
+                if ((auxStart + index) < indexDefend.Length)
+                    orderLook.Add(indexDefend[auxStart + index]);
 
-				index++;
-			}
+                if ((auxStart2 - index) >= 0)
+                    orderLook.Add(indexDefend[auxStart2 - index]);
 
-		} else { //Empezar por la izquierda
-			auxStart2 = auxStart + 1;
+                index++;
+            }
 
-			while (orderLook.Count < 4) {
-				if ((auxStart - index) > 0)
-					orderLook.Add (indexDefend[auxStart-index]);
+        }
+        else
+        { //Empezar por la izquierda
+            auxStart2 = auxStart + 1;
 
-				if ((auxStart2 + index) < indexDefend.Length)
-					orderLook.Add(indexDefend[auxStart2+index]);
+            while (orderLook.Count < indexDefend.Length)
+            {
+                if ((auxStart - index) >= 0)
+                    orderLook.Add(indexDefend[auxStart - index]);
 
-				index++;
-			}
-		}
+                if ((auxStart2 + index) < indexDefend.Length)
+                    orderLook.Add(indexDefend[auxStart2 + index]);
 
-		////////////////////////
-		while (orderLook.Count > 0){
-			int posLooking = orderLook[0];
-			orderLook.RemoveAt(0);
+                index++;
+            }
+        }
 
-			if (!occupied [posLooking]) {
-				occupied [posLooking] = true;
-				occupied [pos] = false;
-				Debug.Log (posLooking);
-				sniper.positionBarricade = posLooking;
-				return positions [posLooking];
-			}
-		}
+        ////////////////////////
+        while (orderLook.Count > 0)
+        {
+            int posLooking = orderLook[0];
+            orderLook.RemoveAt(0);
 
-		return null;
+            if (!occupied[posLooking])
+            {
+                occupied[posLooking] = true;
+                occupied[pos] = false;
+                sniper.positionBarricade = posLooking;
+                return positions[posLooking];
+            }
+        }
+
+        return null;
+        
 	}
 
 	public PositionBarricade attack(Sniper sniper){
 		int pos = sniper.positionBarricade;
-		int[] auxArr = SuffleArray (indexAttack);
+
+        if (assertPos(indexAttack, pos))
+        {
+            Debug.Log("ERROR ATTACK ON ATTACK");
+            return null;
+        }
+
+        int[] auxArr = SuffleArray (indexAttack);
 
 		for (int i = 0; i < auxArr.Length; i++) {
 			if (!occupied [auxArr [i]]) {
 				occupied [pos] = false;
 				occupied [auxArr [i]] = true;
-				sniper.positionBarricade = auxArr [i];
+                sniper.setHidden(false);
+                sniper.positionBarricade = auxArr [i];
 				return positions [auxArr [i]];
 			}
 		}
@@ -127,6 +162,19 @@ public class Barricade : MonoBehaviour {
 
 		return auxArray;
 	}
+
+    private bool assertPos(int[] arr, int pos) {
+        bool inside = false;
+        int index = 0;
+
+        while (!inside && index < arr.Length) {
+            inside = arr[index] == pos;
+
+            index++;
+        }
+
+        return inside;
+    }
 
 	public void generateSound(GameObject snd, int posBarricade){
 		Vector3 posSound = getPositionMarker (posBarricade);

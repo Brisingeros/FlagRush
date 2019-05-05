@@ -19,18 +19,21 @@ public class HuirSniper : StateMachineBehaviour {
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		if (scaping == null) {
+		if (scaping == null && !player.getHidden()) {
 			scaping = player.barricade.defend(player);
 
 			if (scaping != null) {
 				pAI.SetDestination (scaping.transform.position);
 			}
 		} else {
-			bool danger = pAI.remainingDistance > 3;
+			bool danger = pAI.remainingDistance > 0.5f;
 			if (!danger){
-				animator.SetBool ("Peligro", false);
-			}
-		}
+                player.setHidden(true);
+                animator.SetBool ("Peligro", false);
+                player.resetAspect();
+
+            }
+        }
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state

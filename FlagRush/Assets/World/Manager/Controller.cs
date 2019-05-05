@@ -14,12 +14,12 @@ public class Controller : MonoBehaviour {
     private int blueNurses = 1;
 
     //const
-    private const int MAX_SOLDIERS = 10;
+    private const int MAX_SOLDIERS = 15;
     private const int MIN_SOLDIERS = 1;
-    private const int MAX_SNIPERS = 10;
-    private const int MIN_SNIPERS = 1;
+    private const int MAX_SNIPERS = 9;
+    private const int MIN_SNIPERS = 0;
     private const int MAX_NURSES = 10;
-    private const int MIN_NURSES = 1;
+    private const int MIN_NURSES = 0;
 
     void Start () {
 

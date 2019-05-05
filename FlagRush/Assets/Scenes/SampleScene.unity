@@ -3958,7 +3958,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4810437583077818, guid: 89b0691ae31a8194587e34c8aaba373a, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -25.141495
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 4810437583077818, guid: 89b0691ae31a8194587e34c8aaba373a, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4558,7 +4558,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4810437583077818, guid: 89b0691ae31a8194587e34c8aaba373a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 18.117535
+      value: 39.7
       objectReference: {fileID: 0}
     - target: {fileID: 4810437583077818, guid: 89b0691ae31a8194587e34c8aaba373a, type: 2}
       propertyPath: m_LocalPosition.y
@@ -4566,7 +4566,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4810437583077818, guid: 89b0691ae31a8194587e34c8aaba373a, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 147.65851
+      value: 91.3
       objectReference: {fileID: 0}
     - target: {fileID: 4810437583077818, guid: 89b0691ae31a8194587e34c8aaba373a, type: 2}
       propertyPath: m_LocalRotation.x
@@ -7043,7 +7043,6 @@ MonoBehaviour:
   - {fileID: 694762815}
   - {fileID: 797100459}
   - {fileID: 1557694405}
-  occupied: 000000000000000000000000
 --- !u!4 &1638693799
 Transform:
   m_ObjectHideFlags: 0
@@ -7411,7 +7410,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -238.70001, y: -57.099976}
+  m_AnchoredPosition: {x: -238.69995, y: -57.099854}
   m_SizeDelta: {x: 267.40002, y: 50.099976}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1713257127

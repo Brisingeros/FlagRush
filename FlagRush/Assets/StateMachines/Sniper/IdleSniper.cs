@@ -18,8 +18,7 @@ public class IdleSniper : StateMachineBehaviour {
 		player = animator.gameObject.GetComponent<Sniper>();
 		pAI = player.getAgent();
 		pAI.ResetPath ();
-
-		lookAt = 0;
+        lookAt = 0;
 
 		targeting = null;
 		elapsedTime = 0;

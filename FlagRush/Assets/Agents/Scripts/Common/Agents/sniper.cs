@@ -28,27 +28,29 @@ public class Sniper : Player {
 	// Update is called once per frame
 	void Update () {
 
-        if (anim.GetInteger("Lives") > -1)
-        {
-            anim.SetBool("Alerta", enemiesSound.Count > 0);
-            anim.SetBool("Enemigo", focus != null);
+        bool peligro = anim.GetBool("Peligro");
 
-            bool peligro = anim.GetBool("Peligro");
+        if (!peligro)
+        {
+            anim.SetBool("Alerta", enemiesSound.Count > 0 && !getHidden());
+            anim.SetBool("Enemigo", focus != null && !getHidden());
+
             if (!peligro && focus != null)
             {
                 float dis = Vector3.Distance(focus.transform.position, transform.position);
                 peligro = dis < 20;
-                anim.SetBool("Peligro", peligro);
+                anim.SetBool("Peligro", peligro && !getHidden());
             }
         }
-        else
-        {
-            anim.SetBool("Alerta", false);
-            anim.SetBool("Enemigo", false);
-            anim.SetBool("Peligro", false);
-        }
-	
+
 	}
+
+    public void resetAspect()
+    {
+        enemiesSound = new List<Aspect>();
+        enemies = new List<Player>();
+        focus = null;
+    }
 
 	override public void generateSound(){
 		hidden = false;

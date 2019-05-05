@@ -51,7 +51,7 @@ public class AtaqueSniper : StateMachineBehaviour {
 
 	private void shoot(Player enemy){
 
-		Debug.Log ("Shoot");
+		//Debug.Log ("Shoot");
 		player.generateSound ();
 		enemy.getShot ();
 
