@@ -29,8 +29,8 @@ public class WorldManager : MonoBehaviour {
 	public int blueNurses;
 	private int blueForces;
 
-	private int redMoral;
-	private int blueMoral;
+	public int redMoral;
+	public int blueMoral;
 
 	private int redKillMoral;
 	private int blueKillMoral;
@@ -40,13 +40,13 @@ public class WorldManager : MonoBehaviour {
 
         //gets values from Controller
 
-        Controller c = FindObjectOfType<Controller>();
+        /*Controller c = FindObjectOfType<Controller>();
         redSoldiers = c.getRedSoldiers();
         blueSoldiers = c.getBlueSoldiers();
         redSnipers = c.getRedSnipers();
         blueSnipers = c.getBlueSnipers();
         redNurses = c.getRedNurses();
-        blueNurses = c.getBlueNurses();
+        blueNurses = c.getBlueNurses();*/
 
         //set initial values
 		redForces = redSoldiers + redSnipers + redNurses;
@@ -78,19 +78,23 @@ public class WorldManager : MonoBehaviour {
 			blueMoral -= blueKillMoral;
 			redMoral += redKillMoral;
 			blueForces--;
+			if (pl.getTypeNpc () == TypeNPC.type.Soldier)
+				blueSoldiers--;
 			break;
 
 		case Team.team.Red:
 			redMoral -= redKillMoral;
 			blueMoral += blueKillMoral;
 			redForces--;
+			if (pl.getTypeNpc () == TypeNPC.type.Soldier)
+				redSoldiers--;
 			break;
 
 		}
 
-		if (redForces <= 0) {
+		if (redSoldiers <= 0) {
 			GameOver ("BLUE");
-		} else if (blueForces <= 0) {
+		} else if (blueSoldiers <= 0) {
 			GameOver ("RED");
 		}
 	}
@@ -102,15 +106,23 @@ public class WorldManager : MonoBehaviour {
 			blueMoral += blueKillMoral;
 			redMoral -= redKillMoral;
 			blueForces++;
+			if (pl.getTypeNpc () == TypeNPC.type.Soldier)
+				blueSoldiers++;
 			break;
 
 		case Team.team.Red:
 			redMoral += redKillMoral;
 			blueMoral -= blueKillMoral;
 			redForces--;
+			if (pl.getTypeNpc () == TypeNPC.type.Soldier)
+				redSoldiers++;
 			break;
 
 		}
+	}
+
+	public int getTeamMoral(Team.team tm){
+		return (tm == Team.team.Blue) ? blueMoral : redMoral;
 	}
 
     public void changeScene()

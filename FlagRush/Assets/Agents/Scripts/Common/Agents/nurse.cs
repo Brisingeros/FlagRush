@@ -9,9 +9,11 @@ public class Nurse : Player {
     List<Player> allies;
     public Player focusAlly;
 
+	private readonly float distanceHuir = 20;
+
     protected override void initPlayer()
     {
-        defaultHealth = 50;
+        defaultHealth = 1;
         anim.SetInteger("Lives", defaultHealth);
 		typeNpc = TypeNPC.type.Nurse;
 
@@ -21,33 +23,25 @@ public class Nurse : Player {
 
     // Update is called once per frame
     void Update () {
-        if (anim.GetInteger("Lives") > -1)
-        {
-            bool huir = anim.GetBool("Peligro");
+        bool huir = anim.GetBool("Peligro");
 
+        if (!huir)
+        {
+            huir = focus != null;
             if (!huir)
             {
-                huir = focus != null;
-                if (!huir)
+                if (enemiesSound.Count > 0 || enemies.Count > 0)
                 {
-                    if (enemiesSound.Count > 0 || enemies.Count > 0)
-                    {
-                        huir = (enemiesSound.Count > 0) ? Vector3.Distance(enemiesSound[0].transform.position, transform.position) < 30 : (enemies.Count > 0) ? Vector3.Distance(enemies[0].transform.position, transform.position) < 30 : false;
-                    }
-                    else
-                    {
-                        anim.SetBool("Alerta", allySounds.Count > 0);
-                        anim.SetBool("Aliado", allies.Count > 0);
-                    }
+					float distanceNow = distanceHuir + (float)(mG.getTeamMoral (this.teamAct)/10);
+					huir = (enemiesSound.Count > 0) ? Vector3.Distance(enemiesSound[0].transform.position, transform.position) < distanceNow : (enemies.Count > 0) ? Vector3.Distance(enemies[0].transform.position, transform.position) < distanceNow : false;
                 }
-                anim.SetBool("Peligro", huir);
+                else
+                {
+                    anim.SetBool("Alerta", allySounds.Count > 0);
+                    anim.SetBool("Aliado", allies.Count > 0);
+                }
             }
-        }
-        else
-        {
-            anim.SetBool("Alerta", false);
-            anim.SetBool("Aliado", false);
-            anim.SetBool("Peligro", false);
+            anim.SetBool("Peligro", huir);
         }
 	}
 

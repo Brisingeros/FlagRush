@@ -20,8 +20,13 @@ public class PerspectiveEnemy : Sense {
 	}
 
 	private void FixedUpdate()
-    {
-        parent.removeSoldiers("enemy");
+	{
+		parent.removeSoldiers ("enemy");
+
+	}
+
+	void Update()
+	{
 
         //El array de enemigos estará ordenado por distancia (recta)
         parent.focus = null;

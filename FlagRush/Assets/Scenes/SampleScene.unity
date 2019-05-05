@@ -8006,10 +8006,12 @@ MonoBehaviour:
     type: 2}
   redSoldiers: 5
   redSnipers: 2
-  redNurses: 2
+  redNurses: 15
   blueSoldiers: 5
   blueSnipers: 2
-  blueNurses: 2
+  blueNurses: 15
+  redMoral: 0
+  blueMoral: 0
 --- !u!4 &1854603818
 Transform:
   m_ObjectHideFlags: 0

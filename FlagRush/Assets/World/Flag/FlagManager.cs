@@ -11,9 +11,9 @@ public class FlagManager : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 
-		Aspect p = other.GetComponent<Aspect> ();
+		Player p = other.GetComponent<Player> ();
 
-		if (p != null && p.aspectAct == Aspect.aspect.NPC && p.teamAct != team){
+		if (p != null && p.aspectAct == Aspect.aspect.NPC && p.getTypeNpc() == TypeNPC.type.Soldier && p.teamAct != team){
 			Debug.Log (team.ToString() + " VICTORY");
 
 

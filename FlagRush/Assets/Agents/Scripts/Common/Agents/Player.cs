@@ -27,12 +27,14 @@ public abstract class Player : Aspect {
 	public GameObject basicSound;
 
 	private GameObject tomb;
+	protected float speedMax;
 
 	void Awake() {
 		mG = FindObjectOfType<WorldManager> ();
 		tomb = Resources.Load<GameObject>("Prefabs/Tomb");
 
 		playerAI = GetComponent<NavMeshAgent>();
+		speedMax = playerAI.speed;
 		anim = GetComponent<Animator> ();
 		aspectAct = aspect.NPC;
 		alive = true;
@@ -99,10 +101,13 @@ public abstract class Player : Aspect {
 	}
 
 	public void getShot(){
-		int lives = anim.GetInteger ("Lives");
-		alive = lives-1 > 0;
-        lives = (alive) ? --lives : 0;
+		int livesPrev = anim.GetInteger ("Lives");
+		alive = livesPrev-1 > 0;
+		int lives = (alive) ? livesPrev-1 : 0;
 		anim.SetInteger("Lives", lives);
+
+		if (!alive && lives < livesPrev)
+			mG.onKill (this);
     }
 
 	//TODO: ANAALVARO
@@ -112,8 +117,6 @@ public abstract class Player : Aspect {
 
 		Instantiate(tomb);
 		tomb.transform.position = posPlayer;
-
-		mG.onKill (this);
 
 		Destroy(this.gameObject);
 	}
@@ -214,4 +217,8 @@ public abstract class Player : Aspect {
             snd.transform.SetParent(transform);
 
     }
+
+	public float getSpeedMax(){
+		return speedMax;
+	}
 }

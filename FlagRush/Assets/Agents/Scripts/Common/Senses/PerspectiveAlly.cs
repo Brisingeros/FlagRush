@@ -15,10 +15,7 @@ public class PerspectiveAlly : Sense {
         Player al = other.GetComponent<Player>();
 
         if(al && al.aspectAct == Aspect.aspect.NPC && !al.alive)
-        {
             nurse.addAlly(al);
-            Debug.Log("Aliado avistado");
-        }
 	}
 
     private void OnTriggerExit(Collider other)
@@ -26,15 +23,16 @@ public class PerspectiveAlly : Sense {
         Player al = other.GetComponent<Player>();
 
         if ((al && al.aspectAct == Aspect.aspect.NPC && !al.alive)) // || other.CompareTag("tomb")
-        {
             nurse.removeAlly(al);
-        }
     }
 
 	private void FixedUpdate()
-    {
-        nurse.removeSoldiers("ally");
+	{
+		nurse.removeSoldiers ("ally");
+	}
 
+	void Update()
+	{
         for(int i = 0; i < nurse.getAllySize(); i++)
         {
             Player p = nurse.getAlly(i);

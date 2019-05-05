@@ -49,15 +49,7 @@ public class Barricade : MonoBehaviour {
                 auxStart = betweenBottom + 1;
             }
         }
-
-        Debug.Log("sobresale: " + (auxStart * 4 > occupied.Length));
-        if(auxStart * 4 > occupied.Length)
-        {
-            Debug.Log("longitud: " + occupied.Length);
-            Debug.Log("mierda pos:" + pos);
-            Debug.Log("mierda aux: " + auxStart);
-            Debug.Log("resultado: " + (auxStart*4));
-        }
+			
         if ((auxStart * 4 < occupied.Length) && !occupied[auxStart * 4])
         {////////////////////////////
             occupied[auxStart * 4] = true;

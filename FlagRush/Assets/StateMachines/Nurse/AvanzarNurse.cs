@@ -14,7 +14,7 @@ public class AvanzarNurse : StateMachineBehaviour {
         player = animator.gameObject.GetComponent<Player>();
         player.setLayerAnimator(layerIndex);
         pAI = player.getAgent();
-        pAI.speed = 15.0f;
+		pAI.speed = player.getSpeedMax();
         WayPoint destination = player.getObjective();
 
         if (pAI.remainingDistance <= destination.GetComponent<CapsuleCollider>().radius)
