@@ -8,7 +8,7 @@ public class Sound : Aspect {
 
 	// Use this for initialization
 	void Start () {
-		elapsedTime = 20.0f;
+		elapsedTime = 3.0f;
 		aspectAct = aspect.Sound;
 	}
 	

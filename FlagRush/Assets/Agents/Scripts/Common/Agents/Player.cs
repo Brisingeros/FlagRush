@@ -6,9 +6,6 @@ using UnityEngine.AI;
 
 public abstract class Player : Aspect {
 
-    //TODO: Cuando pase X tiempo muerto, hacer despawn y spawnear una tumba en su lugar (Jeje solución de mierda a revivir sin querer)
-    //TODO: Los enfermeros cuando escuchan un sonido o ven a un enemigo, se dirigen al escondite más cercano a un nivel inferior. Tras esto, reinician rutina
-
     protected NavMeshAgent playerAI;
 	protected Animator anim;
 
@@ -29,30 +26,35 @@ public abstract class Player : Aspect {
     protected bool hidden = false;
 	public GameObject basicSound;
 
-	void Start () {
+	private GameObject tomb;
+	protected float speedMax;
 
-        playerAI = GetComponent<NavMeshAgent>();
+	void Awake() {
+		mG = FindObjectOfType<WorldManager> ();
+		tomb = Resources.Load<GameObject>("Prefabs/Tomb");
+
+		playerAI = GetComponent<NavMeshAgent>();
+		speedMax = playerAI.speed;
 		anim = GetComponent<Animator> ();
 		aspectAct = aspect.NPC;
 		alive = true;
-        enemies = new List<Player>();
-        enemiesSound = new List<Aspect>();
-        focus = null;
+		enemies = new List<Player>();
+		enemiesSound = new List<Aspect>();
+		focus = null;
 		wP = new List<WayPoint> ();
 
-		mG = FindObjectOfType<WorldManager> ();
-
 		initPlayer();
-    }
+	}
 
     protected abstract void initPlayer();
 
     public abstract void removeSoldiers(string type);
     public abstract void removeDestroyedSounds(string type);
-    /*void Update () {
-		
-	}*/
 
+    public Animator getAnimator()
+    {
+        return anim;
+    }
     public void setHidden(bool state)
     {
         hidden = state;
@@ -99,12 +101,27 @@ public abstract class Player : Aspect {
 	}
 
 	public void getShot(){
-		int lives = anim.GetInteger ("Lives");
-		lives--;
-		alive = lives > 0;
+		int livesPrev = anim.GetInteger ("Lives");
+		alive = livesPrev-1 > 0;
+		int lives = (alive) ? livesPrev-1 : 0;
 		anim.SetInteger("Lives", lives);
+
+		if (!alive && lives < livesPrev)
+			mG.onKill (this);
     }
 
+	//TODO: ANAALVARO
+	public void die(){
+		Vector3 posPlayer = this.transform.position;
+		posPlayer.y = 0;
+
+		Instantiate(tomb);
+		tomb.transform.position = posPlayer;
+
+		Destroy(this.gameObject);
+	}
+
+	//TODO: ANAALVARO
     public void revive(){
 		anim.SetInteger("Lives", defaultHealth);
 		alive = true;
@@ -113,13 +130,13 @@ public abstract class Player : Aspect {
             GameObject sound = transform.GetChild(transform.childCount-1).gameObject;
             Destroy(sound);
         }
+
+		mG.onRevive (this);
 	}
 
     public void addEnemy(Player e)
     {
-
         enemies.Add(e);
-
     }
 
     public virtual void addSound(Aspect a)
@@ -145,12 +162,10 @@ public abstract class Player : Aspect {
 
     public void OrderByDistance(string type)
     {
-
         if(type.Equals("vision"))
             enemies = enemies.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).ToList();
         else if(type.Equals("sound"))
             enemiesSound = enemiesSound.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).ToList();
-
     }
 
     public int sizeEnemies()
@@ -172,23 +187,24 @@ public abstract class Player : Aspect {
 	{
 		if (other.tag.Equals ("WayPoint")) {
             WayPoint w = other.GetComponent<WayPoint>();
-			if (w.team == teamAct && w.type == typeNpc)
-			    wP.Add (other.GetComponent<WayPoint> ());
+			if (w.team == teamAct && w.type == typeNpc) {
+				wP.Add (w);
+				if (!anim.enabled)
+					anim.enabled = true;
+			}
 		}
     }
 
     public WayPoint getObjective(){
-	
 		wP = wP.OrderBy (x => x.getValue (gameObject)).ToList();
 		return wP [0];
-	
 	}
 
 	public Aspect getEnemySound() {
 		return (enemiesSound.Count > 0) ? enemiesSound[0] : null;
 	}
 
-	public void generateSound(){
+	public virtual void generateSound(){
         hidden = false;
 		GameObject snd = Instantiate(basicSound);
 		snd.transform.position = transform.position;
@@ -201,4 +217,8 @@ public abstract class Player : Aspect {
             snd.transform.SetParent(transform);
 
     }
+
+	public float getSpeedMax(){
+		return speedMax;
+	}
 }

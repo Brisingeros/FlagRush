@@ -18,7 +18,12 @@ public class MuertoNurse : StateMachineBehaviour {
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		//Medir con timeDeltaTime hasta que pasen X segundos, donde el soldado muere definitivamente, dejando su tumba
 		elapsedTime += Time.deltaTime;
-	}
+
+        if (elapsedTime >= 60.0f)
+        {
+			player.die ();
+        }
+    }
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	//override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {

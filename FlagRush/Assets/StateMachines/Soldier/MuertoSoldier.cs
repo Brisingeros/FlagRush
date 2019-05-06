@@ -1,18 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MuertoSoldier : StateMachineBehaviour {
 
 	private Player player;
+    private NavMeshAgent pAI;
 	private float elapsedTime;
     private float elapsedSound;
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		player = animator.gameObject.GetComponent<Player>();
+        pAI = player.getAgent();
 		animator.SetInteger("Lives", -1);
-		elapsedTime = elapsedSound = 0.0f;
+		pAI.speed = 0;
+        pAI.ResetPath();
+		elapsedTime = 0.0f;
+		elapsedSound = 10.0f;
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -20,14 +26,10 @@ public class MuertoSoldier : StateMachineBehaviour {
 		elapsedTime += Time.deltaTime;
         elapsedSound += Time.deltaTime;
 
-		if (elapsedTime >= 60.0f){
-			Vector3 posPlayer = player.transform.position;
-			//TODO:
-			//Instantiate(); tumba
-			//Pos tumba = posPlayer;
-			Destroy(player);
+		if (elapsedTime >= 25.0f){
+			player.die ();
         }
-        else if(elapsedSound >= 20.0f)
+        else if(elapsedSound >= 3.0f)
         {
                 player.generateSound();
                 elapsedSound = 0.0f;

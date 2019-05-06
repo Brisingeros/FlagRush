@@ -7,48 +7,30 @@ public class SoundEnemy : Sense {
     private void Start()
     {
         pla = transform.parent.GetComponent<Player>();
-
     }
 
     void OnTriggerEnter(Collider other){
 	
 		Aspect aspect = other.GetComponent<Aspect> ();
-
-		if (aspect != null) {
-			
-			if (aspect.alive && aspect.aspectAct == Aspect.aspect.Sound && aspect.teamAct != pla.teamAct)
-            {
-                pla.addSound(aspect);
-                pla.OrderByDistance("sound");
-
-                Debug.Log("Enemigo escuchado");
-
-            }
-
+		if (aspect != null && aspect.alive && aspect.aspectAct == Aspect.aspect.Sound && aspect.teamAct != pla.teamAct)
+        {
+            pla.addSound(aspect);
+            pla.OrderByDistance("sound");
         }
-	
 	}
 
     private void OnTriggerExit(Collider other)
     {
-
         Aspect aspect = other.GetComponent<Aspect>();
 
-        if (aspect != null)
+		if (aspect != null && aspect.alive && aspect.aspectAct == Aspect.aspect.Sound && aspect.teamAct != pla.teamAct)
         {
-
-            if (aspect.alive && aspect.aspectAct == Aspect.aspect.Sound && aspect.teamAct != pla.teamAct)
-            {
-                pla.removeSound(other.GetComponent<Aspect>());
-                pla.OrderByDistance("sound");
-
-            }
-
+            pla.removeSound(other.GetComponent<Aspect>());
+            pla.OrderByDistance("sound");
         }
-
     }
 
-    void Update()
+    void FixedUpdate()
     {
         pla.removeDestroyedSounds("enemy");
     }

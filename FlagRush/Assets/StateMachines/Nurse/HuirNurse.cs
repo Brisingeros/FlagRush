@@ -16,9 +16,6 @@ public class HuirNurse : StateMachineBehaviour {
 		player = animator.gameObject.GetComponent<Player>();
         pAI = player.getAgent();
 
-        //pAI.velocity = pAI.velocity * 0.7f;
-        pAI.ResetPath();
-
         player.findHidingPlace();
     }
 

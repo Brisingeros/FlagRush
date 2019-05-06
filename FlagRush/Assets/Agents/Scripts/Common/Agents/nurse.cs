@@ -9,31 +9,31 @@ public class Nurse : Player {
     List<Player> allies;
     public Player focusAlly;
 
+	private readonly float distanceHuir = 20;
+
     protected override void initPlayer()
     {
-        defaultHealth = 50;
+        defaultHealth = 1;
         anim.SetInteger("Lives", defaultHealth);
 		typeNpc = TypeNPC.type.Nurse;
 
         allySounds = new List<Aspect>();
         allies = new List<Player>();
-
     }
 
     // Update is called once per frame
     void Update () {
+        bool huir = anim.GetBool("Peligro");
 
-		bool huir = anim.GetBool("Peligro");
-
-        if (!huir) {
-
+        if (!huir)
+        {
             huir = focus != null;
-
             if (!huir)
             {
                 if (enemiesSound.Count > 0 || enemies.Count > 0)
                 {
-                    huir = (enemiesSound.Count > 0) ? Vector3.Distance(enemiesSound[0].transform.position, transform.position) < 30 : (enemies.Count > 0) ? Vector3.Distance(enemies[0].transform.position, transform.position) < 30 : false;
+					float distanceNow = distanceHuir + (float)(mG.getTeamMoral (this.teamAct)/10);
+					huir = (enemiesSound.Count > 0) ? Vector3.Distance(enemiesSound[0].transform.position, transform.position) < distanceNow : (enemies.Count > 0) ? Vector3.Distance(enemies[0].transform.position, transform.position) < distanceNow : false;
                 }
                 else
                 {
@@ -41,12 +41,8 @@ public class Nurse : Player {
                     anim.SetBool("Aliado", allies.Count > 0);
                 }
             }
-            anim.SetBool ("Peligro", huir); //en el statemachine de huir hay que ponerlo a false cuando llegue al waypoint
-		}
-
-		//fijar peligro según la distancia a sonidos enemigos o si hay un enemigo visible
-		//El problema de este, es que aquí nunca debería ponerse a false si estaba a true,
-		//dado que lo que queremos es que el enfermero huya hasta el waypoint anterior, y ahí realizar de nuevo comprobación
+            anim.SetBool("Peligro", huir);
+        }
 	}
 
     public void SetFocus()
@@ -58,15 +54,13 @@ public class Nurse : Player {
     {
         allies.Add(a);
         OrderAlliesByDistance("vision");
-
     }
 
     public override void removeSoldiers(string type)
     {
         if (type.Equals("enemy"))
         {
-            enemies = enemies.FindAll(x => x != null);
-
+			enemies = enemies.FindAll(x => x != null && x.GetComponent<Nurse>() == null);
         }
         else if (type.Equals("ally"))
         {
@@ -76,16 +70,13 @@ public class Nurse : Player {
 
     public override void removeDestroyedSounds(string type)
     {
-
         if (type.Equals("enemy"))
         {
             enemiesSound = enemiesSound.FindAll(x => x != null);
-
-        }else if (type.Equals("ally"))
+        } else if (type.Equals("ally"))
         {
             allySounds = allySounds.FindAll(x => x != null);
         }
-
     }
 
     public bool removeAlly(Player a)
@@ -102,7 +93,6 @@ public class Nurse : Player {
     }
 
     public override void addSound(Aspect a){
-		Debug.Log ("Nurse");
         allySounds.Add(a);
     }
 
@@ -121,13 +111,12 @@ public class Nurse : Player {
 
     public void OrderAlliesByDistance(string type)
     {
-        if (type.Equals("vision"))
-        {
-            allies = allies.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).ToList();
-            SetFocus();
-        }
-        else if (type.Equals("sound"))
-            allySounds = allySounds.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).ToList();
+		if (type.Equals ("vision")) {
+			allies = allies.OrderBy (x => Vector3.Distance (x.transform.position, transform.position)).ToList ();
+			SetFocus ();
+		} else if (type.Equals ("sound")) {
+			allySounds = allySounds.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).ToList();
+		}
     }
 
     public Aspect getAllySound(int pos)
@@ -139,6 +128,7 @@ public class Nurse : Player {
     {
         return allies[pos];
     }
+
     public int getAllySize()
     {
         return allies.Count;

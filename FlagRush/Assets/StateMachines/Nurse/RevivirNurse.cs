@@ -14,7 +14,7 @@ public class RevivirNurse : StateMachineBehaviour {
 
         player = animator.gameObject.GetComponent<Player>();
         pAI = player.getAgent();
-        pAI.velocity = pAI.velocity * 0.7f;
+        pAI.velocity = pAI.velocity * 0.05f;
         pAI.ResetPath();
 
     }
@@ -24,7 +24,7 @@ public class RevivirNurse : StateMachineBehaviour {
 
         elapsedTime += Time.deltaTime;
 
-        if(elapsedTime >= 5.0f)
+        if(elapsedTime >= 2.0f)
         {
             Nurse n = player.gameObject.GetComponent<Nurse>();
             if (n.focusAlly)

@@ -13,41 +13,21 @@ public class SoundAlly : Sense
 
     void OnTriggerEnter(Collider other)
     {
-
         Aspect aspect = other.GetComponent<Aspect>();
 
-        if (aspect != null)
-        {
-
-            if (!aspect.alive && aspect.aspectAct == Aspect.aspect.Sound && aspect.teamAct == nurse.teamAct)
-            {
-                nurse.addSound(aspect);
-                Debug.Log("Aliado herido escuchado");
-
-            }
-
-        }
-
+        if (aspect != null && !aspect.alive && aspect.aspectAct == Aspect.aspect.Sound && aspect.teamAct == nurse.teamAct)
+        	nurse.addSound(aspect);
     }
 
     private void OnTriggerExit(Collider other)
     {
-
         Aspect aspect = other.GetComponent<Aspect>();
 
-        if (aspect != null)
-        {
-
-            if (!aspect.alive && aspect.aspectAct == Aspect.aspect.Sound && aspect.teamAct == nurse.teamAct)
-            {
-                nurse.removeSound(other.GetComponent<Aspect>());
-            }
-
-        }
-
+        if (aspect != null && !aspect.alive && aspect.aspectAct == Aspect.aspect.Sound && aspect.teamAct == nurse.teamAct)
+            nurse.removeSound(other.GetComponent<Aspect>());
     }
 
-    void Update()
+	void FixedUpdate()
     {
         nurse.removeDestroyedSounds("ally");
     }
