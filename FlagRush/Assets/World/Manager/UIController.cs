@@ -27,6 +27,14 @@ public class UIController : MonoBehaviour {
 
     }
 
+    public void setVictoryOnScreen(string type)
+    {
+        GameObject victory = GameObject.Find("Victory");
+        Text t = victory.GetComponent<Text>();
+        t.text = type.Equals("blue") ? "BLUE VICTORY" : "RED VICTORY";
+        t.color = type.Equals("blue") ? new Color32(0,198,255,255) : new Color32(255,18,0,255);
+    }
+
     public void setInteractableButton(string tag, string type, bool state)
     {
         GameObject parent = GameObject.FindGameObjectWithTag(tag);

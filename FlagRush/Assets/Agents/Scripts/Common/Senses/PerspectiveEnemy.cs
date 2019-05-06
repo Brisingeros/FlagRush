@@ -23,11 +23,6 @@ public class PerspectiveEnemy : Sense {
 	{
 		parent.removeSoldiers ("enemy");
 
-	}
-
-	void Update()
-	{
-
         //El array de enemigos estará ordenado por distancia (recta)
         parent.focus = null;
         parent.OrderByDistance("vision");

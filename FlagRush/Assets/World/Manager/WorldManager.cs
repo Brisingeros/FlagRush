@@ -40,13 +40,15 @@ public class WorldManager : MonoBehaviour {
 
         //gets values from Controller
 
-        /*Controller c = FindObjectOfType<Controller>();
+        Controller c = FindObjectOfType<Controller>();
         redSoldiers = c.getRedSoldiers();
         blueSoldiers = c.getBlueSoldiers();
         redSnipers = c.getRedSnipers();
         blueSnipers = c.getBlueSnipers();
         redNurses = c.getRedNurses();
-        blueNurses = c.getBlueNurses();*/
+        blueNurses = c.getBlueNurses();
+
+        Destroy(c.gameObject);
 
         //set initial values
 		redForces = redSoldiers + redSnipers + redNurses;
@@ -131,7 +133,9 @@ public class WorldManager : MonoBehaviour {
     }
 
 	private void GameOver(string team){
-		Debug.Log (team + " VICTORY");
-        Invoke("changeScene", 5.0f);
+
+        UIController ui = FindObjectOfType<UIController>();
+        ui.setVictoryOnScreen(team);
+        Invoke("changeScene", 7.0f);
 	}
 }

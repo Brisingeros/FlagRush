@@ -2,16 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Controller : MonoBehaviour {
-
-    // num army
-    private int redSoldiers = 1;
-    private int blueSoldiers = 1;
-    private int redSnipers = 1;
-    private int blueSnipers = 1;
-    private int redNurses = 1;
-    private int blueNurses = 1;
 
     //const
     private const int MAX_SOLDIERS = 15;
@@ -21,7 +14,19 @@ public class Controller : MonoBehaviour {
     private const int MAX_NURSES = 10;
     private const int MIN_NURSES = 0;
 
+
+    // num army
+    private int redSoldiers = MIN_SOLDIERS;
+    private int blueSoldiers = MIN_SOLDIERS;
+    private int redSnipers = MIN_SNIPERS;
+    private int blueSnipers = MIN_SNIPERS;
+    private int redNurses = MIN_NURSES;
+    private int blueNurses = MIN_NURSES;
+
     void Start () {
+
+        initializeValues("red team");
+        initializeValues("blue team");
 
         if (FindObjectsOfType<Controller>().Length == 1)
         {
@@ -33,6 +38,33 @@ public class Controller : MonoBehaviour {
         }
 
 	}
+
+    private void initializeValues(string team)
+    {
+
+        GameObject gO = GameObject.Find(team);
+        for (int i = 0; i < gO.transform.childCount; i++)
+        {
+            GameObject child = gO.transform.GetChild(i).gameObject;
+            if (child.transform.Find("numero"))
+            {
+                Text text = child.transform.Find("numero").GetComponent<Text>();
+
+                if (child.name.Contains("soldiers"))
+                {
+                    text.text = MIN_SOLDIERS.ToString();
+                }else if (child.name.Contains("snipers"))
+                {
+                    text.text = MIN_SNIPERS.ToString();
+                }
+                else if (child.name.Contains("nurses"))
+                {
+                    text.text = MIN_NURSES.ToString();
+                }
+            }
+        }
+
+    }
 
     public void exit()
     {
@@ -64,7 +96,7 @@ public class Controller : MonoBehaviour {
             case "red soldiers": 
                 newValue = ++redSoldiers;
                 if (redSoldiers == MAX_SOLDIERS) uiController.setInteractableButton(type, "mas", false);
-                else if (redSoldiers == MIN_SOLDIERS) uiController.setInteractableButton(type, "menos", true);
+                else if (redSoldiers > MIN_SOLDIERS) uiController.setInteractableButton(type, "menos", true);
 
                 break;
             case "blue soldiers": 

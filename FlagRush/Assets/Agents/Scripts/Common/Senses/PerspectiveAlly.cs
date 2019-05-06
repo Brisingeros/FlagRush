@@ -29,10 +29,7 @@ public class PerspectiveAlly : Sense {
 	private void FixedUpdate()
 	{
 		nurse.removeSoldiers ("ally");
-	}
 
-	void Update()
-	{
         for(int i = 0; i < nurse.getAllySize(); i++)
         {
             Player p = nurse.getAlly(i);
