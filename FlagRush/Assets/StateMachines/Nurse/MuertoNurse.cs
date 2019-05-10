@@ -12,6 +12,7 @@ public class MuertoNurse : StateMachineBehaviour {
 		player = animator.gameObject.GetComponent<Player>();
 		animator.SetInteger("Lives", -1);
 		elapsedTime = 0.0f;
+        player.getAgent().ResetPath();
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -13,9 +13,10 @@ public class HuirNurse : StateMachineBehaviour {
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 
-		player = animator.gameObject.GetComponent<Player>();
+        animator.SetFloat("Blend", 1.0f);
+        player = animator.gameObject.GetComponent<Player>();
         pAI = player.getAgent();
-
+        pAI.speed = 20.0f;
         player.findHidingPlace();
     }
 
@@ -23,7 +24,8 @@ public class HuirNurse : StateMachineBehaviour {
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 
         if (player.getHidden()){
-        
+
+            animator.SetFloat("Blend", 0.0f);
             elapsedTime += Time.deltaTime;
 
             if(elapsedTime >= 10)

@@ -75,13 +75,15 @@ public class AtaqueSoldier : StateMachineBehaviour {
 
 		//TODO: ANAALVARO
 		//TODO: animación de disparo o animación de golpe
-		if (distance < 20.0f) {
-		
-		} else {
-		
-		}
+		if (distance < 5.0f) {
 
-		player.generateSound ();
+            player.getAnimator().SetFloat("Shoot", 0.0f);
+		} else {
+            player.getAnimator().SetFloat("Shoot", 1.0f);
+
+        }
+
+        player.generateSound ();
 		enemy.getShot ();
 		
 	}
