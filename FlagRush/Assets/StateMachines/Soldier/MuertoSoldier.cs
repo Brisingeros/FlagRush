@@ -12,17 +12,20 @@ public class MuertoSoldier : StateMachineBehaviour {
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		player = animator.gameObject.GetComponent<Player>();
-        pAI = player.getAgent();
-		animator.SetInteger("Lives", -1);
-		pAI.speed = 0;
-        pAI.ResetPath();
-		elapsedTime = 0.0f;
-		elapsedSound = 10.0f;
-	}
 
-	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+        player = animator.gameObject.GetComponent<Player>();
+        pAI = player.getAgent();
+        pAI.ResetPath();
+        player.GetRigidbody().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        player.GetRigidbody().freezeRotation = true;
+        animator.SetInteger("Lives", -1);
+        elapsedTime = 0.0f;
+		elapsedSound = 10.0f;
+
+    }
+
+    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		elapsedTime += Time.deltaTime;
         elapsedSound += Time.deltaTime;
 

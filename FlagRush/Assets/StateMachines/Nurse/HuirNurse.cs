@@ -25,11 +25,13 @@ public class HuirNurse : StateMachineBehaviour {
 
         if (player.getHidden()){
 
+            pAI.isStopped = true;
             animator.SetFloat("Blend", 0.0f);
             elapsedTime += Time.deltaTime;
 
             if(elapsedTime >= 10)
             {
+                pAI.isStopped = false;
                 animator.SetBool("Peligro", false);
             }
 

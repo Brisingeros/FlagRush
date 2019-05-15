@@ -16,12 +16,12 @@ public class AtaqueSoldier : StateMachineBehaviour {
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		player = animator.gameObject.GetComponent<Player>();
 		pAI = player.getAgent();
-		player.getAnimator().SetFloat("Shoot", 1.0f);
 
 		pAI.velocity = pAI.velocity * 0.7f;
 		pAI.ResetPath ();
+        player.getAnimator().SetFloat("Shoot", 1.0f);
 
-		elapsedTime = 0.0f;
+        elapsedTime = 0.0f;
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

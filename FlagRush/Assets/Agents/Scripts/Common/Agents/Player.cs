@@ -102,6 +102,10 @@ public abstract class Player : Aspect {
 		teamAct = tM;
 	}
 
+    public Rigidbody GetRigidbody()
+    {
+        return GetComponent<Rigidbody>();
+    }
 	public void getShot(){
 		int livesPrev = anim.GetInteger ("Lives");
 		alive = livesPrev-1 > 0;
@@ -112,21 +116,22 @@ public abstract class Player : Aspect {
 			mG.onKill (this);
     }
 
-	//TODO: ANAALVARO
 	public void die(){
-		Vector3 posPlayer = this.transform.position;
+		Vector3 posPlayer = transform.position;
 		posPlayer.y = 0;
 
 		Instantiate(tomb);
 		tomb.transform.position = posPlayer;
 
-		Destroy(this.gameObject);
+		Destroy(gameObject);
 	}
 
-	//TODO: ANAALVARO
     public void revive(){
 		anim.SetInteger("Lives", defaultHealth);
 		alive = true;
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        GetComponent<Rigidbody>().freezeRotation = false;
+
         if (GetComponentInChildren<Aspect>())
         {
             GameObject sound = transform.GetChild(transform.childCount-1).gameObject;
@@ -135,6 +140,20 @@ public abstract class Player : Aspect {
 
 		mG.onRevive (this);
 	}
+
+    private void LateUpdate()
+    {
+        if (alive && playerAI.velocity.sqrMagnitude > Mathf.Epsilon)
+        {
+            transform.rotation = Quaternion.LookRotation(playerAI.velocity.normalized);
+        }
+        else if(!alive)
+        {
+            playerAI.updatePosition = false;
+            playerAI.updatePosition = false;
+        }
+
+    }
 
     public void addEnemy(Player e)
     {
