@@ -54,14 +54,11 @@ public class Sniper : Player {
 
 	override public void generateSound(){
 		hidden = false;
-		GameObject snd = Instantiate(basicSound);
-		barricade.generateSound (snd, positionBarricade);
 
-		Sound sndComp = snd.GetComponent<Sound> ();
-		sndComp.teamAct = teamAct;
-		sndComp.alive = alive;
+		Debug.Log ("Sniper sound");
+		GameObject snd = barricade.generateSound (this, positionBarricade);
 
-		if(!alive)
-			snd.transform.SetParent(transform);
+		/*if(!alive)
+			snd.transform.SetParent(transform);*/
 	}
 }

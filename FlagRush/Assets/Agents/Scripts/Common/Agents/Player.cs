@@ -14,6 +14,7 @@ public abstract class Player : Aspect {
 	protected TypeNPC.type typeNpc;
 
 	protected WorldManager mG;
+	protected SoundGenerator sG;
 
 	protected List<Player> enemies;
     protected List<Aspect> enemiesSound;
@@ -31,6 +32,7 @@ public abstract class Player : Aspect {
 
 	void Awake() {
 		mG = FindObjectOfType<WorldManager> ();
+		sG = FindObjectOfType<SoundGenerator> ();
 		tomb = Resources.Load<GameObject>("Prefabs/Tomb");
 
 		playerAI = GetComponent<NavMeshAgent>();
@@ -206,15 +208,10 @@ public abstract class Player : Aspect {
 
 	public virtual void generateSound(){
         hidden = false;
-		GameObject snd = Instantiate(basicSound);
-		snd.transform.position = transform.position;
 
-		Sound sndComp = snd.GetComponent<Sound> ();
-		sndComp.teamAct = teamAct;
-		sndComp.alive = alive;
-
-        if(!alive)
-            snd.transform.SetParent(transform);
+		GameObject snd = sG.Initialize (transform.position, teamAct, alive);
+		if(!alive)
+			snd.transform.SetParent(transform);
 
     }
 

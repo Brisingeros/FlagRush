@@ -9,9 +9,11 @@ public class Barricade : MonoBehaviour {
 	public PositionBarricade[] positions = new PositionBarricade[13];
 	private bool[] occupied = {false,false,false,false,false,false,false,false,false,false,false,false,false};
 
+	private SoundGenerator sG;
+
 	// Use this for initialization
 	void Start () {
-		
+		sG = FindObjectOfType<SoundGenerator> ();
 	}
 	
 	// Update is called once per frame
@@ -168,11 +170,13 @@ public class Barricade : MonoBehaviour {
         return inside;
     }
 
-	public void generateSound(GameObject snd, int posBarricade){
+	public GameObject generateSound(Sniper snp, int posBarricade){
 		Vector3 posSound = getPositionMarker (posBarricade);
-		posSound.y = 0;
 
-		snd.transform.position = posSound;
+		GameObject snd = sG.Initialize (posSound, snp.getTeam(), snp.alive);
+		snd.transform.position = new Vector3(snd.transform.position.x, 1, snd.transform.position.z);
+
+		return snd;
 	}
 
 	/////////////////////////////////////////////////////////////

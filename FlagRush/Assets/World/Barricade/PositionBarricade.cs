@@ -19,4 +19,9 @@ public class PositionBarricade : MonoBehaviour {
 	public Vector3 getMarker(){
 		return marker.transform.position;
 	}
+
+	void OnDrawGizmosSelected () {
+		Gizmos.color = new Color (0,1,0,0.5f);
+		Gizmos.DrawSphere (this.transform.position, 1);
+	}
 }

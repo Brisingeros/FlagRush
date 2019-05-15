@@ -14,7 +14,10 @@ public class Sound : Aspect {
 	
 	// Update is called once per frame
 	void Update () {
-		elapsedTime -= Time.deltaTime;
+		float changeTime = Time.deltaTime;
+		elapsedTime -= changeTime;
+
+		transform.Rotate (0, 55*changeTime, 0);
 
 		if (elapsedTime <= 0.0f)
 			Destroy(gameObject);

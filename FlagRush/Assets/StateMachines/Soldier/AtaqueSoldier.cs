@@ -16,8 +16,8 @@ public class AtaqueSoldier : StateMachineBehaviour {
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		player = animator.gameObject.GetComponent<Player>();
 		pAI = player.getAgent();
+		player.getAnimator().SetFloat("Shoot", 1.0f);
 
-		//pAI.SetDestination (null);
 		pAI.velocity = pAI.velocity * 0.7f;
 		pAI.ResetPath ();
 
@@ -26,11 +26,6 @@ public class AtaqueSoldier : StateMachineBehaviour {
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		//Hacer un elapsedTime que vaya sumando desde 0 hasta 3
-		//Si es menor o igual a 0 y no está girando, disparar y poner a 0 otra vez
-		//Si está cerca --> Melee
-		//Si no --> distancia
-
 		if (pAI.velocity == Vector3.zero) {
 			elapsedTime += Time.deltaTime;
 
@@ -41,8 +36,6 @@ public class AtaqueSoldier : StateMachineBehaviour {
 			focusLeveled.y = player.transform.position.y;
 
 			if (!lookingAt (player.transform.forward, player.transform.position, focusLeveled)) {
-				//TODO: Mirar lo del giro
-
 				Vector3 targetDir = focusLeveled - player.transform.position;
 
 				// The step size is equal to speed times frame time.
@@ -61,31 +54,21 @@ public class AtaqueSoldier : StateMachineBehaviour {
 	}
 
 	private bool lookingAt(Vector3 direction, Vector3 position, Vector3 targetPos){
-
 		Vector3 desiredDirection = targetPos - position;
 		float angle = Vector3.Angle( desiredDirection, direction );
 		return angle < 5.0f;
-		
 	}
 
 	private void shoot(Player enemy){
-
-		//Debug.Log ("Shoot");
 		float distance = Vector3.Distance (enemy.transform.position, player.transform.position);
 
-		//TODO: ANAALVARO
-		//TODO: animación de disparo o animación de golpe
-		if (distance < 5.0f) {
-
+		if (distance < 5.0f)
             player.getAnimator().SetFloat("Shoot", 0.0f);
-		} else {
+		else
             player.getAnimator().SetFloat("Shoot", 1.0f);
-
-        }
 
         player.generateSound ();
 		enemy.getShot ();
-		
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state

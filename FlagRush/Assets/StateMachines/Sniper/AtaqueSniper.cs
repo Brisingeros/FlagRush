@@ -50,11 +50,8 @@ public class AtaqueSniper : StateMachineBehaviour {
 	}
 
 	private void shoot(Player enemy){
-
-		//Debug.Log ("Shoot");
 		player.generateSound ();
 		enemy.getShot ();
-
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
