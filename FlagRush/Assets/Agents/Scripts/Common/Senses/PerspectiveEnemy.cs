@@ -45,9 +45,10 @@ public class PerspectiveEnemy : Sense {
                     else
                     {
                         RaycastHit hit;
-                        Vector3 rayDirection = player.transform.position - shootPos.transform.position;
+						Vector3 rayDirection = Vector3.zero;
+						rayDirection = player.transform.position - shootPos.transform.position;
 
-						if (Physics.Raycast(shootPos.transform.position, rayDirection, out hit, 300.0f, -5, QueryTriggerInteraction.Ignore))
+						if (rayDirection != Vector3.zero && Physics.Raycast(shootPos.transform.position, rayDirection, out hit, 300.0f, -5, QueryTriggerInteraction.Ignore))
                         {
 							Player plaHit = hit.collider.GetComponentInParent<Player> ();
 

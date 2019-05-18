@@ -6,12 +6,14 @@ public class MuertoNurse : StateMachineBehaviour {
 
 	private Player player;
 	private float elapsedTime;
+	private float elapsedSound;
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		player = animator.gameObject.GetComponent<Player>();
 		animator.SetInteger("Lives", -1);
 		elapsedTime = 0.0f;
+		elapsedSound = 10.0f;
         player.getAgent().ResetPath();
         player.GetRigidbody().freezeRotation = true;
 	}
@@ -20,11 +22,16 @@ public class MuertoNurse : StateMachineBehaviour {
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		//Medir con timeDeltaTime hasta que pasen X segundos, donde el soldado muere definitivamente, dejando su tumba
 		elapsedTime += Time.deltaTime;
+		elapsedSound += Time.deltaTime;
 
-        if (elapsedTime >= 60.0f)
+        if (elapsedTime >= 25.0f)
         {
 			player.die ();
-        }
+		} else if(elapsedSound >= 3.0f)
+		{
+			player.generateSound();
+			elapsedSound = 0.0f;
+		}
     }
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state

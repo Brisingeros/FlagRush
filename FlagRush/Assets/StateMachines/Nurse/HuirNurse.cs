@@ -16,8 +16,10 @@ public class HuirNurse : StateMachineBehaviour {
         animator.SetFloat("Blend", 1.0f);
         player = animator.gameObject.GetComponent<Player>();
         pAI = player.getAgent();
+		pAI.ResetPath ();
         pAI.speed = 20.0f;
-        player.findHidingPlace();
+        Vector3 dest = player.findHidingPlace();
+		pAI.SetDestination (dest);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -25,13 +27,14 @@ public class HuirNurse : StateMachineBehaviour {
 
         if (player.getHidden()){
 
-            pAI.isStopped = true;
+			Debug.Log ("escondida");
+			player.GetRigidbody ().freezeRotation = true;
             animator.SetFloat("Blend", 0.0f);
             elapsedTime += Time.deltaTime;
 
             if(elapsedTime >= 10)
             {
-                pAI.isStopped = false;
+				player.GetRigidbody ().freezeRotation = false;
                 animator.SetBool("Peligro", false);
             }
 

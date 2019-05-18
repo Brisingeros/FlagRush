@@ -19,7 +19,11 @@ public class SoundGenerator : MonoBehaviour {
 		float sumHeight = (al) ? 5.0f : 2.5f;
 		soundObject.transform.position = new Vector3(pos.x, pos.y + sumHeight, pos.z);
 
-		soundRenderer.sharedMaterial = (tm == Team.team.Blue) ? colors [0] : colors [1];
+		int actMaterial = (tm == Team.team.Blue) ? 0 : 2;
+		if (!al)
+			actMaterial++;
+		
+		soundRenderer.sharedMaterial = colors[actMaterial];
 		soundRenderer.enabled = true;
 
 		return soundObject;

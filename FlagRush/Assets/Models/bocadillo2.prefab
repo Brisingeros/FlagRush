@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33127055410096616}
   - component: {fileID: 23054469764044320}
   - component: {fileID: 114177036686978038}
+  - component: {fileID: 135507860710885852}
   m_Layer: 0
   m_Name: bocadillo2
   m_TagString: Untagged
@@ -98,3 +99,15 @@ MonoBehaviour:
   aspectAct: 0
   teamAct: 0
   alive: 0
+--- !u!135 &135507860710885852
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1945304371857892}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}

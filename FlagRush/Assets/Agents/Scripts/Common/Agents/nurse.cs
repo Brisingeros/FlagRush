@@ -71,12 +71,9 @@ public class Nurse : Player {
     public override void removeDestroyedSounds(string type)
     {
         if (type.Equals("enemy"))
-        {
             enemiesSound = enemiesSound.FindAll(x => x != null);
-        } else if (type.Equals("ally"))
-        {
+       	else if (type.Equals("ally"))
             allySounds = allySounds.FindAll(x => x != null);
-        }
     }
 
     public bool removeAlly(Player a)

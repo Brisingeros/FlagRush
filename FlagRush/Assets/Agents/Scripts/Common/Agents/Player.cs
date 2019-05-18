@@ -71,13 +71,14 @@ public abstract class Player : Aspect {
 		return typeNpc;
 	}
 
-    public void findHidingPlace()
+    public Vector3 findHidingPlace()
     {
-        getAgent().ResetPath();
+		//playerAI.ResetPath();
         List<GameObject> bushes = GameObject.FindGameObjectsWithTag("Bush").ToList();
         bushes = bushes.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).ToList(); //ordenamos por distancia a enfermera
-        getAgent().SetDestination(bushes[0].transform.position);
+		Debug.Log(bushes[0]);
 
+		return bushes [0].transform.position;
     }
 
     public void setLayerAnimator(int a)
@@ -147,12 +148,6 @@ public abstract class Player : Aspect {
         {
             transform.rotation = Quaternion.LookRotation(playerAI.velocity.normalized);
         }
-        else if(!alive)
-        {
-            playerAI.updatePosition = false;
-            playerAI.updatePosition = false;
-        }
-
     }
 
     public void addEnemy(Player e)
