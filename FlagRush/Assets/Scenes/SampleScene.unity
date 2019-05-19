@@ -5461,7 +5461,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1124899289}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 80.78, y: 89.7, z: -62.98}
+  m_LocalPosition: {x: 84.68, y: 89.7, z: -62.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1725083073}
@@ -7917,17 +7917,17 @@ MonoBehaviour:
   blueSpawner: {fileID: 2100227527}
   redBarricade: {fileID: 1638693798}
   blueBarricade: {fileID: 2016196278}
-  redSoldierPrefab: {fileID: 1465778374587520, guid: 3689b950668e0b446a4a73742140c40f,
+  redSoldierPrefab: {fileID: 1653590009610842, guid: 3689b950668e0b446a4a73742140c40f,
     type: 2}
-  blueSoldierPrefab: {fileID: 1332966043453516, guid: b0fbd1c5825a43948ba42c0b4caf281d,
+  blueSoldierPrefab: {fileID: 1023821153534502, guid: b0fbd1c5825a43948ba42c0b4caf281d,
     type: 2}
-  redSniperPrefab: {fileID: 1598040838908394, guid: 9818785c7d67487499a49d4605c36a8a,
+  redSniperPrefab: {fileID: 1465848496748312, guid: 9818785c7d67487499a49d4605c36a8a,
     type: 2}
-  blueSniperPrefab: {fileID: 1008388982014394, guid: 0cbc45d74e28fa44d941894204d36ee4,
+  blueSniperPrefab: {fileID: 1382984347907442, guid: 0cbc45d74e28fa44d941894204d36ee4,
     type: 2}
-  redNursePrefab: {fileID: 1009535539381240, guid: 58f602b8d51647542a32dd70a4d567fc,
+  redNursePrefab: {fileID: 1132496354366886, guid: 58f602b8d51647542a32dd70a4d567fc,
     type: 2}
-  blueNursePrefab: {fileID: 1646641930362854, guid: 1d9433fefc60309448c5508a8b86a3a6,
+  blueNursePrefab: {fileID: 1945812628296536, guid: 1d9433fefc60309448c5508a8b86a3a6,
     type: 2}
   redSoldiers: 5
   redSnipers: 2
