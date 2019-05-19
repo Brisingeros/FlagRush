@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public abstract class Player : Aspect {
 
+	protected TypeNPC.type[] targetTypes;
+
     protected NavMeshAgent playerAI;
 	protected Animator anim;
 
@@ -17,9 +19,9 @@ public abstract class Player : Aspect {
 	protected SoundGenerator sG;
 
 	protected List<Player> enemies;
-    protected List<Aspect> enemiesSound;
+	protected List<Aspect> enemiesSound;
 
-    public Player focus;
+	protected Player focus;
 
 	protected List<WayPoint> wP;
 
@@ -29,6 +31,9 @@ public abstract class Player : Aspect {
 
 	private GameObject tomb;
 	protected float speedMax;
+
+	protected Bounds colliderNPC;
+
 
 	void Awake() {
 		mG = FindObjectOfType<WorldManager> ();
@@ -44,6 +49,8 @@ public abstract class Player : Aspect {
 		enemiesSound = new List<Aspect>();
 		focus = null;
 		wP = new List<WayPoint> ();
+
+		colliderNPC = this.GetComponent<CapsuleCollider> ().bounds;
 
 		initPlayer();
 	}
@@ -71,14 +78,13 @@ public abstract class Player : Aspect {
 		return typeNpc;
 	}
 
-    public Vector3 findHidingPlace()
+	public GameObject findHidingPlace()
     {
 		//playerAI.ResetPath();
         List<GameObject> bushes = GameObject.FindGameObjectsWithTag("Bush").ToList();
         bushes = bushes.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).ToList(); //ordenamos por distancia a enfermera
-		Debug.Log(bushes[0]);
 
-		return bushes [0].transform.position;
+		return bushes [0];
     }
 
     public void setLayerAnimator(int a)
@@ -128,8 +134,14 @@ public abstract class Player : Aspect {
 	}
 
     public void revive(){
-		anim.SetInteger("Lives", defaultHealth);
 		alive = true;
+
+		GameObject bush = findHidingPlace ();
+		Bounds bushBound = bush.GetComponent<CapsuleCollider> ().bounds;
+		hidden = bushBound.Intersects(colliderNPC) || bushBound.Contains(transform.position);
+
+		anim.SetInteger("Lives", defaultHealth);
+
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         GetComponent<Rigidbody>().freezeRotation = false;
 
@@ -149,6 +161,14 @@ public abstract class Player : Aspect {
             transform.rotation = Quaternion.LookRotation(playerAI.velocity.normalized);
         }
     }
+
+	public void setFocus(Player f){
+		focus = f;
+	}
+
+	public Player getFocus(){
+		return focus;
+	}
 
     public void addEnemy(Player e)
     {
@@ -199,17 +219,18 @@ public abstract class Player : Aspect {
         return Vector3.Distance(e.transform.position, transform.position);
     }
 
-	void OnTriggerEnter(Collider other)
-	{
-		if (other.tag.Equals ("WayPoint")) {
-            WayPoint w = other.GetComponent<WayPoint>();
-			if (w.team == teamAct && w.type == typeNpc) {
-				wP.Add (w);
-				if (!anim.enabled)
-					anim.enabled = true;
-			}
-		}
-    }
+	public void addWayPoint(WayPoint w){
+		if (!wP.Contains (w))
+			wP.Add (w);
+
+		if (!anim.enabled)
+			anim.enabled = true;
+	}
+
+	public void removeWayPoint(WayPoint w){
+		if (wP.Contains (w))
+			wP.Remove (w);
+	}
 
     public WayPoint getObjective(){
 		wP = wP.OrderBy (x => x.getValue (gameObject)).ToList();
@@ -231,5 +252,13 @@ public abstract class Player : Aspect {
 
 	public float getSpeedMax(){
 		return speedMax;
+	}
+
+	public TypeNPC.type[] getTypeTargets(){
+		return targetTypes;
+	}
+
+	public Bounds getColliderNPC(){
+		return colliderNPC;
 	}
 }

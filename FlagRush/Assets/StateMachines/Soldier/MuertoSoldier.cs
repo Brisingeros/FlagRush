@@ -16,6 +16,7 @@ public class MuertoSoldier : StateMachineBehaviour {
         player = animator.gameObject.GetComponent<Player>();
         pAI = player.getAgent();
         pAI.ResetPath();
+		pAI.speed = 0;
         player.GetRigidbody().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         player.GetRigidbody().freezeRotation = true;
         animator.SetInteger("Lives", -1);
@@ -29,16 +30,15 @@ public class MuertoSoldier : StateMachineBehaviour {
 		elapsedTime += Time.deltaTime;
         elapsedSound += Time.deltaTime;
 
-		if (elapsedTime >= 25.0f){
-			player.die ();
-        }
-        else if(elapsedSound >= 3.0f)
-        {
-                player.generateSound();
-                elapsedSound = 0.0f;
-            }
-        
-        
+		int lives = animator.GetInteger("Lives");
+		if (lives <= 0) {
+			if (elapsedTime >= 25.0f) {
+				player.die ();
+			} else if (elapsedSound >= 3.0f) {
+				player.generateSound ();
+				elapsedSound = 0.0f;
+			}
+		}
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state

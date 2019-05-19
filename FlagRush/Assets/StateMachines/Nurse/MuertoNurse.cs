@@ -15,7 +15,9 @@ public class MuertoNurse : StateMachineBehaviour {
 		elapsedTime = 0.0f;
 		elapsedSound = 10.0f;
         player.getAgent().ResetPath();
-        player.GetRigidbody().freezeRotation = true;
+		player.getAgent().speed = 0;
+		player.GetRigidbody().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+		player.GetRigidbody().freezeRotation = true;
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -24,13 +26,16 @@ public class MuertoNurse : StateMachineBehaviour {
 		elapsedTime += Time.deltaTime;
 		elapsedSound += Time.deltaTime;
 
-        if (elapsedTime >= 25.0f)
-        {
-			player.die ();
-		} else if(elapsedSound >= 3.0f)
-		{
-			player.generateSound();
-			elapsedSound = 0.0f;
+		int lives = animator.GetInteger("Lives");
+		if (lives <= 0) {
+			if (elapsedTime >= 25.0f)
+			{
+				player.die ();
+			} else if(elapsedSound >= 3.0f)
+			{
+				player.generateSound();
+				elapsedSound = 0.0f;
+			}
 		}
     }
 

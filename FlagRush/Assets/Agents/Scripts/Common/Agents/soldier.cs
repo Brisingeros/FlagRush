@@ -5,6 +5,11 @@ using UnityEngine;
 public class Soldier : Player {
 
     protected override void initPlayer(){
+		targetTypes = new TypeNPC.type[3];
+		targetTypes[0] = TypeNPC.type.Soldier;
+		targetTypes [1] = TypeNPC.type.Sniper;
+		targetTypes [2] = TypeNPC.type.Nurse;
+
 		defaultHealth = 3;
 		anim.SetInteger ("Lives", defaultHealth);
 		typeNpc = TypeNPC.type.Soldier;

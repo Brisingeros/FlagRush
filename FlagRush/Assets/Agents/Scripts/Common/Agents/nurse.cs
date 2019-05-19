@@ -13,6 +13,10 @@ public class Nurse : Player {
 
     protected override void initPlayer()
     {
+		targetTypes = new TypeNPC.type[2];
+		targetTypes[0] = TypeNPC.type.Soldier;
+		targetTypes [1] = TypeNPC.type.Sniper;
+
         defaultHealth = 1;
         anim.SetInteger("Lives", defaultHealth);
 		typeNpc = TypeNPC.type.Nurse;
@@ -102,8 +106,8 @@ public class Nurse : Player {
     {
         OrderAlliesByDistance("sound");
         Aspect goal = allySounds.Count > 0? getAllySound(0): null;
-        if (goal != null)
-            getAgent().SetDestination(goal.transform.position);
+		if (goal != null)
+			getAgent ().destination = goal.transform.position;
     }
 
     public void OrderAlliesByDistance(string type)

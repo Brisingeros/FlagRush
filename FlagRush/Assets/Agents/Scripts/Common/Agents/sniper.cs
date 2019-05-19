@@ -8,6 +8,10 @@ public class Sniper : Player {
 	public Barricade barricade;
 
     protected override void initPlayer(){
+		targetTypes = new TypeNPC.type[2];
+		targetTypes[0] = TypeNPC.type.Soldier;
+		targetTypes [1] = TypeNPC.type.Nurse;
+
 		defaultHealth = 2;
 		anim.SetInteger ("Lives", defaultHealth);
 		typeNpc = TypeNPC.type.Sniper;
@@ -54,11 +58,6 @@ public class Sniper : Player {
 
 	override public void generateSound(){
 		hidden = false;
-
-		Debug.Log ("Sniper sound");
 		GameObject snd = barricade.generateSound (this, positionBarricade);
-
-		/*if(!alive)
-			snd.transform.SetParent(transform);*/
 	}
 }

@@ -40,7 +40,7 @@ public class WorldManager : MonoBehaviour {
 
         //gets values from Controller
 
-        Controller c = FindObjectOfType<Controller>();
+        /*Controller c = FindObjectOfType<Controller>();
         redSoldiers = c.getRedSoldiers();
         blueSoldiers = c.getBlueSoldiers();
         redSnipers = c.getRedSnipers();
@@ -48,7 +48,7 @@ public class WorldManager : MonoBehaviour {
         redNurses = c.getRedNurses();
         blueNurses = c.getBlueNurses();
 
-        Destroy(c.gameObject);
+        Destroy(c.gameObject);*/
 
         //set initial values
 		redForces = redSoldiers + redSnipers + redNurses;

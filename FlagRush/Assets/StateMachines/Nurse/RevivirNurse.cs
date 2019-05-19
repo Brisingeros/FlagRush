@@ -21,19 +21,22 @@ public class RevivirNurse : StateMachineBehaviour {
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-
         elapsedTime += Time.deltaTime;
 
-        if(elapsedTime >= 2.0f)
-        {
-            Nurse n = player.gameObject.GetComponent<Nurse>();
-            if (n.focusAlly)
-            {
-                n.focusAlly.revive();
-                n.removeAlly(n.focusAlly);
-            }
-            elapsedTime = 0.0f;
-        }
+		bool aliado = animator.GetBool ("Aliado");
+		if (aliado) {
+			if(elapsedTime >= 2.0f)
+			{
+				Nurse n = player.gameObject.GetComponent<Nurse>();
+				if (n.focusAlly) {
+					n.focusAlly.revive ();
+					n.removeAlly (n.focusAlly);
+				} /*else {					//TODO: Mira esto a ver si sirve Laura
+					animator.SetBool ("Aliado", false);
+				}*/
+				elapsedTime = 0.0f;
+			}
+		}
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state

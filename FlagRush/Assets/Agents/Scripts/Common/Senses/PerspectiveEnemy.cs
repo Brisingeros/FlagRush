@@ -6,17 +6,31 @@ public class PerspectiveEnemy : Sense {
 
 	public GameObject shootPos;
     private Player parent;
-    private float distanceMelee = 3; //CAMBIAR
+	private TypeNPC.type[] targetTypes;
+	private float distanceMelee = 5; //CAMBIAR
 
     private void Awake()
     {
         parent = transform.GetComponentInParent<Player>();
+		targetTypes = parent.getTypeTargets ();
     }
 
     void OnTriggerEnter(Collider other){
         Player p = other.GetComponent<Player>();
-        if (p && p.aspectAct == Aspect.aspect.NPC && p.teamAct != pla.teamAct)
+		if (p && p.aspectAct == Aspect.aspect.NPC && p.teamAct != pla.teamAct && assertType(p.getTypeNpc()))
             parent.addEnemy(p);
+	}
+
+	private bool assertType(TypeNPC.type typeEnemy){
+		int index = 0;
+		bool isIn = false;
+
+		do {
+			isIn = targetTypes[index] == typeEnemy;
+			index++;
+		} while(index < targetTypes.Length && !isIn);
+
+		return isIn;
 	}
 
 	private void FixedUpdate()
@@ -24,7 +38,7 @@ public class PerspectiveEnemy : Sense {
 		parent.removeSoldiers ("enemy");
 
         //El array de enemigos estará ordenado por distancia (recta)
-        parent.focus = null;
+		parent.setFocus(null);
         parent.OrderByDistance("vision");
         int numEnemies = parent.sizeEnemies();
         //Probar raycast en orden, y quedarse como focus con el primero que puedas golpear
@@ -32,7 +46,7 @@ public class PerspectiveEnemy : Sense {
         if ( numEnemies > 0)
         {
             int i = 0;
-            while(i < numEnemies && parent.focus == null)
+			while(i < numEnemies && parent.getFocus() == null)
             {
                 Player player = parent.getEnemy(i);
 
@@ -40,7 +54,7 @@ public class PerspectiveEnemy : Sense {
                 {
                     if(parent.GetDistanceToEnemy(player) < distanceMelee)
                     {
-                        parent.focus = player;
+						parent.setFocus(player);
                     }
                     else
                     {
@@ -53,7 +67,7 @@ public class PerspectiveEnemy : Sense {
 							Player plaHit = hit.collider.GetComponentInParent<Player> ();
 
                             if (plaHit != null && plaHit == player)
-                                parent.focus = player;
+								parent.setFocus(player);
                         }
                     }
                         

@@ -16,11 +16,11 @@ public class AtaqueSniper : StateMachineBehaviour {
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		if (player.focus == null)
+		if (player.getFocus() == null)
 			return;
 		
 		elapsedTime += Time.deltaTime;
-		Vector3 focusLeveled = player.focus.transform.position;
+		Vector3 focusLeveled = player.getFocus().transform.position;
 		focusLeveled.y = player.transform.position.y;
 
 		if (!lookingAt (player.transform.forward, player.transform.position, focusLeveled)) {
@@ -37,7 +37,7 @@ public class AtaqueSniper : StateMachineBehaviour {
 
 		} else if (elapsedTime >= 3.0f) {
 			elapsedTime = 0.0f;
-			shoot (player.focus);
+			shoot (player.getFocus());
 		}
 	}
 

@@ -29,7 +29,22 @@ public class WayPoint : MonoBehaviour {
 			if (anim.GetCurrentAnimatorStateInfo (layerActual).IsName ("Avanzar") && getNext () != null)
 				player.getAgent().SetDestination(getNext().transform.position);
         }
+
+		if (other.tag.Equals ("WaypointVision")) {
+			player = other.GetComponentInParent<Player> ();
+			if (team == player.getTeam() && type == player.getTypeNpc())
+				player.addWayPoint (this);
+		}
     }
+
+	private void OnTriggerExit(Collider other)
+	{
+		if (other.tag.Equals ("WaypointVision")) {
+			Player player = other.GetComponentInParent<Player> ();
+			if (team == player.getTeam() && type == player.getTypeNpc())
+				player.removeWayPoint (this);
+		}
+	}
 
 	public WayPoint getNext(){
 		return (next != null) ? next : this;

@@ -8,27 +8,35 @@ public class AvanzarNurse : StateMachineBehaviour {
     private Player player;
     private NavMeshAgent pAI;
 
+	private Vector3 initDestination;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = animator.gameObject.GetComponent<Player>();
         player.setLayerAnimator(layerIndex);
         pAI = player.getAgent();
+		pAI.ResetPath ();
 		pAI.speed = player.getSpeedMax();
-        WayPoint destination = player.getObjective();
 
-        if (pAI.remainingDistance <= destination.GetComponent<CapsuleCollider>().radius)
-			destination = destination.getNext();
-
-        pAI.SetDestination(destination.transform.position);
+		setPath();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //Navmesh elegir siguiente objetivo y caminar hacia él
-
+		if (!pAI.hasPath)
+			setPath();
     }
+
+	public void setPath(){
+		WayPoint destination = player.getObjective ();
+		Bounds destBound = destination.GetComponent<CapsuleCollider> ().bounds;
+		if (destBound.Intersects(player.getColliderNPC()) || destBound.Contains(player.transform.position))
+			destination = destination.getNext();
+
+		pAI.destination = destination.transform.position;
+	}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
