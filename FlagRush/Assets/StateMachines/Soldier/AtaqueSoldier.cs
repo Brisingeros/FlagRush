@@ -26,33 +26,30 @@ public class AtaqueSoldier : StateMachineBehaviour {
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		bool enemigo = animator.GetBool ("Enemigo");
-		if (enemigo) {
-			if (pAI.velocity == Vector3.zero) {
-				elapsedTime += Time.deltaTime;
+		if (pAI.velocity == Vector3.zero) {
+			elapsedTime += Time.deltaTime;
 
-				if (player.getFocus() == null)
-					return;
+			if (player.getFocus() == null)
+				return;
 
-				Vector3 focusLeveled = player.getFocus().transform.position;
-				focusLeveled.y = player.transform.position.y;
+			Vector3 focusLeveled = player.getFocus().transform.position;
+			focusLeveled.y = player.transform.position.y;
 
-				if (!lookingAt (player.transform.forward, player.transform.position, focusLeveled)) {
-					Vector3 targetDir = focusLeveled - player.transform.position;
+			if (!lookingAt (player.transform.forward, player.transform.position, focusLeveled)) {
+				Vector3 targetDir = focusLeveled - player.transform.position;
 
-					// The step size is equal to speed times frame time.
-					float step = speed * Time.deltaTime;
+				// The step size is equal to speed times frame time.
+				float step = speed * Time.deltaTime;
 
-					Vector3 newDir = Vector3.RotateTowards(player.transform.forward, targetDir, step, 0.0f);
+				Vector3 newDir = Vector3.RotateTowards(player.transform.forward, targetDir, step, 0.0f);
 
-					// Move our position a step closer to the target.
-					player.transform.rotation = Quaternion.LookRotation(newDir);
+				// Move our position a step closer to the target.
+				player.transform.rotation = Quaternion.LookRotation(newDir);
 
-				} else if (elapsedTime >= 3.0f) {
-					elapsedTime = 0.0f;
-					shoot (player.getFocus());
-				}	
-			}
+			} else if (elapsedTime >= 3.0f) {
+				elapsedTime = 0.0f;
+				shoot (player.getFocus());
+			}	
 		}
 	}
 

@@ -19,17 +19,13 @@ public class AlertaSoldier : StateMachineBehaviour {
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		//Acercarse al sonido seleccionado
-		bool alerta = animator.GetBool("Alerta");
-		bool enemigo = animator.GetBool ("Enemigo");
-		if (alerta && !enemigo) {
-			Aspect destination = player.getEnemySound();
+		Aspect destination = player.getEnemySound();
 
-			if (!destination)
-				return;
+		if (!destination)
+			return;
 
-			if (pAI.destination != destination.transform.position)
-				pAI.destination = destination.transform.position;
-		}
+		if (pAI.destination != destination.transform.position)
+			pAI.destination = destination.transform.position;
 	}
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state

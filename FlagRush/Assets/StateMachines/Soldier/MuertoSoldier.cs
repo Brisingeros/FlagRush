@@ -30,14 +30,11 @@ public class MuertoSoldier : StateMachineBehaviour {
 		elapsedTime += Time.deltaTime;
         elapsedSound += Time.deltaTime;
 
-		int lives = animator.GetInteger("Lives");
-		if (lives <= 0) {
-			if (elapsedTime >= 25.0f) {
-				player.die ();
-			} else if (elapsedSound >= 3.0f) {
-				player.generateSound ();
-				elapsedSound = 0.0f;
-			}
+		if (elapsedTime >= 25.0f) {
+			player.die ();
+		} else if (elapsedSound >= 3.0f) {
+			player.generateSound ();
+			elapsedSound = 0.0f;
 		}
 	}
 

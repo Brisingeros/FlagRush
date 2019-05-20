@@ -23,19 +23,16 @@ public class RevivirNurse : StateMachineBehaviour {
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         elapsedTime += Time.deltaTime;
 
-		bool aliado = animator.GetBool ("Aliado");
-		if (aliado) {
-			if(elapsedTime >= 2.0f)
-			{
-				Nurse n = player.gameObject.GetComponent<Nurse>();
-				if (n.focusAlly) {
-					n.focusAlly.revive ();
-					n.removeAlly (n.focusAlly);
-				} /*else {					//TODO: Mira esto a ver si sirve Laura
-					animator.SetBool ("Aliado", false);
-				}*/
-				elapsedTime = 0.0f;
+		if(elapsedTime >= 2.0f)
+		{
+			Nurse n = player.gameObject.GetComponent<Nurse>();
+			if (n.focusAlly) {
+				n.focusAlly.revive ();
+				n.removeAlly (n.focusAlly);
+			} else {					//TODO: Mira esto a ver si sirve Laura
+				animator.SetBool ("Aliado", false);
 			}
+			elapsedTime = 0.0f;
 		}
 	}
 

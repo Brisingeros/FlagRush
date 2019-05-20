@@ -21,22 +21,19 @@ public class HuirNurse : StateMachineBehaviour {
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		bool peligro = animator.GetBool ("Peligro");
-		if (peligro) {
-			if (player.getHidden ()) {
+		if (player.getHidden ()) {
 
-				player.GetRigidbody ().freezeRotation = true;
-				animator.SetFloat ("Blend", 0.0f);
-				elapsedTime += Time.deltaTime;
+			player.GetRigidbody ().freezeRotation = true;
+			animator.SetFloat ("Blend", 0.0f);
+			elapsedTime += Time.deltaTime;
 
-				if (elapsedTime >= 10) {
-					player.GetRigidbody ().freezeRotation = false;
-					animator.SetBool ("Peligro", false);
-				}
-
-			} else {
-				pAI.destination = player.findHidingPlace().transform.position;
+			if (elapsedTime >= 10) {
+				player.GetRigidbody ().freezeRotation = false;
+				animator.SetBool ("Peligro", false);
 			}
+
+		} else {
+			pAI.destination = player.findHidingPlace().transform.position;
 		}
 	}
 
