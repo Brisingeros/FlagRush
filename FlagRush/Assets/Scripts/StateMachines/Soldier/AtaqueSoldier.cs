@@ -62,7 +62,7 @@ public class AtaqueSoldier : StateMachineBehaviour {
 	private void shoot(Player enemy){
 		float distance = Vector3.Distance (enemy.transform.position, player.transform.position);
 
-		if (distance < 5.0f)
+		if (distance < 9.0f)
             player.getAnimator().SetFloat("Shoot", 0.0f);
 		else
             player.getAnimator().SetFloat("Shoot", 1.0f);

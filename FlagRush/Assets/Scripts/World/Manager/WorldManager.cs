@@ -132,7 +132,7 @@ public class WorldManager : MonoBehaviour {
         SceneManager.LoadScene("menu");
     }
 
-	private void GameOver(Team.team team){
+	public void GameOver(Team.team team){
 
         UIController ui = FindObjectOfType<UIController>();
         ui.setVictoryOnScreen(team);

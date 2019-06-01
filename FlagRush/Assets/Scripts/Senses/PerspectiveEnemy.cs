@@ -7,7 +7,7 @@ public class PerspectiveEnemy : Sense {
 	public GameObject shootPos;
     private Player parent;
 	private TypeNPC.type[] targetTypes;
-	private float distanceMelee = 5; //CAMBIAR
+	private float distanceMelee = 15; //CAMBIAR
 
     private void Awake()
     {
