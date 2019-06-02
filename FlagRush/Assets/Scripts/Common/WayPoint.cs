@@ -6,7 +6,6 @@ public class WayPoint : MonoBehaviour {
 
 	public static int weight;
 
-	public WayPoint previous;
 	public WayPoint next;
 	public TypeNPC.type type;
     public Team.team team;
