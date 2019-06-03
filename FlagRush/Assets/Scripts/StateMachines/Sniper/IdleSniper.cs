@@ -22,10 +22,12 @@ public class IdleSniper : StateMachineBehaviour {
 
 		targeting = null;
 		elapsedTime = 0;
-	}
+        animator.SetFloat("Idle", 0.0f);
 
-	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+    }
+
+    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 		lookAt += Time.deltaTime;
 
 		if (lookAt > 3) {
@@ -46,6 +48,7 @@ public class IdleSniper : StateMachineBehaviour {
 					targeting = player.barricade.attack (player);
 
 					if (targeting != null) {
+                        animator.SetFloat("Idle", 1.0f);
 						pAI.SetDestination (targeting.transform.position);
 					}
 				}
