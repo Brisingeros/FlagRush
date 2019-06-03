@@ -69,7 +69,7 @@ public class Nurse : Player {
     public void broadcastToNurses()
     {
         List<Nurse> nurses = FindObjectsOfType<Nurse>().ToList();
-        nurses.Remove(this);
+        nurses = nurses.FindAll(x => x != this && x.getTeam() == getTeam());
 
         nurses.ForEach(nurse=> {
 
