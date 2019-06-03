@@ -36,7 +36,7 @@ public class Nurse : Player {
             {
                 if (enemiesSound.Count > 0 || enemies.Count > 0)
                 {
-					float distanceNow = distanceHuir + (float)(mG.getTeamMoral (this.teamAct)/10);
+					float distanceNow = distanceHuir + (mG.getTeamMoral(teamAct)/10);
 					huir = (enemiesSound.Count > 0) ? Vector3.Distance(enemiesSound[0].transform.position, transform.position) < distanceNow : (enemies.Count > 0) ? Vector3.Distance(enemies[0].transform.position, transform.position) < distanceNow : false;
                 }
                 else
@@ -61,10 +61,8 @@ public class Nurse : Player {
 
         if (player != null)
         {
-            allies.Remove(player);
-            allies.Add(player);
-
-            focusAlly = allies.Count > 1? allies[0] : null;
+            removeAlly(player);
+            getAnimator().SetBool("Aliado", getAnimator().GetBool("Aliado") && player != focusAlly);
         }
     }
 
@@ -114,7 +112,9 @@ public class Nurse : Player {
             Aspect sound = a.gameObject.GetComponentInChildren<Aspect>();
             removeSound(sound);
         }
+        
         OrderAlliesByDistance("vision");
+        focusAlly = allies.Count > 1 ? allies[0] : null;
 
         return success;
     }
@@ -139,9 +139,11 @@ public class Nurse : Player {
     public void OrderAlliesByDistance(string type)
     {
 		if (type.Equals ("vision")) {
+            removeSoldiers("ally");
 			allies = allies.OrderBy (x => Vector3.Distance (x.transform.position, transform.position)).ToList ();
-			SetFocus ();
+			SetFocus();
 		} else if (type.Equals ("sound")) {
+            removeDestroyedSounds("ally");
 			allySounds = allySounds.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).ToList();
 		}
     }

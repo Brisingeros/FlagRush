@@ -21,7 +21,8 @@ public class HuirNurse : StateMachineBehaviour {
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		if (player.getHidden ()) {
+
+        if (player.getHidden ()) {
 
 			player.GetRigidbody ().freezeRotation = true;
 			animator.SetFloat ("Blend", 0.0f);

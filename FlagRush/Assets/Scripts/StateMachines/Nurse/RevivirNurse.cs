@@ -31,7 +31,7 @@ public class RevivirNurse : StateMachineBehaviour {
                 n.broadcastToNurses();
 				n.focusAlly.revive ();
 				n.removeAlly (n.focusAlly);
-			} else {					//TODO: Mira esto a ver si sirve Laura
+			} else {			
 				animator.SetBool ("Aliado", false);
 			}
 			elapsedTime = 0.0f;

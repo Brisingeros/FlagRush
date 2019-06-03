@@ -18,7 +18,7 @@ public class AvanzarNurse : StateMachineBehaviour {
         pAI = player.getAgent();
 		pAI.ResetPath ();
 		pAI.speed = player.getSpeedMax();
-
+        animator.SetFloat("Running", 1.0f);
 		setPath();
     }
 
@@ -30,12 +30,21 @@ public class AvanzarNurse : StateMachineBehaviour {
     }
 
 	public void setPath(){
+
 		WayPoint destination = player.getObjective ();
 		Bounds destBound = destination.GetComponent<CapsuleCollider> ().bounds;
 		if (destBound.Intersects(player.getColliderNPC()) || destBound.Contains(player.transform.position))
-			destination = destination.getNext();
+        {
+            WayPoint lastDest = destination;
+            destination = destination.getNext();
 
-		pAI.destination = destination.transform.position;
+            if(lastDest == destination)
+            {
+                player.getAnimator().SetFloat("Running", 0.0f);
+            }
+        }
+
+        pAI.destination = destination.transform.position;
 	}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
