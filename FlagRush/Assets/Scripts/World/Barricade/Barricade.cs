@@ -147,11 +147,18 @@ public class Barricade : MonoBehaviour {
 			auxArray [i] = array [i];
 		}
 
-		for (int j = auxArray.Length; j > 0; j--) {
+		/*for (int j = auxArray.Length; j > 0; j--) {
 			int k = (int)Random.Range (0, j);
 			int l = auxArray [k];
 			auxArray [k] = array [j - 1];
 			auxArray [j - 1] = l;
+		}*/
+
+		for (var i = auxArray.Length - 1; i > 0; i--) {
+			var r = Random.Range(0,i);
+			int tmp = auxArray[i];
+			auxArray[i] = auxArray[r];
+			auxArray[r] = tmp;
 		}
 
 		return auxArray;
@@ -185,9 +192,13 @@ public class Barricade : MonoBehaviour {
 		int[] orderSpawn = SuffleArray (indexAttack);
 		int index = 0;
 
+		Debug.Log ("EQUIPO");
+
 		while (index < numSnipers && index < orderSpawn.Length) {
 			int position = orderSpawn [index];
 			occupied [position] = true;
+
+			Debug.Log (position);
 
 			GameObject instanced = Instantiate (prefab);
             instanced.transform.position = transform.TransformPoint(positions[position].transform.localPosition);
