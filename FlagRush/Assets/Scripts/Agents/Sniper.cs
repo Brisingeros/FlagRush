@@ -42,7 +42,7 @@ public class Sniper : Player {
             if (!peligro && focus != null)
             {
                 float dis = Vector3.Distance(focus.transform.position, transform.position);
-                peligro = dis < 20;
+                peligro = dis < 30;
                 anim.SetBool("Peligro", peligro && !getHidden());
             }
         }
@@ -60,4 +60,17 @@ public class Sniper : Player {
 		hidden = false;
 		GameObject snd = barricade.generateSound (this, positionBarricade);
 	}
+
+    protected override void setAnimWalk(bool hidden)
+    {
+        if (hidden)
+        {
+            getAnimator().SetFloat("Crouch", 1.0f);
+        }
+        else
+        {
+            getAnimator().SetFloat("Crouch", 0.0f);
+
+        }
+    }
 }

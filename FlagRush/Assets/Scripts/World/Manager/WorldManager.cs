@@ -35,9 +35,12 @@ public class WorldManager : MonoBehaviour {
 	private int redKillMoral;
 	private int blueKillMoral;
 
+    static private bool gameOver;
+
 	// Use this for initialization
 	void Awake () {
 
+        gameOver = false;
         //gets values from Controller
 
         Controller c = FindObjectOfType<Controller>();
@@ -74,29 +77,30 @@ public class WorldManager : MonoBehaviour {
 	}
 	
 	public void onKill(Player pl){
+
 		switch (pl.teamAct) {
 
-		case Team.team.Blue:
-			blueMoral -= blueKillMoral;
-			redMoral += redKillMoral;
-			blueForces--;
-			if (pl.getTypeNpc () == TypeNPC.type.Soldier)
-				blueSoldiers--;
-			break;
+		    case Team.team.Blue:
+			    blueMoral -= blueKillMoral;
+			    redMoral += redKillMoral;
+			    blueForces--;
+			    if (pl.getTypeNpc() == TypeNPC.type.Soldier)
+				    blueSoldiers--;
+			    break;
 
-		case Team.team.Red:
-			redMoral -= redKillMoral;
-			blueMoral += blueKillMoral;
-			redForces--;
-			if (pl.getTypeNpc () == TypeNPC.type.Soldier)
-				redSoldiers--;
-			break;
+		    case Team.team.Red:
+			    redMoral -= redKillMoral;
+			    blueMoral += blueKillMoral;
+			    redForces--;
+			    if (pl.getTypeNpc() == TypeNPC.type.Soldier)
+				    redSoldiers--;
+			    break;
 
 		}
 
-		if (redSoldiers <= 0) {
+		if (!gameOver && redSoldiers <= 0) {
 			GameOver (Team.team.Blue);
-		} else if (blueSoldiers <= 0) {
+		} else if (!gameOver && blueSoldiers <= 0) {
 			GameOver (Team.team.Red);
 		}
 	}
@@ -136,6 +140,14 @@ public class WorldManager : MonoBehaviour {
 
         UIController ui = FindObjectOfType<UIController>();
         ui.setVictoryOnScreen(team);
+        gameOver = true;
+
         Invoke("changeScene", 3.0f);
+        
 	}
+
+    public void arrivingToGoal(Team.team team)
+    {
+        FindObjectOfType<UIController>().renderArrow(team);
+    }
 }

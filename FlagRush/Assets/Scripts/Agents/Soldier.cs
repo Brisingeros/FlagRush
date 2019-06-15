@@ -32,4 +32,17 @@ public class Soldier : Player {
         anim.SetBool("Alerta", enemiesSound.Count > 0);
         anim.SetBool("Enemigo", focus != null);
 	}
+
+    protected override void setAnimWalk(bool hidden)
+    {
+        if (hidden) //anda agachado
+        {
+            getAnimator().SetFloat("Walk", 1.0f);
+        }
+        else //anda normal
+        {
+            getAnimator().SetFloat("Walk", 0.0f);
+
+        }
+    }
 }

@@ -158,12 +158,12 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
       copied configuration does not match position in animation file:\n\t'mixamorig:LeftUpLeg'
-      : position error = 29.382681 mm\n\t'mixamorig:LeftLeg' : position error = 99.631866
-      mm\n\t'mixamorig:LeftFoot' : position error = 95.764717 mm\n\t'mixamorig:LeftToeBase'
-      : position error = 48.880867 mm\n\t'mixamorig:RightUpLeg' : position error =
-      29.876152 mm\n\t'mixamorig:RightLeg' : position error = 99.610832 mm\n\t'mixamorig:RightFoot'
-      : position error = 95.439636 mm\n\t'mixamorig:RightToeBase' : position error
-      = 44.921116 mm\n"
+      : position error = 160.875031 mm\n\t'mixamorig:LeftLeg' : position error = 627.508606
+      mm\n\t'mixamorig:LeftFoot' : position error = 597.363525 mm\n\t'mixamorig:LeftToeBase'
+      : position error = 257.338440 mm\n\t'mixamorig:RightUpLeg' : position error
+      = 160.891342 mm\n\t'mixamorig:RightLeg' : position error = 627.574036 mm\n\t'mixamorig:RightFoot'
+      : position error = 597.305542 mm\n\t'mixamorig:RightToeBase' : position error
+      = 259.581024 mm\n"
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -229,7 +229,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.0254
+    previousCalculatedGlobalScale: 0.01
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60

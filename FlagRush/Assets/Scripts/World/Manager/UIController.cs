@@ -42,4 +42,13 @@ public class UIController : MonoBehaviour {
         if(button.interactable != state)
             button.interactable = state;
     }
+
+    public void renderArrow(Team.team team)
+    {
+        string name = team == Team.team.Blue ? "BlueArrow" : "RedArrow";
+        GameObject img = Resources.Load<GameObject>("Prefabs/" + name);
+        img = Instantiate(img, GameObject.Find("MainCanvas").transform);
+
+    }
+
 }

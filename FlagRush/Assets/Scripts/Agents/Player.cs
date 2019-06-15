@@ -56,6 +56,7 @@ public abstract class Player : Aspect {
 	}
 
     protected abstract void initPlayer();
+    protected abstract void setAnimWalk(bool hidden);
 
     public abstract void removeSoldiers(string type);
     public abstract void removeDestroyedSounds(string type);
@@ -67,6 +68,7 @@ public abstract class Player : Aspect {
     public void setHidden(bool state)
     {
         hidden = state;
+        setAnimWalk(hidden);
     }
 
     public bool getHidden()
@@ -134,25 +136,29 @@ public abstract class Player : Aspect {
 	}
 
     public void revive(){
-		alive = true;
 
-		GameObject bush = findHidingPlace ();
+		alive = true;
+        resetTransform();
+        GameObject bush = findHidingPlace ();
 		Bounds bushBound = bush.GetComponent<CapsuleCollider> ().bounds;
 		hidden = bushBound.Intersects(colliderNPC) || bushBound.Contains(transform.position);
 
-		anim.SetInteger("Lives", defaultHealth);
-
-        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-        GetComponent<Rigidbody>().freezeRotation = false;
+        anim.SetInteger("Lives", defaultHealth);
 
         if (GetComponentInChildren<Aspect>())
         {
             GameObject sound = transform.GetChild(transform.childCount-1).gameObject;
             Destroy(sound);
         }
+        mG.onRevive (this);
 
-		mG.onRevive (this);
 	}
+
+    public void resetTransform()
+    {
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        GetComponent<Rigidbody>().freezeRotation = false;
+    }
 
     private void LateUpdate()
     {

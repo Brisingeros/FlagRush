@@ -36,6 +36,8 @@ public class Nurse : Player {
             {
                 if (enemiesSound.Count > 0 || enemies.Count > 0)
                 {
+                    removeDestroyedSounds("enemy");
+                    removeSoldiers("enemy");
 					float distanceNow = distanceHuir + (mG.getTeamMoral(teamAct)/10);
 					huir = (enemiesSound.Count > 0) ? Vector3.Distance(enemiesSound[0].transform.position, transform.position) < distanceNow : (enemies.Count > 0) ? Vector3.Distance(enemies[0].transform.position, transform.position) < distanceNow : false;
                 }
@@ -56,14 +58,21 @@ public class Nurse : Player {
 
     public void changeAllyToRevive(Player p)
     {
+        removeDestroyedSounds("ally");
+        removeSoldiers("ally");
+        Aspect a = allySounds.Find(x => x == p.GetComponentInChildren<Aspect>());
 
-        Player player = allies.Find(x => x == p);
-
-        if (player != null)
+        if(a != null)
         {
-            removeAlly(player);
-            getAnimator().SetBool("Aliado", getAnimator().GetBool("Aliado") && player != focusAlly);
+            Player player = a.GetComponentInParent<Player>();
+            if (player != null)
+            {
+                getAgent().ResetPath();
+                removeAlly(player);
+                getAnimator().SetBool("Aliado", getAnimator().GetBool("Aliado") && player != focusAlly);
+            }
         }
+
     }
 
     public void broadcastToNurses()
@@ -163,5 +172,15 @@ public class Nurse : Player {
         return allies.Count;
     }
 
-
+    protected override void setAnimWalk(bool hidden)
+    {
+        if (hidden) //anda agachado
+        {
+            getAnimator().SetFloat("Running", 1.0f);
+        }
+        else //anda normal
+        {
+            getAnimator().SetFloat("Running", 0.5f);
+        }
+    }
 }

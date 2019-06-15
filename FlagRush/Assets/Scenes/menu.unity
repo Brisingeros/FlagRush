@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1279,7 +1279,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.12178563}
-  m_AnchoredPosition: {x: -0.0017089844, y: -1.5395508}
+  m_AnchoredPosition: {x: -0.001953125, y: -1.5395508}
   m_SizeDelta: {x: 0.4000244, y: -4.100006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &377310628
@@ -2588,7 +2588,15 @@ Prefab:
     - target: {fileID: 13700000, guid: eeccbab593215d2469ca2fbb6fe8e81a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ad5f41fbe8896ca4980e555858079cc8, type: 2}
+      objectReference: {fileID: 2100000, guid: cdbaae367df714746848ce42ee018d3b, type: 2}
+    - target: {fileID: 400086, guid: eeccbab593215d2469ca2fbb6fe8e81a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.0077117975
+      objectReference: {fileID: 0}
+    - target: {fileID: 400086, guid: eeccbab593215d2469ca2fbb6fe8e81a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.06376296
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eeccbab593215d2469ca2fbb6fe8e81a, type: 3}
   m_IsPrefabAsset: 0
@@ -3676,7 +3684,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.8954676}
   m_AnchorMax: {x: 1, y: 0.9685325}
-  m_AnchoredPosition: {x: 0.50024414, y: -0.5}
+  m_AnchoredPosition: {x: 0.5, y: -0.5}
   m_SizeDelta: {x: -0.6, y: 6.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1037269280
@@ -4222,7 +4230,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.8954676}
-  m_AnchoredPosition: {x: 0.0012207031, y: -1.9599609}
+  m_AnchoredPosition: {x: 0.0009765625, y: -1.9599609}
   m_SizeDelta: {x: 0.4000244, y: -3.880005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1224732099
@@ -5860,7 +5868,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.12178563}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -0.0017089844, y: -1.8000488}
+  m_AnchoredPosition: {x: -0.001953125, y: -1.8000488}
   m_SizeDelta: {x: 2.4000244, y: 3.600006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1914073719
@@ -6129,6 +6137,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: f9e344c33375c6e47bf821eead87677f,
     type: 3}
   m_PrefabInternal: {fileID: 2056028683}
+--- !u!1 &2079213605 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: eeccbab593215d2469ca2fbb6fe8e81a,
+    type: 3}
+  m_PrefabInternal: {fileID: 733437598}
+--- !u!95 &2079213607
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2079213605}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 03878e369db19a540b2643f711581ada, type: 3}
+  m_Controller: {fileID: 9100000, guid: ac8512ac1d9bb1f429774bbe59d4aa6a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &2097780042
 Prefab:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class AvanzarNurse : StateMachineBehaviour {
         pAI = player.getAgent();
 		pAI.ResetPath ();
 		pAI.speed = player.getSpeedMax();
-        animator.SetFloat("Running", 1.0f);
+        animator.SetFloat("Running", 0.5f);
 		setPath();
     }
 
