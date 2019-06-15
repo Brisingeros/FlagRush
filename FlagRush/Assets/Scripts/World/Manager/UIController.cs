@@ -7,24 +7,17 @@ public class UIController : MonoBehaviour {
 
     private void Start()
     {
-    
         if(FindObjectsOfType<UIController>().Length == 1)
-        {
             DontDestroyOnLoad(this);
-        }
         else
-        {
             Destroy(gameObject);
-        }
     }
 
     public void setValueOnScreen(string tag, int value)
     {
-
         GameObject parent = GameObject.FindGameObjectWithTag(tag);
         GameObject number = parent.transform.Find("numero").gameObject;
         number.GetComponent<Text>().text = value.ToString();
-
     }
 
     public void setVictoryOnScreen(Team.team type)
@@ -41,14 +34,6 @@ public class UIController : MonoBehaviour {
         Button button = parent.transform.Find(type).gameObject.GetComponent<Button>();
         if(button.interactable != state)
             button.interactable = state;
-    }
-
-    public void renderArrow(Team.team team)
-    {
-        string name = team == Team.team.Blue ? "BlueArrow" : "RedArrow";
-        GameObject img = Resources.Load<GameObject>("Prefabs/" + name);
-        img = Instantiate(img, GameObject.Find("MainCanvas").transform);
-
     }
 
 }

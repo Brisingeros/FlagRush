@@ -35,6 +35,9 @@ public class WorldManager : MonoBehaviour {
 	private int redKillMoral;
 	private int blueKillMoral;
 
+	public GameObject redArrow;
+	public GameObject blueArrow;
+
     static private bool gameOver;
 
 	// Use this for initialization
@@ -72,14 +75,17 @@ public class WorldManager : MonoBehaviour {
 	IEnumerator soldiers(Spawner target, GameObject prefab, int num){
 		for (int i = 0; i < num; i++) {
 			target.SpawnPrefab (prefab, 1);
-			yield return null;
+
+			if ((i+1) % 5 == 0)
+				yield return new WaitForSeconds (10);
+			else
+				yield return null;
 		}
 	}
 	
 	public void onKill(Player pl){
 
 		switch (pl.teamAct) {
-
 		    case Team.team.Blue:
 			    blueMoral -= blueKillMoral;
 			    redMoral += redKillMoral;
@@ -95,7 +101,6 @@ public class WorldManager : MonoBehaviour {
 			    if (pl.getTypeNpc() == TypeNPC.type.Soldier)
 				    redSoldiers--;
 			    break;
-
 		}
 
 		if (!gameOver && redSoldiers <= 0) {
@@ -107,23 +112,21 @@ public class WorldManager : MonoBehaviour {
 
 	public void onRevive(Player pl){
 		switch (pl.teamAct) {
+			case Team.team.Blue:
+				blueMoral += blueKillMoral;
+				redMoral -= redKillMoral;
+				blueForces++;
+				if (pl.getTypeNpc () == TypeNPC.type.Soldier)
+					blueSoldiers++;
+				break;
 
-		case Team.team.Blue:
-			blueMoral += blueKillMoral;
-			redMoral -= redKillMoral;
-			blueForces++;
-			if (pl.getTypeNpc () == TypeNPC.type.Soldier)
-				blueSoldiers++;
-			break;
-
-		case Team.team.Red:
-			redMoral += redKillMoral;
-			blueMoral -= blueKillMoral;
-			redForces--;
-			if (pl.getTypeNpc () == TypeNPC.type.Soldier)
-				redSoldiers++;
-			break;
-
+			case Team.team.Red:
+				redMoral += redKillMoral;
+				blueMoral -= blueKillMoral;
+				redForces--;
+				if (pl.getTypeNpc () == TypeNPC.type.Soldier)
+					redSoldiers++;
+				break;
 		}
 	}
 
@@ -137,17 +140,33 @@ public class WorldManager : MonoBehaviour {
     }
 
 	public void GameOver(Team.team team){
-
         UIController ui = FindObjectOfType<UIController>();
         ui.setVictoryOnScreen(team);
         gameOver = true;
 
         Invoke("changeScene", 3.0f);
-        
 	}
 
     public void arrivingToGoal(Team.team team)
     {
-        FindObjectOfType<UIController>().renderArrow(team);
+		GameObject arrow = null;
+		Vector3 position = Vector3.zero;
+
+		switch (team) {
+			case Team.team.Blue:
+				arrow = blueArrow;
+				position = redSpawner.transform.position;
+				break;
+
+			case Team.team.Red:
+				arrow = redArrow;
+				position = blueSpawner.transform.position;
+				break;
+		}
+
+		position.y += 25;
+
+		GameObject arrowInstance = Instantiate (arrow);
+		arrowInstance.transform.position = position;
     }
 }

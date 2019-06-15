@@ -84,10 +84,12 @@
      <Compile Include="Assets\Scripts\StateMachines\Soldier\AtaqueSoldier.cs" />
      <Compile Include="Assets\Scripts\StateMachines\Soldier\AvanzarSoldier.cs" />
      <Compile Include="Assets\Scripts\StateMachines\Soldier\MuertoSoldier.cs" />
+     <Compile Include="Assets\Scripts\World\Arrows\Arrow.cs" />
      <Compile Include="Assets\Scripts\World\Barricade\Barricade.cs" />
      <Compile Include="Assets\Scripts\World\Barricade\PositionBarricade.cs" />
      <Compile Include="Assets\Scripts\World\Flag\FlagManager.cs" />
      <Compile Include="Assets\Scripts\World\Manager\Controller.cs" />
+     <Compile Include="Assets\Scripts\World\Manager\TriggerUI.cs" />
      <Compile Include="Assets\Scripts\World\Manager\UIController.cs" />
      <Compile Include="Assets\Scripts\World\Manager\WorldManager.cs" />
      <Compile Include="Assets\Scripts\World\Spawner\Spawner.cs" />
