@@ -106,10 +106,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 683, y: 492}
+  m_MinSize: {x: 681, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 13390
+  controlID: 53
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -130,10 +130,10 @@ MonoBehaviour:
     y: 0
     width: 1402
     height: 947
-  m_MinSize: {x: 406, y: 492}
+  m_MinSize: {x: 404, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 13391
+  controlID: 54
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -154,10 +154,10 @@ MonoBehaviour:
     y: 0
     width: 1402
     height: 425
-  m_MinSize: {x: 406, y: 221}
-  m_MaxSize: {x: 8006, y: 4021}
+  m_MinSize: {x: 404, y: 221}
+  m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
-  controlID: 13392
+  controlID: 55
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -176,8 +176,8 @@ MonoBehaviour:
     y: 0
     width: 224
     height: 425
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -201,8 +201,8 @@ MonoBehaviour:
     y: 0
     width: 1178
     height: 425
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 204, y: 221}
+  m_MaxSize: {x: 4004, y: 4021}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 14}
@@ -369,23 +369,23 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 0e350000
+    m_SelectedIDs: 98350000
     m_LastClickedID: 0
-    m_ExpandedIDs: 5843ecffc85becff5070edffe2a4edfff0ccedffa2d8edffb00beeff9e8beeffbaadeeff26b4eeff4ad4eeff4e1eefff8e2aefffb851efffae6aefff24adefff341ff0ffb221f0ff2a2cf0ffac7df0ff328df0ff6498f0ffecb9f0ffc60bf1ff4a2df1ffa434f1ffba38f1ffca2df2ff3e50f3ff3660f3ff0867f3ff0673f3ff1481f3ff641cf5ff741ff5ff0c25f5ff8c35f5ff363cf5ff8a46f5ffca64f5ff2ed6f5ffce20f6ff5e3ff6ffa071f6ff44a3f6ff68baf6ff6eddf6fff667f7ff14dbfdff9adbfdfff8edfdff244cfeffa24efeff6457feffdcf1feff8afaffff10fbffff000000006a6c02005e80020000a00200f0a0020094a20200d0b50200bcea0200525a0300
+    m_ExpandedIDs: 9490ffff7cd3ffff7eeaffffdaefffff5af9ffff0000000042480000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: MainCanvas
-      m_OriginalName: MainCanvas
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 153718
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 8}
     m_SearchString: 
@@ -650,14 +650,14 @@ MonoBehaviour:
     height: 404
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 10667.813897260916
+  lastFramingTime: 128.79593931370584
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 54.256214, y: 28.478601, z: -21.42595}
+    m_Target: {x: 105.8285, y: 48.360912, z: 6.5013595}
     speed: 2
-    m_Value: {x: 54.256214, y: 28.478601, z: -21.42595}
+    m_Value: {x: 105.8285, y: 48.360912, z: 6.5013595}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -685,13 +685,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.1354542, y: -0.3345288, z: 0.04863938, w: 0.93133074}
+    m_Target: {x: -0.097057864, y: 0.74806035, z: -0.11222574, w: -0.64683145}
     speed: 2
-    m_Value: {x: 0.1354542, y: -0.3345288, z: 0.04863938, w: 0.93133074}
+    m_Value: {x: -0.097057864, y: 0.74806035, z: -0.11222574, w: -0.64683145}
   m_Size:
-    m_Target: 0.8546528
+    m_Target: 2.354653
     speed: 2
-    m_Value: 0.8546528
+    m_Value: 2.354653
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -771,14 +771,14 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Scenes
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\Laura\Desktop\comportamientos\FlagRush\FlagRush
+  m_LastProjectPath: C:\Users\Laura\Desktop\comportamientos aux\FlagRush\FlagRush
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: ca300000
-    m_LastClickedID: 12490
-    m_ExpandedIDs: 000000009a2b0000622e0000e231000062340000ce380000b8410000ba410000bc410000be410000c0410000
+    m_SelectedIDs: 4c310000
+    m_LastClickedID: 12620
+    m_ExpandedIDs: 00000000102c0000e42e000060320000e434000064390000b4420000b6420000b8420000ba420000bc420000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -806,7 +806,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000009a2b0000622e0000be2e00006234000024360000ce380000e8390000b8410000ba410000bc410000be410000c041000000ca9a3b
+    m_ExpandedIDs: 00000000102c0000e42e000060320000e434000064390000b4420000b6420000b8420000ba420000bc420000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
