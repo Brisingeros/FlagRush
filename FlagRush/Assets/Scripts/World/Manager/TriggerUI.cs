@@ -11,9 +11,7 @@ public class TriggerUI : MonoBehaviour {
         Player p = other.GetComponent<Player>();
         if ( p != null && p.GetComponent<Soldier>() != null && p.getTeam() != teamAct)
         {
-            Debug.Log("Hi");
             FindObjectOfType<WorldManager>().arrivingToGoal(p.getTeam());
-
         }
     }
 }
