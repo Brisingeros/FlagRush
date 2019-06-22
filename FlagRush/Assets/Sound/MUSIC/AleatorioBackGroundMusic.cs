@@ -14,7 +14,7 @@ public class AleatorioBackGroundMusic : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(transform.gameObject);
+        //DontDestroyOnLoad(transform.gameObject);
     }
 
     // Use this for initialization

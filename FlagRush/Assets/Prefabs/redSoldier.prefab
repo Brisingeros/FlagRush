@@ -2819,7 +2819,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 50
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -2969,7 +2969,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disparoSonido: {fileID: 8300000, guid: b84964e1e3369314f948708332744f71, type: 3}
-  andarSonido: {fileID: 0}
+  andarSonidoIzq: {fileID: 0}
+  andarSonidoDrch: {fileID: 0}
   muerteSonido: {fileID: 8300000, guid: 9da9986cdea34e948a1142b41514f1b2, type: 3}
   alertaSonido: {fileID: 0}
   resucitarSonido: {fileID: 8300000, guid: c459d56e751758c418666bfb22d583f3, type: 3}
