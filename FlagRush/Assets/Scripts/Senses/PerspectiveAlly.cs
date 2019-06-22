@@ -4,40 +4,43 @@ using UnityEngine;
 
 public class PerspectiveAlly : Sense {
 
-    Nurse nurse;
+	Nurse nurse;
 
-    private void Start()
-    {
-        nurse = GetComponentInParent<Nurse>();
-    }
-
-    void OnTriggerEnter(Collider other){
-        Player al = other.GetComponent<Player>();
-
-        if(al && al.aspectAct == Aspect.aspect.NPC && !al.alive)
-            nurse.addAlly(al);
+	private void Start()
+	{
+		nurse = GetComponentInParent<Nurse>();
+		targetAspect = Aspect.aspect.NPC;
+		targetTeam = nurse.getTeam ();
+		targetAlive = false;
 	}
 
-    private void OnTriggerExit(Collider other)
-    {
-        Player al = other.GetComponent<Player>();
+	void OnTriggerEnter(Collider other){
+		Player al = other.GetComponent<Player>();
 
-        if ((al && al.aspectAct == Aspect.aspect.NPC && !al.alive)) // || other.CompareTag("tomb")
-            nurse.removeAlly(al);
-    }
+		if(assertPerception(al))
+			nurse.addAlly(al);
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+		Player al = other.GetComponent<Player>();
+
+		if (assertPerception(al)) // || other.CompareTag("tomb")
+			nurse.removeAlly(al);
+	}
 
 	private void FixedUpdate()
 	{
 		nurse.removeSoldiers ("ally");
 
-        for(int i = 0; i < nurse.getAllySize(); i++)
-        {
-            Player p = nurse.getAlly(i);
-            if (p.alive)
-            {
-                nurse.removeAlly(p);
-                i--;
-            }
-        }
-    }
+		for(int i = 0; i < nurse.getAllySize(); i++)
+		{
+			Player p = nurse.getAlly(i);
+			if (p.alive != targetAlive)
+			{
+				nurse.removeAlly(p);
+				i--;
+			}
+		}
+	}
 }

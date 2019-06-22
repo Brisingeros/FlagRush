@@ -4,32 +4,36 @@ using UnityEngine;
 
 public class SoundAlly : Sense
 {
-    Player nurse;
+	Player nurse;
 
-    private void Start()
-    {
-        nurse = GetComponentInParent<Player>();
-    }
+	private void Start()
+	{
+		nurse = GetComponentInParent<Player>();
 
-    void OnTriggerEnter(Collider other)
-    {
-        Aspect aspect = other.GetComponent<Aspect>();
+		targetAspect = Aspect.aspect.Sound;
+		targetTeam = nurse.getTeam ();
+		targetAlive = false;
+	}
 
-        if (aspect != null && !aspect.alive && aspect.aspectAct == Aspect.aspect.Sound && aspect.teamAct == nurse.teamAct)
-        	nurse.addSound(aspect);
-    }
+	void OnTriggerEnter(Collider other)
+	{
+		Aspect aspect = other.GetComponent<Aspect>();
 
-    private void OnTriggerExit(Collider other)
-    {
-        Aspect aspect = other.GetComponent<Aspect>();
+		if (assertPerception(aspect))
+			nurse.addSound(aspect);
+	}
 
-        if (aspect != null && !aspect.alive && aspect.aspectAct == Aspect.aspect.Sound && aspect.teamAct == nurse.teamAct)
-            nurse.removeSound(other.GetComponent<Aspect>());
-    }
+	private void OnTriggerExit(Collider other)
+	{
+		Aspect aspect = other.GetComponent<Aspect>();
+
+		if (assertPerception(aspect))
+			nurse.removeSound(other.GetComponent<Aspect>());
+	}
 
 	void FixedUpdate()
-    {
-        nurse.removeDestroyedSounds("ally");
-    }
+	{
+		nurse.removeDestroyedSounds("ally");
+	}
 
 }

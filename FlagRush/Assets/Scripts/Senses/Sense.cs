@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Sense : MonoBehaviour {
 
-	public Player pla;
+	protected Aspect.aspect targetAspect;
+	protected Team.team targetTeam;
+	protected bool targetAlive;
 
+	/*
 	// Use this for initialization
 	void Start () {
-		pla = transform.parent.GetComponent<Player> ();
+
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
+	}
+	*/
+
+	protected bool assertPerception(Aspect al){
+		return (al && al.aspectAct == targetAspect && al.teamAct == targetTeam && al.alive == targetAlive);
 	}
 
 }

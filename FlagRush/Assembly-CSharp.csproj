@@ -70,6 +70,7 @@
      <Compile Include="Assets\Scripts\Senses\Sense.cs" />
      <Compile Include="Assets\Scripts\Senses\SoundAlly.cs" />
      <Compile Include="Assets\Scripts\Senses\SoundEnemy.cs" />
+     <Compile Include="Assets\Scripts\SFXManager\EfectosSonidos.cs" />
      <Compile Include="Assets\Scripts\StateMachines\Nurse\AlertaNurse.cs" />
      <Compile Include="Assets\Scripts\StateMachines\Nurse\AvanzarNurse.cs" />
      <Compile Include="Assets\Scripts\StateMachines\Nurse\HuirNurse.cs" />
@@ -93,6 +94,8 @@
      <Compile Include="Assets\Scripts\World\Manager\UIController.cs" />
      <Compile Include="Assets\Scripts\World\Manager\WorldManager.cs" />
      <Compile Include="Assets\Scripts\World\Spawner\Spawner.cs" />
+     <Compile Include="Assets\Scripts\World\TerrainManager.cs" />
+     <Compile Include="Assets\Sound\MUSIC\AleatorioBackGroundMusic.cs" />
      <None Include="Assets\NavMeshComponents-2018.2\ProjectSettings\ProjectVersion.txt" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>D:/Git/FlagRush/FlagRush/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>

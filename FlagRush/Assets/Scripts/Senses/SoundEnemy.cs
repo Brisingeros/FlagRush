@@ -4,35 +4,41 @@ using UnityEngine;
 
 public class SoundEnemy : Sense {
 
-    private void Start()
-    {
-        pla = transform.parent.GetComponent<Player>();
-    }
+	Player pla;
 
-    void OnTriggerEnter(Collider other){
-	
-		Aspect aspect = other.GetComponent<Aspect> ();
-		if (aspect != null && aspect.alive && aspect.aspectAct == Aspect.aspect.Sound && aspect.teamAct != pla.teamAct)
-        {
-            pla.addSound(aspect);
-            pla.OrderByDistance("sound");
-        }
+	private void Start()
+	{
+		pla = transform.parent.GetComponent<Player>();
+
+		targetAspect = Aspect.aspect.Sound;
+		targetTeam = (pla.getTeam () == Team.team.Blue) ? Team.team.Red : Team.team.Blue;
+		targetAlive = true;
 	}
 
-    private void OnTriggerExit(Collider other)
-    {
-        Aspect aspect = other.GetComponent<Aspect>();
+	void OnTriggerEnter(Collider other){
 
-		if (aspect != null && aspect.alive && aspect.aspectAct == Aspect.aspect.Sound && aspect.teamAct != pla.teamAct)
-        {
-            pla.removeSound(other.GetComponent<Aspect>());
-            pla.OrderByDistance("sound");
-        }
-    }
+		Aspect aspect = other.GetComponent<Aspect> ();
+		if (assertPerception(aspect))
+		{
+			pla.addSound(aspect);
+			pla.OrderByDistance("sound");
+		}
+	}
 
-    void FixedUpdate()
-    {
-        pla.removeDestroyedSounds("enemy");
-    }
+	private void OnTriggerExit(Collider other)
+	{
+		Aspect aspect = other.GetComponent<Aspect>();
+
+		if (assertPerception(aspect))
+		{
+			pla.removeSound(other.GetComponent<Aspect>());
+			pla.OrderByDistance("sound");
+		}
+	}
+
+	void FixedUpdate()
+	{
+		pla.removeDestroyedSounds("enemy");
+	}
 
 }
