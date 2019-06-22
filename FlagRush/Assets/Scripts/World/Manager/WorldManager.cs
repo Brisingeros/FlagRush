@@ -76,8 +76,8 @@ public class WorldManager : MonoBehaviour {
 		for (int i = 0; i < num; i++) {
 			target.SpawnPrefab (prefab, 1);
 
-			if ((i+1) % 5 == 0)
-				yield return new WaitForSeconds (10);
+			if ((i+1) % 3 == 0)
+				yield return new WaitForSeconds (20);
 			else
 				yield return null;
 		}

@@ -2626,7 +2626,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b23fefd8142264ebeb41ae21d97589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pla: {fileID: 0}
   shootPos: {fileID: 1932242784999750}
 --- !u!114 &114431781694266038
 MonoBehaviour:
@@ -2656,7 +2655,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 586bb59383d3d5640a9bd00a9d783a27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pla: {fileID: 0}
 --- !u!114 &114675634024939924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2669,7 +2667,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disparoSonido: {fileID: 8300000, guid: 6a1f0f02daf79674789ac01acc39efcc, type: 3}
-  andarSonido: {fileID: 0}
+  andarSonidoIzq: {fileID: 0}
+  andarSonidoDrch: {fileID: 0}
   muerteSonido: {fileID: 8300000, guid: 5d1f4f565480199408421e341f1c2313, type: 3}
   alertaSonido: {fileID: 0}
   resucitarSonido: {fileID: 0}
@@ -2697,7 +2696,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.25
+  m_Radius: 1
   m_Height: 5.81
   m_Direction: 1
   m_Center: {x: 0, y: 2.89, z: 0}

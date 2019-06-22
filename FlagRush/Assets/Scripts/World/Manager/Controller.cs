@@ -7,21 +7,21 @@ using UnityEngine.UI;
 public class Controller : MonoBehaviour {
 
     //const
-    private const int MAX_SOLDIERS = 15;
+    private const int MAX_SOLDIERS = 9;
     private const int MIN_SOLDIERS = 1;
     private const int MAX_SNIPERS = 9;
     private const int MIN_SNIPERS = 0;
-    private const int MAX_NURSES = 10;
+    private const int MAX_NURSES = 6;
     private const int MIN_NURSES = 0;
 
 
     // num army
-    private int redSoldiers = MIN_SOLDIERS;
-    private int blueSoldiers = MIN_SOLDIERS;
-    private int redSnipers = MIN_SNIPERS;
-    private int blueSnipers = MIN_SNIPERS;
-    private int redNurses = MIN_NURSES;
-    private int blueNurses = MIN_NURSES;
+    private int redSoldiers = 6;
+    private int blueSoldiers = 6;
+    private int redSnipers = 3;
+    private int blueSnipers = 3;
+    private int redNurses = 3;
+    private int blueNurses = 3;
 
     void Start () {
 
@@ -41,6 +41,21 @@ public class Controller : MonoBehaviour {
 
     private void initializeValues(string team)
     {
+        int initSol;
+        int initNur;
+        int initSnp;
+
+        if (team.Equals("red team"))
+        {
+            initSol = redSoldiers;
+            initNur = redNurses;
+            initSnp = redSnipers;
+        } else
+        {
+            initSol = blueSoldiers;
+            initNur = blueNurses;
+            initSnp = blueSnipers;
+        }
 
         GameObject gO = GameObject.Find(team);
         for (int i = 0; i < gO.transform.childCount; i++)
@@ -52,14 +67,15 @@ public class Controller : MonoBehaviour {
 
                 if (child.name.Contains("soldiers"))
                 {
-                    text.text = MIN_SOLDIERS.ToString();
-                }else if (child.name.Contains("snipers"))
+                    text.text = initSol.ToString();
+                }
+                else if (child.name.Contains("snipers"))
                 {
-                    text.text = MIN_SNIPERS.ToString();
+                    text.text = initNur.ToString();
                 }
                 else if (child.name.Contains("nurses"))
                 {
-                    text.text = MIN_NURSES.ToString();
+                    text.text = initSnp.ToString();
                 }
             }
         }

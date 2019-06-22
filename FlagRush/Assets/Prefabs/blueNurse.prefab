@@ -2295,7 +2295,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb6e460e0199864091b04c35a690bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pla: {fileID: 0}
 --- !u!114 &114771640282444140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2307,7 +2306,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b23fefd8142264ebeb41ae21d97589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pla: {fileID: 0}
   shootPos: {fileID: 1772665957251078}
 --- !u!114 &114848211654224682
 MonoBehaviour:
@@ -2320,7 +2318,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c6c00d839d1334b8ce21e43b15f8d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pla: {fileID: 0}
 --- !u!114 &114959016647178946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2374,7 +2371,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.25
+  m_Radius: 1
   m_Height: 5.81
   m_Direction: 1
   m_Center: {x: 0, y: 2.89, z: 0}
