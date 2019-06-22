@@ -1122,7 +1122,7 @@ GameObject:
   - component: {fileID: 195548477720462828}
   - component: {fileID: 82762813853798790}
   - component: {fileID: 114675634024939924}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: redSniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}

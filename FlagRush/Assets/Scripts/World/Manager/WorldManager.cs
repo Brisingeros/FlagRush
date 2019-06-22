@@ -35,9 +35,6 @@ public class WorldManager : MonoBehaviour {
 	private int redKillMoral;
 	private int blueKillMoral;
 
-	public GameObject redArrow;
-	public GameObject blueArrow;
-
     static private bool gameOver;
 
 	// Use this for initialization
@@ -147,26 +144,4 @@ public class WorldManager : MonoBehaviour {
         Invoke("changeScene", 3.0f);
 	}
 
-    public void arrivingToGoal(Team.team team)
-    {
-		GameObject arrow = null;
-		Vector3 position = Vector3.zero;
-
-		switch (team) {
-			case Team.team.Blue:
-				arrow = blueArrow;
-				position = redSpawner.transform.position;
-				break;
-
-			case Team.team.Red:
-				arrow = redArrow;
-				position = blueSpawner.transform.position;
-				break;
-		}
-
-		position.y += 25;
-
-		GameObject arrowInstance = Instantiate (arrow);
-		arrowInstance.transform.position = position;
-    }
 }

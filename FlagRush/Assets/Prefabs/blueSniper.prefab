@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 195747968368903038}
   - component: {fileID: 82378100367027022}
   - component: {fileID: 114817062261724714}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: blueSniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}

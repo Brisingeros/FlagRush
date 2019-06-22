@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 54574793141684886}
   - component: {fileID: 82334992295202556}
   - component: {fileID: 114398632608345470}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: redNurse
   m_TagString: Untagged
   m_Icon: {fileID: 0}

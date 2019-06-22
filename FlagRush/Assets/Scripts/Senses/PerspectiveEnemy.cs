@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PerspectiveEnemy : Sense {
 
+    const int layermask = 1 << 30;
+
 	public GameObject shootPos;
 	private Player parent;
 	private TypeNPC.type[] targetTypes;
@@ -66,7 +68,7 @@ public class PerspectiveEnemy : Sense {
 						Vector3 rayDirection = Vector3.zero;
 						rayDirection = player.transform.position - shootPos.transform.position;
 
-						if (rayDirection != Vector3.zero && Physics.Raycast(shootPos.transform.position, rayDirection, out hit, 300.0f, -5, QueryTriggerInteraction.Ignore))
+						if (rayDirection != Vector3.zero && Physics.Raycast(shootPos.transform.position, rayDirection, out hit, 350.0f, layermask, QueryTriggerInteraction.Ignore))
 						{
 							Player plaHit = hit.collider.GetComponentInParent<Player> ();
 

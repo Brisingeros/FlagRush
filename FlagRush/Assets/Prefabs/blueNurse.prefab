@@ -1099,7 +1099,7 @@ GameObject:
   - component: {fileID: 195176510849409594}
   - component: {fileID: 82799671111209282}
   - component: {fileID: 114959016647178946}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: blueNurse
   m_TagString: Untagged
   m_Icon: {fileID: 0}

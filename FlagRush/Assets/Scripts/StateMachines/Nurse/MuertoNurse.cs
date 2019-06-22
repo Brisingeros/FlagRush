@@ -18,7 +18,9 @@ public class MuertoNurse : StateMachineBehaviour {
 		player.getAgent().speed = 0;
 		player.GetRigidbody().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 		player.GetRigidbody().freezeRotation = true;
-	}
+
+        animator.SetTrigger("visualDeath");
+    }
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {

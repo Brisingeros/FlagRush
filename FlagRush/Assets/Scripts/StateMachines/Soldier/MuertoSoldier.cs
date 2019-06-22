@@ -23,6 +23,8 @@ public class MuertoSoldier : StateMachineBehaviour {
         elapsedTime = 0.0f;
 		elapsedSound = 10.0f;
 
+        animator.SetTrigger("visualDeath");
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

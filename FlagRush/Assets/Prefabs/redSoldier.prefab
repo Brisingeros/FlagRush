@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 54518219347602618}
   - component: {fileID: 82300334426381306}
   - component: {fileID: 114699592945259228}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: redSoldier
   m_TagString: Untagged
   m_Icon: {fileID: 0}

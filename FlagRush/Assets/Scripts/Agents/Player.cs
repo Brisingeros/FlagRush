@@ -144,6 +144,7 @@ public abstract class Player : Aspect {
 		hidden = bushBound.Intersects(colliderNPC) || bushBound.Contains(transform.position);
 
         anim.SetInteger("Lives", defaultHealth);
+        anim.ResetTrigger("visualDeath");
 
         if (GetComponentInChildren<Aspect>())
         {
