@@ -19,7 +19,7 @@ public class RotateMoveCamera : MonoBehaviour
     float MouseX;
     float MouseY;
 
-    public float velocity = 0.5f;
+    public float velocity = 0.3f;
 
     void Update()
     {

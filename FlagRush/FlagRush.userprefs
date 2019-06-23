@@ -1,12 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Senses\SoundEnemy.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\World\Manager\WorldManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\Senses\PerspectiveAlly.cs" Line="47" Column="1" />
-      <File FileName="Assets\Scripts\Senses\PerspectiveEnemy.cs" Line="92" Column="1" />
-      <File FileName="Assets\Scripts\Senses\Sense.cs" Line="27" Column="1" />
-      <File FileName="Assets\Scripts\Senses\SoundAlly.cs" Line="40" Column="1" />
-      <File FileName="Assets\Scripts\Senses\SoundEnemy.cs" Line="45" Column="1" />
+      <File FileName="Assets\Scripts\Senses\PerspectiveAlly.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Senses\PerspectiveEnemy.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Senses\Sense.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Senses\SoundAlly.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Senses\SoundEnemy.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Camera\RotateMoveCamera.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\World\Manager\WorldManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

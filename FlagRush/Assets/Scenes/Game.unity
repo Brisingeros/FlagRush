@@ -3421,7 +3421,7 @@ MonoBehaviour:
   maxY: 45
   sensX: 100
   sensY: 100
-  velocity: 0.5
+  velocity: 0.3
 --- !u!1 &540699853
 GameObject:
   m_ObjectHideFlags: 0
